@@ -6045,7 +6045,7 @@ msgstr ""
 #: templates/problem/submit.html:161
 #, python-brace-format
 msgid ""
-"`Only accept \"${file_ext}\". Maximum file size is ${file_size_limit}MB.`"
+"Only accept \"{file_ext}\". Maximum file size is {file_size_limit}MB."
 msgstr ""
 
 #: templates/problem/submit.html:227

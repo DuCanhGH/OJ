@@ -40,3 +40,5 @@ tmp.sh
 *.sql
 fc_*
 local_urls.py
+.parcel-cache
+fe-output

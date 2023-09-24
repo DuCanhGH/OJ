@@ -37,15 +37,14 @@
 
 {% block js_media %}
     {% include "blog/media-js.html" %}
-    <script type="text/javascript">
-        $(function () {
-            $('.leave-organization').click(function () {
-                return confirm('{{ _('Are you sure you want to leave this organization?') }}\n' +
-                    {% if organization.is_open %}
-                        '{{ _('You will have to rejoin to show up on the organization leaderboard.') }}'
-                    {% else %}
-                        '{{ _('You will have to request membership in order to join again.') }}'
-                    {% endif %}
+    <script type="text/javascript" data-is-org-open="{{ organization.is_open }}">
+        const isOrgOpen = document.currentScript.dataset.isOrgOpen === "True";
+        $(() => {
+            $('.leave-organization').click(() => {
+                return confirm("{{ _('Are you sure you want to leave this organization?') }}\n" +
+                    isOrgOpen
+                        ? "{{ _('You will have to rejoin to show up on the organization leaderboard.') }}"
+                        : "{{ _('You will have to request membership in order to join again.') }}",
                 );
             });
         });

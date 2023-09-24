@@ -17,10 +17,9 @@
 {% endblock %}
 
 {% block js_media %}
+    {% include "user/webauthn-helpers.js" %}
     <script>
-        // This is basically impossible to write without ES6, hence separate script block.
         $(() => {
-            {% include "user/webauthn-helpers.js" %}
 
             function buf2hex(buffer) {
                 return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
@@ -29,12 +28,7 @@
             $('#use-webauthn').click(event => {
                 event.preventDefault();
 
-                if (typeof window.PublicKeyCredential === 'undefined') {
-                    alert('{{ _('WebAuthn is not supported by your browser.') }}');
-                    return;
-                }
-
-                $.getJSON('{{ url('webauthn_assert') }}')
+                $.getJSON("{{ url('webauthn_assert') }}")
                     .done(publicKey => {
                         decodeJSONBytes(publicKey);
                         navigator.credentials.get({publicKey})
@@ -51,7 +45,7 @@
                                 $('#2fa-form').submit();
                             });
                     })
-                    .fail(() => alert('{{ _('Failed to contact server.') }}'));
+                    .fail(() => alert("{{ _('Failed to contact server.') }}"));
             })
         });
     </script>

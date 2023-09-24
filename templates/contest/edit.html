@@ -9,7 +9,7 @@
 
     <script>
         // This code activates flatpickr on fields with the 'datetimefield' class when the document has loaded
-        window.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener("DOMContentLoaded", () => {
             flatpickr(".datetimefield", {
                 enableTime: true,
                 enableSeconds: true,
@@ -21,23 +21,23 @@
 
     <script src="{{ static('vnoj/jquery.formset.js') }}"></script>
     <script type="text/javascript">
-        $(function() {
+        $(() => {
             $('#form_set tr').formset({
                 prefix: '{{ contest_problem_formset.prefix }}'
             });
 
-            var noResults = function () {
-                return '{{ _('Press Enter to select multiple users...') }}';
+            const noResults = () => {
+                return "{{ _('Press Enter to select multiple users...') }}";
             };
 
-            $(document).one('click', '#id_private_contestants + .select2', function (e) {
+            $(document).one('click', '#id_private_contestants + .select2', (e) => {
                 $('#id_private_contestants').data().select2.options.get('translations').dict['noResults'] = noResults;
             });
 
-            $(document).on('keyup', '#id_private_contestants + .select2 .select2-search__field', function (e) {
+            $(document).on('keyup', '#id_private_contestants + .select2 .select2-search__field', (e) => {
                 if (e.keyCode === 13) {
-                    var $id_private_contestants = $('#id_private_contestants');
-                    var contestants = $(this).val().split(/[\s,]+/);
+                    const $id_private_contestants = $('#id_private_contestants');
+                    const contestants = $(this).val().split(/[\s,]+/);
                     if (contestants.length <= 1) {
                         // Skip to let select2 handle this
                         return;
@@ -49,7 +49,7 @@
                         data: {
                             multiple_terms: contestants,
                         },
-                        success: function (response) {
+                        success(response) {
                             for (const contestant of response.results) {
                                 $id_private_contestants.select2('trigger', 'select', {
                                     data: contestant,
@@ -67,7 +67,7 @@
 {% block media %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     {{ form.media.css }}
-    <link rel="stylesheet" type="text/css" href="{{ static('ui_form.css') }}">
+    <link rel="stylesheet" type="text/css" href="/resources/ui_form.css">
 {% endblock %}
 
 {% block body %}

@@ -4,48 +4,56 @@
 {% endblock %}
 
 {% block js_media %}
-    <script src="{{ static('libs/featherlight/featherlight.min.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.time-remaining').each(function () {
+    <script 
+        type="module" 
+        data-official-contest-mode="{{ request.official_contest_mode }}" 
+        data-in-contest="{{ request.in_contest }}"
+        data-hide-private-contests="{{ hide_private_contests }}"
+    >
+        import "$prebundled/featherlight/featherlight.min.js";
+
+        const officialContestMode = document.currentScript.dataset.officialContestMode === "True";
+        const inContest = document.currentScript.dataset.inContest === "True";
+        const hidePrivateContests = document.currentScript.dataset.hidePrivateContests;
+
+        $(document).ready(() => {
+            $('.time-remaining').each(() => {
                 count_down($(this));
             });
 
             $('.contest-tag').find('a[data-featherlight]').featherlight();
 
-            {% if not request.official_contest_mode %}
-                $('.join-warning').click(function () {
-                    return confirm('{{ _('Are you sure you want to join?') }}\n' +
-                        '{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}'
-                        {% if request.in_contest %}
-                            + '\n{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}'
-                        {% endif %}
+            if (officialContestMode) {
+                $('.join-warning').click(() => {
+                    return confirm("{{ _('Are you sure you want to join?') }}\n" +
+                        "{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}"
+                            + inContest ? "\n{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}" : ''
                     );
                 });
-            {% endif %}
+            }
 
-            {% if request.in_contest %}
-                $('.spectate-warning').click(function () {
-                    return confirm('{{ _('Are you sure you want to spectate?') }}\n' +
-                        '{{ _('Spectating this contest will leave %(contest)s.', contest=request.participation.contest.name) }}');
+            if (inContest) {
+                $('.spectate-warning').click(() => {
+                    return confirm("{{ _('Are you sure you want to spectate?') }}\n" +
+                        "{{ _('Spectating this contest will leave %(contest)s.', contest=request.participation.contest.name) }}");
                 });
-            {% endif %}
+            }
 
-            $('.register-warning').click(function () {
-                return confirm('{{ _('Are you sure you want to register?') }}');
+            $('.register-warning').click(() => {
+                return confirm("{{ _('Are you sure you want to register?') }}");
             });
 
-            {% if hide_private_contests is not none %}
-                {% if hide_private_contests %}
+            if (hidePrivateContests !== "None") {
+                if (hidePrivateContests === "True") {
                     $('#hide-private-contests-checkbox').prop('checked', true);
-                {% endif %}
+                }
 
                 $('#hide-private-contests-checkbox').click(function () {
                     const parser = new URL(window.location.href);
-                    parser.searchParams.set('hide_private_contests', '{{ 'false' if hide_private_contests else 'true' }}');
+                    parser.searchParams.set('hide_private_contests', "{{ 'false' if hide_private_contests else 'true' }}");
                     window.location.href = parser.href;
                 });
-            {% endif %}
+            }
 
             // var tooltip_classes = 'tooltipped tooltipped-e';
             //
@@ -98,9 +106,9 @@
                 </span>
             {% endif %}
             {% for tag in contest.tags.all() %}
-                <span style="background-color: {{ tag.color }}" class="contest-tag">
+                <span style="background-color: '{{ tag.color }}'" class="contest-tag">
                     <a href="{{ url('contest_tag', tag.name) }}"
-                       style="color: {{ tag.text_color }}"
+                       style="color: '{{ tag.text_color }}'"
                        data-featherlight="{{ url('contest_tag_ajax', tag.name) }}">
                         {{- tag.name -}}
                     </a>

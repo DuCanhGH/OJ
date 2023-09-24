@@ -1,6 +1,6 @@
-(function () {
+(() => {
     function getDocHeight() {
-        var D = document;
+        const D = document;
         return Math.max(
             Math.max(D.body.scrollHeight, D.documentElement.scrollHeight),
             Math.max(D.body.offsetHeight, D.documentElement.offsetHeight),
@@ -9,7 +9,7 @@
     }
 
     function getDocWidth() {
-        var D = document;
+        const D = document;
         return Math.max(
             Math.max(D.body.scrollWidth, D.documentElement.scrollWidth),
             Math.max(D.body.offsetWidth, D.documentElement.offsetWidth),
@@ -39,7 +39,7 @@
         element = $(element);
         var n = document.createTextNode(' ');
         element.appendChild(n);
-        (function () {
+        (() => {
             n.parentNode.removeChild(n)
         }).defer();
         return element;
@@ -84,7 +84,7 @@
 
         // Toolbar maximize/minimize button
         var min_max = toolbar.getElementsByClassName('django-ace-max_min');
-        min_max[0].onclick = function () {
+        min_max[0].onclick = () => {
             minimizeMaximize(widget, main_block, editor);
             return false;
         };
@@ -102,7 +102,7 @@
             editor.setTheme("ace/theme/" + theme);
         } else {
             if (window.matchMedia) {
-                const setEditorTheme = function (is_dark) {
+                const setEditorTheme = (is_dark) => {
                     if (is_dark) {
                         editor.setTheme("ace/theme/" + default_dark_theme);
                     } else {
@@ -111,7 +111,7 @@
                 }
 
                 setEditorTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(ev) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev) => {
                     setEditorTheme(ev.matches);
                 })
             }
@@ -120,7 +120,7 @@
             editor.getSession().setUseWrapMode(true);
         }
 
-        editor.getSession().on('change', function () {
+        editor.getSession().on('change', () => {
             textarea.value = editor.getSession().getValue();
         });
 
@@ -128,7 +128,7 @@
             {
                 name: 'Full screen',
                 bindKey: {win: 'Ctrl-F11', mac: 'Command-F11'},
-                exec: function (editor) {
+                exec: (editor) => {
                     minimizeMaximize(widget, main_block, editor);
                 },
                 readOnly: true // false if this command should not apply in readOnly mode
@@ -136,7 +136,7 @@
             {
                 name: 'submit',
                 bindKey: {win: 'Ctrl+Enter', mac: 'Command+Enter'},
-                exec: function (editor) {
+                exec(editor) {
                     $('form#problem_submit').submit();
                 },
                 readOnly: true
@@ -144,8 +144,8 @@
             {
                 name: "showKeyboardShortcuts",
                 bindKey: {win: "Ctrl-Shift-/", mac: "Command-Shift-/"},
-                exec: function (editor) {
-                    ace.config.loadModule("ace/ext/keybinding_menu", function (module) {
+                exec(editor) {
+                    ace.config.loadModule("ace/ext/keybinding_menu", (module) => {
                         module.init(editor);
                         editor.showKeyboardShortcuts();
                     });
@@ -154,7 +154,7 @@
             {
                 name: "increaseFontSize",
                 bindKey: "Ctrl-+",
-                exec: function (editor) {
+                exec(editor) {
                     var size = parseInt(editor.getFontSize(), 10) || 12;
                     editor.setFontSize(size + 1);
                 }
@@ -162,7 +162,7 @@
             {
                 name: "decreaseFontSize",
                 bindKey: "Ctrl+-",
-                exec: function (editor) {
+                exec(editor) {
                     var size = parseInt(editor.getFontSize(), 10) || 12;
                     editor.setFontSize(Math.max(size - 1 || 1));
                 }
@@ -170,7 +170,7 @@
             {
                 name: "resetFontSize",
                 bindKey: "Ctrl+0",
-                exec: function (editor) {
+                exec(editor) {
                     editor.setFontSize(12);
                 }
             }
@@ -181,10 +181,10 @@
     }
 
     function init() {
-        var widgets = document.getElementsByClassName('django-ace-widget');
+        const widgets = document.getElementsByClassName('django-ace-widget');
 
-        for (var i = 0; i < widgets.length; i++) {
-            var widget = widgets[i];
+        for (let i = 0; i < widgets.length; i++) {
+            const widget = widgets[i];
             widget.className = "django-ace-widget"; // remove `loading` class
 
             apply_widget(widget);

@@ -40,7 +40,7 @@
                     return;
                 }
 
-                window.location.href = '{{ url('diff_submissions') }}?first_id=' + first_id + '&second_id=' + second_id;
+                window.location.href = "{{ url('diff_submissions') }}?first_id=" + first_id + '&second_id=' + second_id;
             });
 
             var highlight_id = (new URL(window.location.href)).searchParams.get('highlight');

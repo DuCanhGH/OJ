@@ -6324,10 +6324,10 @@ msgstr "Nhấn để chọn file hoặc kéo thả file vào đây"
 #: templates/problem/submit.html:161
 #, python-brace-format
 msgid ""
-"`Only accept \"${file_ext}\". Maximum file size is ${file_size_limit}MB.`"
+"Only accept \"{file_ext}\". Maximum file size is ${file_size_limit}MB."
 msgstr ""
-"`Chỉ chấp nhận file có đuôi \"${file_ext}\". Độ lớn tối đa của file là "
-"${file_size_limit}MB.`"
+"Chỉ chấp nhận file có đuôi \"{file_ext}\". Độ lớn tối đa của file là "
+"{file_size_limit}MB."
 
 #: templates/problem/submit.html:227
 msgid "File name"

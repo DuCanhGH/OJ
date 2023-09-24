@@ -28,7 +28,7 @@
                         if (code != null) {
                             update_submit_area(code);
                         } else {
-                            $.get('{{ url('language_template_ajax') }}', {
+                            $.get("{{ url('language_template_ajax') }}", {
                                 id: lang_id
                             }).done(function (template) {
                                 update_submit_area(template);
@@ -66,7 +66,7 @@
                     return RefPresenter;
                 });
 
-                var customAdapter = $.fn.select2.amd.require('select2/data/customAdapter');
+                const customAdapter = $.fn.select2.amd.require('select2/data/customAdapter');
 
                 $("#id_language").select2({
                     theme: '{{ DMOJ_SELECT2_THEME }}',
@@ -75,38 +75,38 @@
                     resultsAdapter: customAdapter
                 });
 
-                $('#id_language').on('select2:open', function (evt) {
-                    var dropdown = $('.select2-dropdown');
+                $('#id_language').on('select2:open', (evt) => {
+                    const dropdown = $('.select2-dropdown');
                     if (!$('#result-version-info').length)
                         dropdown.append($("<span id=\"result-version-info\">"));
                     dropdown.attr('id', 'language-select2');
                 });
 
-                $('#id_judge').on('select2:open', function (evt) {
-                    var dropdown = $('.select2-dropdown');
+                $('#id_judge').on('select2:open', (evt) => {
+                    const dropdown = $('.select2-dropdown');
                     $('#result-version-info').remove();
                     dropdown.attr('id', 'judge-select2');
                 });
 
-                $('#id_language').change(function () {
-                    var lang = $("#id_language").find("option:selected").attr('data-ace');
+                $('#id_language').change(() => {
+                    const lang = $("#id_language").find("option:selected").attr('data-ace');
                     window.ace_source.getSession().setMode("ace/mode/" + lang);
                     update_language_template();
                 });
 
-                $('#ace_source').on('ace_load', function (e, editor) {
+                $('#ace_source').on('ace_load', (e, editor) => {
                     update_language_template();
                     editor.commands.addCommand({
                         name: 'save',
                         bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
-                        exec: function () {
+                        exec() {
                             localStorage.setItem('submit:' + $('#id_language').val(), editor.getSession().getValue());
                         }
                     });
                     editor.commands.addCommand({
                         name: 'open',
                         bindKey: {win: 'Ctrl-O', mac: 'Command-O'},
-                        exec: function () {
+                        exec() {
                             $('#file_select').click();
                         }
                     });
@@ -115,26 +115,26 @@
                     editor.setPrintMarginColumn(100);
                     editor.focus();
 
-                    $(editor.container).on('dragover', function (e) {
-                        var types = e.originalEvent.dataTransfer.types;
+                    $(editor.container).on('dragover', (e) => {
+                        const types = e.originalEvent.dataTransfer.types;
                         if (types && Array.prototype.indexOf.call(types, 'Files') !== -1) {
                             e.stopPropagation();
                             e.preventDefault();
                         }
                     });
 
-                    $(editor.container).on('drop', function (e) {
+                    $(editor.container).on('drop', (e) => {
                         e.preventDefault();
                         $('#file_select').prop('files', e.originalEvent.dataTransfer.files);
                         handleFileSelect();
                     });
                 });
 
-                $(window).resize(function () {
+                $(window).resize(() => {
                     $('#ace_source').height(Math.max($(window).height() - 353, 100));
                 }).resize();
 
-                $('#problem_submit').submit(function (event) {
+                $('#problem_submit').submit((event) => {
                     if ($('#id_source').val().length > 65536) {
                         alert("{{ _('Your source code must contain at most 65536 characters.') }}");
                         event.preventDefault();
@@ -159,7 +159,9 @@
                         $('#file_upload').attr({accept: file_ext});
                         $('#file_drag').html(
                             '<b>{{ _("Click to select a file or drag a file into this box") }}</b><br>' +
-                            {{ _('`Only accept "${file_ext}". Maximum file size is ${file_size_limit}MB.`') }}
+                            "{{ _('Only accept {file_ext}. Maximum file size is {file_size_limit}MB.') }}"
+                                .replace("{file_ext}", file_ext)
+                                .replace("{file_size_limit}", file_size_limit)
                         );
                     } else {
                         if ($('#editor').hasClass('hidden')) {
@@ -171,7 +173,7 @@
                     }
                 };
 
-                $("#id_language").change( function() {
+                $("#id_language").change(() => {
                     on_language_change();
                 });
 

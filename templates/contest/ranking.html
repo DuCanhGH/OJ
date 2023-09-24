@@ -44,15 +44,15 @@
 
 {% block users_js_media %}
     {% if not contest.ended %}
-        <script type="text/javascript">
-            $(function () {
-                window.install_tooltips = function () {
-                    $('td.user-name').find('> span:first-child').each(function () {
-                        var link = $(this);
-                        link.mouseenter(function (e) {
-                            var start_time = link.siblings('.start-time').text().trim();
+        <script type="text/javascript" data-tab="{{ tab }}">
+            $(() => {
+                window.install_tooltips = () => {
+                    $('td.user-name').find('> span:first-child').each(() => {
+                        const link = $(this);
+                        link.mouseenter((e) => {
+                            const start_time = link.siblings('.start-time').text().trim();
                             link.addClass('tooltipped tooltipped-e').attr('aria-label', start_time);
-                        }).mouseleave(function (e) {
+                        }).mouseleave((e) => {
                             link.removeClass('tooltipped tooltipped-e').removeAttr('aria-label');
                         });
                     });
@@ -61,30 +61,30 @@
                 install_tooltips();
 
                 // Auto reload every 10 seconds
-                var ranking_outdated = false;
+                let ranking_outdated = false;
                 function update_ranking() {
                     if ($('body').hasClass('window-hidden')) {
                         return ranking_outdated = true;
                     }
-                    var queryParam = window.location.search
+                    const queryParam = window.location.search
                     $.ajax({
                         url: queryParam ? queryParam + '&raw' : '?raw',
-                    }).done(function (data) {
+                    }).done((data) => {
                         $('#ranking-table').html(data);
                         if (localStorage.getItem('show-personal-info') == 'true') {
                             $('.personal-info').show();
                             $('#show-personal-info-checkbox').prop('checked', true);
                         }
-                        {% if tab == 'ranking' %}
+                        if (document.currentScript.dataset.tab === 'ranking') {
                             window.applyRankingFilter();
-                        {% endif %}
+                        }
                         window.enableAdminOperations();
-                    }).always(function () {
+                    }).always(() => {
                         ranking_outdated = false;
                         setTimeout(update_ranking, 10000);
                     });
                 }
-                $(window).on('dmoj:window-visible', function () {
+                $(window).on('dmoj:window-visible', () => {
                     if (ranking_outdated) {
                         update_ranking();
                     }
@@ -93,10 +93,11 @@
             });
         </script>
     {% endif %}
-    <script type="text/javascript">
-        $(function () {
-            var url = '{{ url('contest_participation', contest.key, '__username__') }}';
-            var placeholder = $('#search-contest').replaceWith($('<select>').attr({
+    <script type="text/javascript" data-tab="{{ tab }}" data-show-virtual="{{ show_virtual }}">
+        const showVirtual = document.currentScript.dataset.showVirtual === "True";
+        $(() => {
+            const url = "{{ url('contest_participation', contest.key, '__username__') }}";
+            const placeholder = $('#search-contest').replaceWith($('<select>').attr({
                 id: 'search-contest'
             })).attr('placeholder');
 
@@ -104,10 +105,10 @@
                 theme: '{{ DMOJ_SELECT2_THEME }}',
                 placeholder: placeholder,
                 ajax: {
-                    url: '{{ url('contest_user_search_select2_ajax', contest.key) }}'
+                    url: "{{ url('contest_user_search_select2_ajax', contest.key) }}"
                 },
                 minimumInputLength: 1,
-                templateResult: function (data) {
+                templateResult(data) {
                     return $('<span>')
                         .append($('<img>', {
                             class: 'user-search-image',
@@ -119,11 +120,11 @@
                             class: data.display_rank + ' user-search-name',
                         }).text(data.text));
                 }
-            }).on('change', function () {
+            }).on('change', () => {
                 window.location.href = url.replace('__username__', $(this).val());
             });
 
-            $('#show-personal-info-checkbox').click(function () {
+            $('#show-personal-info-checkbox').click(() => {
                 $('.personal-info').toggle();
                 localStorage.setItem('show-personal-info', $('.personal-info').is(':visible') ? 'true' : 'false');
             });
@@ -133,19 +134,19 @@
                 $('#show-personal-info-checkbox').prop('checked', true);
             }
 
-            {% if show_virtual %}
+            if (showVirtual) {
                 $('#show-virtual-participations-checkbox').prop('checked', true);
-            {% endif %}
+            }
 
-            $('#show-virtual-participations-checkbox').click(function () {
+            $('#show-virtual-participations-checkbox').click(() => {
                 const parser = new URL(window.location.href);
-                parser.searchParams.set('show_virtual', '{{ 'false' if show_virtual else 'true' }}');
+                parser.searchParams.set('show_virtual', "{{ 'false' if show_virtual else 'true' }}");
                 window.location.href = parser.href;
             });
 
             var contest_key = '{{contest.key}}';
 
-            $("a#cache_alert").click(function () {
+            $("a#cache_alert").click(() => {
                 var $closer = $(this);
                 $closer.parent().hide();
                 localStorage.setItem(`hide-cache-alert-${contest_key}`, 'true');
@@ -155,7 +156,7 @@
                 $("a#cache_alert").click();
             }
 
-            $("a#frozen_alert").click(function () {
+            $("a#frozen_alert").click(() => {
                 var $closer = $(this);
                 $closer.parent().hide();
                 localStorage.setItem(`hide-frozen-alert-${contest_key}`, 'true');
@@ -168,18 +169,18 @@
             // hack to keep scroll position after selecting option
             // https://stackoverflow.com/questions/55045146/select2-do-not-scroll-on-selection
             // scrollAfterSelect is only available after v4.0.6
-            $(function() {
+            $(() => {
                 $('#org-check-list').select2({
                     theme: '{{ DMOJ_SELECT2_THEME }}',
                     multiple: true,
                     closeOnSelect: false,
-                    placeholder: '{{ _('Search organizations') }}',
+                    placeholder: "{{ _('Search organizations') }}",
                 });
 
-                var selection = $('#org-check-list').data().select2.selection;
-                var results = $('#org-check-list').data().select2.results;
+                const selection = $('#org-check-list').data().select2.selection;
+                const results = $('#org-check-list').data().select2.results;
 
-                $('#org-check-list').on('select2:selecting', function(e) {
+                $('#org-check-list').on('select2:selecting', (e) => {
                     let id = e.params.args.data.id;
                     let val = $(e.target).val().concat([id]);
                     $(e.target).val(val).trigger('change');
@@ -194,9 +195,9 @@
                     return false;
                 });
 
-                $('#org-check-list').on('select2:unselecting', function(e) {
+                $('#org-check-list').on('select2:unselecting', (e) => {
                     let id = e.params.args.data.id;
-                    let val = $(e.target).val().filter(function(v) { return v != id; });
+                    let val = $(e.target).val().filter((v) => { return v !== id; });
                     $(e.target).val(val).trigger('change');
 
                     if (selection.$search.val() != '') {
@@ -209,7 +210,7 @@
                     return false;
                 });
 
-                $('#org-check-list').data().select2.toggleDropdown = function () {
+                $('#org-check-list').data().select2.toggleDropdown = () => {
                     selection.$search.trigger('focus');
 
                     if (!this.isOpen()) {
@@ -217,7 +218,7 @@
                     }
                 }
 
-                $('#filter-by-organization-button').click(function () {
+                $('#filter-by-organization-button').click(() => {
                     $('#org-check-list-wrapper').toggle();
                     $('#org-check-list').select2('open');
                 });
@@ -231,7 +232,7 @@
                 localStorage.setItem(`filter-selected-orgs-${contest_key}`, []);
             }
 
-            $('#apply-organization-filter').click(function () {
+            $('#apply-organization-filter').click(() => {
                 $('#org-check-list-wrapper').hide();
 
                 let selected_orgs = $('#org-check-list').val().map(x => x.trim());
@@ -239,13 +240,13 @@
                 window.applyRankingFilter();
             });
 
-            $('#clear-organization-filter').click(function () {
+            $('#clear-organization-filter').click(() => {
                 $('#org-check-list').val(null).trigger('change');
                 $('#apply-organization-filter').click();
             });
 
             // hide checklist by clicking outside
-            $(document).mouseup(function (e) {
+            $(document).mouseup((e) => {
                 e.stopPropagation();
 
                 // if clicked on the filter button
@@ -268,10 +269,10 @@
                 }
             });
 
-            window.getOrganizationCodes = function () {
+            window.getOrganizationCodes = () => {
                 let org_list = []
 
-                $('#ranking-table > tbody > *').each(function () {
+                $('#ranking-table > tbody > *').each(() => {
                     let org_anchor = $(this).find("div > div > .personal-info > .organization > a")[0];
 
                     if (org_anchor) {
@@ -287,7 +288,7 @@
                 let org_options = $('#org-check-list');
                 org_options.empty();
 
-                org_list.forEach(function (org) {
+                org_list.forEach((org) => {
                     org_options.append(
                         `<option value="${org}">${org}</option>`
                     );
@@ -305,12 +306,12 @@
                 return current_abs_rank;
             }
 
-            window.clearRankingFilter = function () {
+            window.clearRankingFilter = () => {
                 if (localStorage.getItem(`filter-cleared-${contest_key}`) == 'true') {
                     return;
                 }
 
-                $('#ranking-table > tbody > tr[id]').each(function () {
+                $('#ranking-table > tbody > tr[id]').each(() => {
                     $(this).show();
                     $(this).find("td")[0].innerHTML = extractCurrentAbsRank($(this).find("td")[0].innerText);
                 });
@@ -318,7 +319,7 @@
                 localStorage.setItem(`filter-cleared-${contest_key}`, 'true');
             };
 
-            window.applyRankingFilter = function () {
+            window.applyRankingFilter = () => {
                 let counter = 0;
                 let previous_abs_rank = -1;
                 let selected_orgs = localStorage.getItem(`filter-selected-orgs-${contest_key}`);
@@ -328,7 +329,7 @@
                     return;
                 }
 
-                $('#ranking-table > tbody > tr[id]').each(function () {
+                $('#ranking-table > tbody > tr[id]').each(() => {
                     let row = $(this);
 
                     let org_anchor = row.find("div > div > .personal-info > .organization > a")[0];
@@ -357,20 +358,20 @@
 
             window.applyRankingFilter();
 
-            window.restoreChecklistOptions = function () {
+            window.restoreChecklistOptions = () => {
                 let selected_orgs = localStorage.getItem(`filter-selected-orgs-${contest_key}`).split(',');
                 $('#org-check-list').val(selected_orgs).trigger('change');
             };
 
             window.restoreChecklistOptions();
 
-            window.enableAdminOperations = function () {
-                $('a.disqualify-participation').click(function (e) {
+            window.enableAdminOperations = () => {
+                $('a.disqualify-participation').click((e) => {
                     e.preventDefault();
                     if (e.ctrlKey || e.metaKey || confirm("{{ _('Are you sure you want to disqualify this participation?') }}"))
                         $(this).closest('form').submit();
                 })
-                $('a.un-disqualify-participation').click(function (e) {
+                $('a.un-disqualify-participation').click((e) => {
                     e.preventDefault();
                     if (e.ctrlKey || e.metaKey || confirm("{{ _('Are you sure you want to un-disqualify this participation?') }}"))
                         $(this).closest('form').submit();
@@ -380,8 +381,8 @@
             window.enableAdminOperations();
         });
 
-        {% if tab == 'ranking' %}
-            $.fn.ignore = function(sel) {
+        if (document.currentScript.dataset.tab  === "ranking") {
+            $.fn.ignore = (sel) => {
                 return this.clone().find(sel || '>*').remove().end();
             };
 
@@ -397,9 +398,9 @@
 
                 var csv = [];
 
-                $('#ranking-table thead tr').each(function () {
+                $('#ranking-table thead tr').each(() => {
                     var header = [];
-                    $(this).find('th').each(function () {
+                    $(this).find('th').each(() => {
                         var $col = $(this);
 
                         if ($col.hasClass('rating-column')) {
@@ -410,8 +411,8 @@
                             header.push(clean_text($col.text()));
                         } else if ($col.hasClass('username')) {
                             // Username and Full name
-                            header.push(clean_text('{{ _('Username') }}'));
-                            header.push(clean_text('{{ _('Full Name') }}'));
+                            header.push(clean_text("{{ _('Username') }}"));
+                            header.push(clean_text("{{ _('Full Name') }}"));
                         } else {
                             // Point
                             var name = $col.find('.problem-code').text();
@@ -424,14 +425,14 @@
                     csv.push(header.join(','));
                 });
 
-                $('#ranking-table tbody tr').each(function () {
+                $('#ranking-table tbody tr').each(() => {
                     // Skip hidden row (due to filtering)
                     if ($(this).is(':hidden')) {
                         return;
                     }
 
                     var row_data = [];
-                    $(this).find('td').each(function () {
+                    $(this).find('td').each(() => {
                         var $col = $(this);
 
                         if ($col.hasClass('rating-column')) {
@@ -460,7 +461,7 @@
                 link.click();
                 document.body.removeChild(link);
             }
-        {% endif %}
+        }
     </script>
     {% include "contest/media-js.html" %}
 {% endblock %}

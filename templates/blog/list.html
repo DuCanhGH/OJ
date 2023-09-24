@@ -16,20 +16,20 @@
     {% include "blog/media-js.html" %}
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.time-remaining').each(function () {
+        $(document).ready(() => {
+            $('.time-remaining').each(() => {
                 count_down($(this));
             });
 
             $('.blog-sidebar').hide();
-            $('#blog-tab').find('a').click(function (e) {
+            $('#blog-tab').find('a').click((e) => {
                 e.preventDefault();
                 $('#blog-tab').addClass('active');
                 $('#event-tab').removeClass('active');
                 $('.blog-content').show();
                 $('.blog-sidebar').hide();
             });
-            $('#event-tab').find('a').click(function (e) {
+            $('#event-tab').find('a').click((e) => {
                 e.preventDefault();
                 $('#event-tab').addClass('active');
                 $('#blog-tab').removeClass('active');

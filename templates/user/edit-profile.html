@@ -93,16 +93,16 @@
     {% include "timezone/media-js.html" %}
     {{ form.media.js }}
     <script type="text/javascript">
-        $(function () {
-            $('#ace_user_script').on('ace_load', function (e, editor) {
+        $(() => {
+            $('#ace_user_script').on('ace_load', (e, editor) => {
                 editor.getSession().setMode("ace/mode/javascript");
             });
 
-            $('#disable-2fa-button').click(function () {
+            $('#disable-2fa-button').click(() => {
                 alert("{{ _('The administrators for this site require all the staff to have Two-factor Authentication enabled, so it may not be disabled at this time.') }}");
             });
 
-            $('#generate-api-token-button').click(function (event) {
+            $('#generate-api-token-button').click((event) => {
                 event.preventDefault();
                 if (confirm("{{ _('Are you sure you want to generate or regenerate your API token?') }}\n"
                           + "{{ _('This will invalidate any previous API tokens.') }} "
@@ -114,15 +114,15 @@
                         type: 'POST',
                         url: $(this).attr('href'),
                         dataType: 'json',
-                        success: function(data) {
+                        success(data) {
                             $('#api-token').text(data.data.token);
                             $('#generate-api-token-button').text("{{ _('Regenerate') }}");
 
                             // Add remove button on-the-fly
                             if ($('#remove-api-token-button').length == 0) {
-                                $('#generate-api-token-button').after($('<a id="remove-api-token-button" \
+                                $('#generate-api-token-button').after($(`<a id="remove-api-token-button" \
                                     href="{{ url('remove_api_token') }}" \
-                                    class="button inline-button ml-5">{{ _('Remove') }}</a>'));
+                                    class="button inline-button ml-5">{{ _('Remove') }}</a>`));
                             }
                         },
                     });
@@ -130,14 +130,14 @@
             });
 
             // Delegated event handler because the remove button may have been added on-the-fly
-            $('#api-token-td').on('click', '#remove-api-token-button', function (event) {
+            $('#api-token-td').on('click', '#remove-api-token-button', (event) => {
                 event.preventDefault();
                 if (confirm("{{ _('Are you sure you want to remove your API token?') }}")) {
                     $.ajax({
                         type: 'POST',
                         url: $(this).attr('href'),
                         dataType: 'json',
-                        success: function(data) {
+                        success(data) {
                             $('#api-token').text('');
                             $('#generate-api-token-button').text("{{ _('Generate') }}");
                             $('#remove-api-token-button').remove();
@@ -147,20 +147,13 @@
             });
         });
     </script>
+    {% include "user/webauthn-helpers.js" %}
     <script>
-        // This is basically impossible to write without ES6, hence separate script block.
         $(() => {
-            {% include "user/webauthn-helpers.js" %}
-
             $('#new-webauthn').click(event => {
                 event.preventDefault();
 
-                if (typeof window.PublicKeyCredential === 'undefined') {
-                    alert('{{ _('WebAuthn is not supported by your browser.') }}');
-                    return;
-                }
-
-                $.getJSON('{{ url('webauthn_attest') }}')
+                $.getJSON("{{ url('webauthn_attest') }}")
                     .done(publicKey => {
                         decodeJSONBytes(publicKey);
                         navigator.credentials.create({publicKey})
@@ -172,7 +165,7 @@
                                         clientData: urlSafeBase64Encode(credential.response.clientDataJSON),
                                     }
                                 };
-                                $.post('{{ url('webauthn_attest') }}', {
+                                $.post("{{ url('webauthn_attest') }}", {
                                     credential: JSON.stringify(credential),
                                     name: $('#new-webauthn-name').val(),
                                 })
@@ -180,10 +173,10 @@
                                     .fail((jqXHR) => alert(jqXHR.responseText));
                             });
                     })
-                    .fail(() => alert('{{ _('Failed to contact server.') }}'));
+                    .fail(() => alert("{{ _('Failed to contact server.') }}"));
             });
 
-            $('.webauthn-delete').click(function (event) {
+            $('.webauthn-delete').click((event) => {
                 event.preventDefault();
                 if (confirm("{{ _('Are you sure you want to delete this security key?') }}")) {
                     $.post($(this).attr('data-delete-url'))
@@ -193,40 +186,41 @@
             });
         });
     </script>
-    <script src="{{ static('libs/clipboard/clipboard.js') }}"></script>
-    <script src="{{ static('libs/clipboard/tooltip.js') }}"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#generate-scratch-codes-button').click(function(event) {
+    <script type="module">
+        import "$prebundled/clipboard/clipboard.js";
+        import "$prebundled/clipboard/tooltip.js";
+
+        $(() => {
+            $('#generate-scratch-codes-button').click((event) => {
                 event.preventDefault();
                 if (confirm("{{ _('Are you sure you want to generate or regenerate a new set of scratch codes?') }}\n"
                           + "{{ _('This will invalidate any previous scratch codes you have.') }}\n\n"
                           + "{{ _('You will not be able to view your scratch codes after you leave this page!') }}")) {
                     $('#scratch-codes').text("{{ _('Generating...') }}");
 
-                    $('pre code').each(function () {
+                    $('pre code').each(() => {
                         var copyButton;
                         $(this).parent().before($('<div>', {'class': 'copy-clipboard'})
                             .append(copyButton = $('<span>', {
                                 'class': 'btn-clipboard',
                                 'id': 'scratch-codes-copy-button',
                                 'data-clipboard-text': '',
-                                'title': '{{ _('Click to copy') }}'
-                            }).text('{{ _('Copy') }}')));
+                                'title': "{{ _('Click to copy') }}"
+                            }).text("{{ _('Copy') }}")));
 
-                        $(copyButton.get(0)).mouseleave(function () {
+                        $(copyButton.get(0)).mouseleave(() => {
                             $(this).attr('class', 'btn-clipboard');
                             $(this).removeAttr('aria-label');
                         });
 
                         var curClipboard = new Clipboard(copyButton.get(0));
 
-                        curClipboard.on('success', function(e) {
+                        curClipboard.on('success', (e) => {
                             e.clearSelection();
-                            showTooltip(e.trigger, '{{ _('Copied!') }}');
+                            showTooltip(e.trigger, "{{ _('Copied!') }}");
                         });
 
-                        curClipboard.on('error', function(e) {
+                        curClipboard.on('error', (e) => {
                             showTooltip(e.trigger, fallbackMessage(e.action));
                         });
                     });
@@ -235,7 +229,7 @@
                         type: 'POST',
                         url: $(this).attr('href'),
                         dataType: 'json',
-                        success: function(data) {
+                        success: (data) => {
                             $('#scratch-codes').text(data.data.codes.join('\n'));
                             $('#scratch-codes-copy-button').attr('data-clipboard-text', data.data.codes.join('\n'));
                             $('#generate-scratch-codes-button').text("{{ _('Regenerate') }}");

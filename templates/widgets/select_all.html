@@ -24,10 +24,10 @@
     }
 </style>
 <script type="text/javascript">
-    django.jQuery(function ($) {
-        var box = $('div#' + '{{ select_all_name }}');
-        var original = box.find('.original-checkboxes');
-        $('.checkall').click(function () {
+    django.jQuery(($) => {
+        const box = $('div#' + '{{ select_all_name }}');
+        const original = box.find('.original-checkboxes');
+        $('.checkall').click(() => {
             original.find(':checkbox').prop('checked', this.checked);
         });
     });

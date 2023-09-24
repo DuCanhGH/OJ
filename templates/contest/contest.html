@@ -20,8 +20,8 @@
 
 {% block content_js_media %}
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.time-remaining').each(function () {
+        $(document).ready(() => {
+            $('.time-remaining').each(() => {
                 count_down($(this));
             });
         });

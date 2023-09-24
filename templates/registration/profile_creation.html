@@ -1,12 +1,8 @@
 {% extends "base.html" %}
 {% block media %}
-    <link rel="stylesheet" href="{{ static('libs/timezone-map/timezone-map.css') }}">
+    <link rel="stylesheet" href="/resources/prebundled/timezone-map/timezone-map.css">
     {{ form.media.css }}
     <style>
-        .map-inset {
-            background: url('{{ TIMEZONE_MAP }}') 50% 50%
-        }
-
         .map-wrap {
             display: none
         }
@@ -20,9 +16,9 @@
 {% block js_media %}
     {{ form.media.js }}
     <script type="text/javascript">
-        $(function () {
+        $(() => {
             try {
-                var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
                 if (typeof tz === 'string' && $('#id_timezone option[value="' + tz + '"]').length) {
                     $('#id_timezone').val(tz).change();
                 }

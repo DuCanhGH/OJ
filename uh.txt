@@ -1,0 +1,1097 @@
+
+/home/ducanh/Documents/Web/vnoj/resources/accordion.js
+  1:1   error  '$' is not defined  no-undef
+  2:5   error  '$' is not defined  no-undef
+  5:21  error  '$' is not defined  no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/common.js
+    2:1   error    '$' is not defined                                                                    no-undef
+   34:13  error    '$' is not defined                                                                    no-undef
+   57:1   error    '$' is not defined                                                                    no-undef
+   58:5   error    '$' is not defined                                                                    no-undef
+   59:25  error    '$' is not defined                                                                    no-undef
+   63:10  warning  'featureTest' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+   77:41  error    '$' is not defined                                                                    no-undef
+   87:6   error    '$' is not defined                                                                    no-undef
+   88:5   error    '$' is not defined                                                                    no-undef
+   89:14  error    '$' is not defined                                                                    no-undef
+   94:1   error    '$' is not defined                                                                    no-undef
+   96:9   error    '$' is not defined                                                                    no-undef
+   98:13  error    '$' is not defined                                                                    no-undef
+  102:21  error    '$' is not defined                                                                    no-undef
+  103:5   error    '$' is not defined                                                                    no-undef
+  107:13  error    '$' is not defined                                                                    no-undef
+  109:13  error    '$' is not defined                                                                    no-undef
+  112:9   error    '$' is not defined                                                                    no-undef
+  114:9   error    '$' is not defined                                                                    no-undef
+  119:9   error    '$' is not defined                                                                    no-undef
+  123:14  error    '$' is not defined                                                                    no-undef
+  125:9   error    '$' is not defined                                                                    no-undef
+  128:13  error    '$' is not defined                                                                    no-undef
+  136:5   error    '$' is not defined                                                                    no-undef
+  140:5   error    '$' is not defined                                                                    no-undef
+  143:53  error    '$' is not defined                                                                    no-undef
+  154:10  warning  'count_down' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u   @typescript-eslint/no-unused-vars
+  176:24  error    'npgettext' is not defined                                                            no-undef
+  179:24  error    'pgettext' is not defined                                                             no-undef
+  188:21  error    '$' is not defined                                                                    no-undef
+  189:20  error    'moment' is not defined                                                               no-undef
+  193:17  error    '$' is not defined                                                                    no-undef
+  196:17  error    'moment' is not defined                                                               no-undef
+  204:9   error    '$' is not defined                                                                    no-undef
+  213:1   error    '$' is not defined                                                                    no-undef
+  214:19  error    '$' is not defined                                                                    no-undef
+  216:5   error    '$' is not defined                                                                    no-undef
+  216:32  warning  'evt' is defined but never used. Allowed unused args must match /^_/u                 @typescript-eslint/no-unused-vars
+  218:9   error    '$' is not defined                                                                    no-undef
+  230:9   error    'data' is already defined                                                             no-redeclare
+  230:47  error    '$' is not defined                                                                    no-undef
+  257:30  error    '$' is not defined                                                                    no-undef
+  261:25  error    'notify' is not defined                                                               no-undef
+  267:33  error    'notify' is not defined                                                               no-undef
+  278:9   error    '$' is not defined                                                                    no-undef
+  294:1   error    '$' is not defined                                                                    no-undef
+  296:5   error    '$' is not defined                                                                    no-undef
+  297:23  error    '$' is not defined                                                                    no-undef
+  302:1   error    '$' is not defined                                                                    no-undef
+  304:5   error    '$' is not defined                                                                    no-undef
+  305:9   error    '$' is not defined                                                                    no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/django_select2.js
+  16:49  warning  'page' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  50:9   error    'django' is not defined                                                 no-undef
+  58:3   error    'jQuery' is not defined                                                 no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/dmmd-preview.js
+   1:1   error  '$' is not defined                      no-undef
+   7:25  error  '$' is not defined                      no-undef
+  21:17  error  '$' is not defined                      no-undef
+  23:42  error  '$' is not defined                      no-undef
+  31:29  error  '$' is not defined                      no-undef
+  37:37  error  '$' is not defined                      no-undef
+  43:45  error  'MathJax' is not defined                no-undef
+  52:29  error  'MathJax' is not defined                no-undef
+  85:5   error  '$' is not defined                      no-undef
+  86:9   error  'register_dmmd_preview' is not defined  no-undef
+  86:31  error  '$' is not defined                      no-undef
+  90:9   error  'django' is not defined                 no-undef
+  96:17  error  'register_dmmd_preview' is not defined  no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/event.js
+   1:10  warning  'WSEventDispatcher' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+  10:9   error    Unexpected aliasing of 'this' to local variable                                             @typescript-eslint/no-this-alias
+  29:40  error    '$' is not defined                                                                          no-undef
+  32:42  warning  'status' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+  32:50  warning  'jqXHR' is defined but never used. Allowed unused args must match /^_/u                     @typescript-eslint/no-unused-vars
+  37:49  warning  'error' is defined but never used. Allowed unused args must match /^_/u                     @typescript-eslint/no-unused-vars
+
+/home/ducanh/Documents/Web/vnoj/resources/martor-mathjax.js
+  1:1   error  'jQuery' is not defined   no-undef
+  4:13  error  'MathJax' is not defined  no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown/Markdown.Converter.js
+    56:26   warning  'x' is defined but never used. Allowed unused args must match /^_/u                              @typescript-eslint/no-unused-vars
+   254:17   warning  'block_tags_a' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u   @typescript-eslint/no-unused-vars
+   255:17   warning  'block_tags_b' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u   @typescript-eslint/no-unused-vars
+   451:32   error    Unnecessary escape character: \/                                                                 no-useless-escape
+   493:54   error    Unnecessary escape character: \[                                                                 no-useless-escape
+   533:54   error    Unnecessary escape character: \[                                                                 no-useless-escape
+   551:40   error    Unnecessary escape character: \[                                                                 no-useless-escape
+   747:36   error    Unnecessary escape character: \#                                                                 no-useless-escape
+   747:61   error    Unnecessary escape character: \#                                                                 no-useless-escape
+   895:25   warning  'leading_space' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+  1008:51   warning  'm4' is defined but never used. Allowed unused args must match /^_/u                             @typescript-eslint/no-unused-vars
+  1036:44   error    Unnecessary escape character: \*                                                                 no-useless-escape
+  1057:55   error    Unnecessary escape character: \*                                                                 no-useless-escape
+  1100:47   error    Spaces are hard to count. Use {2}                                                                no-regex-spaces
+  1150:26   error    'i' is already defined                                                                           no-redeclare
+  1172:42   error    Unnecessary escape character: \/                                                                 no-useless-escape
+  1172:45   error    Unnecessary escape character: \$                                                                 no-useless-escape
+  1194:43   error    Unnecessary escape character: \[                                                                 no-useless-escape
+  1205:70   error    Unnecessary escape character: \/                                                                 no-useless-escape
+  1205:78   error    Unnecessary escape character: \[                                                                 no-useless-escape
+  1205:82   error    Unnecessary escape character: \(                                                                 no-useless-escape
+  1205:84   error    Unnecessary escape character: \)                                                                 no-useless-escape
+  1205:89   error    Unnecessary escape character: \.                                                                 no-useless-escape
+  1205:106  error    Unnecessary escape character: \/                                                                 no-useless-escape
+  1205:113  error    Unnecessary escape character: \[                                                                 no-useless-escape
+  1301:51   error    Unnecessary escape character: \/                                                                 no-useless-escape
+  1312:63   error    Unnecessary escape character: \[                                                                 no-useless-escape
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown/Markdown.Editor.js
+   100:5   error    'Markdown' is not defined                                                                          no-undef
+   121:9   error    'idButton' is not defined                                                                          no-undef
+   122:9   error    'idPreview' is not defined                                                                         no-undef
+   123:9   error    'idInput' is not defined                                                                           no-undef
+   125:24  error    Do not access Object.prototype method 'hasOwnProperty' from target object                          no-prototype-builtins
+   126:17  error    'idButton' is not defined                                                                          no-undef
+   127:24  error    Do not access Object.prototype method 'hasOwnProperty' from target object                          no-prototype-builtins
+   128:17  error    'idPreview' is not defined                                                                         no-undef
+   129:24  error    Do not access Object.prototype method 'hasOwnProperty' from target object                          no-prototype-builtins
+   130:17  error    'idInput' is not defined                                                                           no-undef
+   133:38  error    'Markdown' is not defined                                                                          no-undef
+   143:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+   150:42  error    'idButton' is not defined                                                                          no-undef
+   150:52  error    'idPreview' is not defined                                                                         no-undef
+   150:63  error    'idInput' is not defined                                                                           no-undef
+   186:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+   233:44  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+   420:20  error    Expected a conditional expression and instead saw an assignment                                    no-cond-assign
+   479:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+   714:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+   851:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+   851:13  warning  'managerObj' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u       @typescript-eslint/no-unused-vars
+  1464:17  warning  'normalYShift' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u     @typescript-eslint/no-unused-vars
+  1465:17  warning  'disabledYShift' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u   @typescript-eslint/no-unused-vars
+  1466:17  warning  'highlightYShift' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+  1584:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+  1596:42  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  1608:13  warning  'prevStars' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u        @typescript-eslint/no-unused-vars
+  1633:49  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  1645:13  warning  'prevStars' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u        @typescript-eslint/no-unused-vars
+  1750:43  error    Unnecessary escape character: \[                                                                   no-useless-escape
+  1817:53  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  1851:17  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+  1912:50  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  1914:13  error    Unexpected aliasing of 'this' to local variable                                                    @typescript-eslint/no-this-alias
+  1955:50  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  2099:44  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  2267:47  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+  2326:54  warning  'postProcessing' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown/Markdown.Sanitizer.js
+    5:21  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+   25:69  error  Unnecessary escape character: \/                no-useless-escape
+   25:82  error  Unnecessary escape character: \(                no-useless-escape
+   25:84  error  Unnecessary escape character: \)                no-useless-escape
+   28:66  error  Unnecessary escape character: \/                no-useless-escape
+   28:79  error  Unnecessary escape character: \(                no-useless-escape
+   28:81  error  Unnecessary escape character: \)                no-useless-escape
+  100:13  error  'ctag' is already defined                       no-redeclare
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown/demo/node/demo.js
+  5:12  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  6:11  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  7:19  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  8:17  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  9:30  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown/local/Markdown.local.fr.js
+  6:9   error  'Markdown' is not defined  no-undef
+  6:26  error  'Markdown' is not defined  no-undef
+  7:9   error  'Markdown' is not defined  no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown/node-pagedown.js
+  1:21  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  2:34  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+
+/home/ducanh/Documents/Web/vnoj/resources/pagedown_math.js
+   7:21  error  'MathJax' is not defined  no-undef
+   9:17  error  'MathJax' is not defined  no-undef
+  17:1   error  '$' is not defined        no-undef
+  18:40  error  '$' is not defined        no-undef
+  18:44  error  'django' is not defined   no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/chart.js/Chart.js
+      8:145  error    Empty block statement                                                      no-empty
+      9:33   error    'define' is not defined                                                    no-undef
+      9:46   error    'define' is not defined                                                    no-undef
+      9:157  error    Empty block statement                                                      no-empty
+     13:27   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+    147:7    error    'b' is already defined                                                     no-redeclare
+    292:7    error    'v' is already defined                                                     no-redeclare
+    361:13   error    'r' is not defined                                                         no-undef
+    361:20   error    'g' is not defined                                                         no-undef
+    361:27   error    'b' is not defined                                                         no-undef
+    362:13   error    'r' is not defined                                                         no-undef
+    362:20   error    'g' is not defined                                                         no-undef
+    362:27   error    'b' is not defined                                                         no-undef
+    363:13   error    'r' is not defined                                                         no-undef
+    363:21   error    'g' is not defined                                                         no-undef
+    363:28   error    'b' is not defined                                                         no-undef
+    364:13   error    'r' is not defined                                                         no-undef
+    364:21   error    'g' is not defined                                                         no-undef
+    364:28   error    'b' is not defined                                                         no-undef
+    365:13   error    'r' is not defined                                                         no-undef
+    365:20   error    'g' is not defined                                                         no-undef
+    365:28   error    'b' is not defined                                                         no-undef
+    366:13   error    'r' is not defined                                                         no-undef
+    366:20   error    'g' is not defined                                                         no-undef
+    366:28   error    'b' is not defined                                                         no-undef
+    369:11   error    'r' is not defined                                                         no-undef
+    369:20   error    'g' is not defined                                                         no-undef
+    369:29   error    'b' is not defined                                                         no-undef
+    798:42   warning  'vals' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+    984:90   error    Unnecessary escape character: \.                                           no-useless-escape
+    985:35   error    Unnecessary escape character: \.                                           no-useless-escape
+    985:40   error    Unnecessary escape character: \%                                           no-useless-escape
+    985:58   error    Unnecessary escape character: \.                                           no-useless-escape
+    985:63   error    Unnecessary escape character: \%                                           no-useless-escape
+    985:81   error    Unnecessary escape character: \.                                           no-useless-escape
+    985:86   error    Unnecessary escape character: \%                                           no-useless-escape
+    985:107  error    Unnecessary escape character: \.                                           no-useless-escape
+   1002:13   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1005:16   error    'i' is already defined                                                     no-redeclare
+   1012:13   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1013:16   error    'i' is already defined                                                     no-redeclare
+   1018:13   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1019:16   error    'i' is already defined                                                     no-redeclare
+   1024:13   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1034:13   error    'i' is already defined                                                     no-redeclare
+   1051:60   error    Unnecessary escape character: \.                                           no-useless-escape
+   1051:82   error    Unnecessary escape character: \.                                           no-useless-escape
+   1051:107  error    Unnecessary escape character: \.                                           no-useless-escape
+   1067:58   error    Unnecessary escape character: \.                                           no-useless-escape
+   1067:80   error    Unnecessary escape character: \.                                           no-useless-escape
+   1067:105  error    Unnecessary escape character: \.                                           no-useless-escape
+   1094:13   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1097:13   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1104:8    error    'a' is already defined                                                     no-redeclare
+   1222:14   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1224:14   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+   1500:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   1534:15   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   1896:22   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   1969:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   1970:48   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   2707:13   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   2717:14   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   2757:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   2766:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   2907:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   2923:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3059:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3071:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3137:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3146:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3156:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3176:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3259:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3477:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3961:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3972:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   3984:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4011:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4035:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4086:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4119:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4174:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4195:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4218:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4301:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4315:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4373:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4561:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4617:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4700:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4760:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4917:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   4960:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5006:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5054:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5095:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5128:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5183:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5347:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5377:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5392:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5475:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5517:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5572:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5611:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5650:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5698:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   5732:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   6266:16   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   7251:28   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   7255:24   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   7258:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   7259:19   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   7770:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   7793:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   7821:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   7837:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8229:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8411:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8471:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8508:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8570:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8652:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8687:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8702:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8772:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8797:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8816:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8833:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8885:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8918:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8935:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8957:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   8980:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9026:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9085:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9114:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9127:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9154:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9182:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9235:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+   9927:14   error    'CanvasGradient' is already defined as a built-in global variable          no-redeclare
+   9936:13   error    'CanvasPattern' is already defined as a built-in global variable           no-redeclare
+  10234:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10283:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10382:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10422:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10436:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10451:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10500:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10619:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10693:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10717:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10738:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10753:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10798:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10823:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  10850:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11143:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11166:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11173:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11185:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11228:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11349:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11416:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11443:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11482:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11499:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11618:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11644:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11660:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11740:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11845:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11882:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11939:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  11980:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12335:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12347:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12381:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12394:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12409:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12427:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12450:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12465:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12478:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  12490:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13011:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13041:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13119:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13174:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13198:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13230:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13241:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13265:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13280:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13295:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13810:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13844:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13877:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13899:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14011:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14156:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14181:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14300:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14311:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14346:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14385:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14415:7    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  14566:14   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/clipboard/clipboard.js
+    7:128  error    'define' is not defined                                                           no-undef
+    7:140  error    'define' is not defined                                                           no-undef
+    7:298  error    Unexpected aliasing of 'this' to local variable                                   @typescript-eslint/no-this-alias
+    7:348  warning  'module' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u   @typescript-eslint/no-unused-vars
+    7:355  warning  'exports' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+    7:841  warning  'exports' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+   19:54   warning  'exports' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  116:34   warning  'exports' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  213:55   warning  'exports' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  254:34   warning  'exports' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  284:34   warning  'exports' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  303:9    error    Unexpected aliasing of 'this' to local variable                                   @typescript-eslint/no-this-alias
+  445:17   error    Unexpected aliasing of 'this' to local variable                                   @typescript-eslint/no-this-alias
+  672:17   error    Unexpected aliasing of 'this' to local variable                                   @typescript-eslint/no-this-alias
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/clipboard/tooltip.js
+  1:10  warning  'showTooltip' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u      @typescript-eslint/no-unused-vars
+  5:10  warning  'fallbackMessage' is defined but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/featherlight/featherlight.min.js
+  8:2255  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:2850  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:3182  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:3545  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:4066  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:4968  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:5228  error  Empty block statement                            no-empty
+  8:5452  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:5935  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:6075  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+  8:6932  error  'jQuery' is not defined                          no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/jquery-3.4.1.min.js
+  2:2038   error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:5433   error  Unexpected control character(s) in regular expression: \x1f, \x1f          no-control-regex
+  2:5916   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:6170   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:6614   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:7404   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:9497   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:9807   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:11608  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:12183  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:12221  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:13234  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:13546  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:15374  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:15645  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:15843  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:16217  error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  2:16907  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:18727  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:18827  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:18887  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:19071  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:20240  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:21514  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:21625  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:23791  error  Unnecessary escape character: \/                                           no-useless-escape
+  2:24305  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:29394  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:33395  error  Empty block statement                                                      no-empty
+  2:35265  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:37269  error  Unnecessary escape character: \/                                           no-useless-escape
+  2:38490  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:38606  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:39234  error  Empty block statement                                                      no-empty
+  2:43124  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:46727  error  Unnecessary escape character: \/                                           no-useless-escape
+  2:49033  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:50593  error  Empty block statement                                                      no-empty
+  2:58406  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:59575  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:60265  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:65215  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:66958  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:67024  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:67328  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:67394  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:67801  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:68078  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:73449  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:75043  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:75823  error  'r.href' is assigned to itself                                             no-self-assign
+  2:79696  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:80414  error  Empty block statement                                                      no-empty
+  2:83525  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:83678  error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:87869  error  'define' is not defined                                                    no-undef
+  2:87881  error  'define' is not defined                                                    no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/jquery-cookie.js
+   9:38  error  'define' is not defined                         no-undef
+  11:3   error  'define' is not defined                         no-undef
+  14:11  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  17:11  error  'jQuery' is not defined                         no-undef
+  47:14  error  Empty block statement                           no-empty
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/jquery-sortable.js
+   31:35  error    Shadowing of global property 'undefined'                                                   no-shadow-restricted-names
+   52:34  warning  '$placeholder' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+   52:48  warning  'container' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+   52:59  warning  '$closestItemOrContainer' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   78:38  warning  '$item' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+   78:45  warning  'container' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+   83:33  warning  '$item' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+   83:40  warning  'container' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+   83:59  warning  'event' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+   87:56  warning  'event' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+   95:62  warning  'event' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+  104:57  warning  'event' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+  411:17  error    Unexpected aliasing of 'this' to local variable                                            @typescript-eslint/no-this-alias
+  422:27  warning  'e' is defined but never used. Allowed unused args must match /^_/u                        @typescript-eslint/no-unused-vars
+  427:17  error    Unexpected aliasing of 'this' to local variable                                            @typescript-eslint/no-this-alias
+  602:17  error    Unexpected aliasing of 'this' to local variable                                            @typescript-eslint/no-this-alias
+  612:48  warning  'item' is defined but never used. Allowed unused args must match /^_/u                     @typescript-eslint/no-unused-vars
+  624:17  error    Unexpected aliasing of 'this' to local variable                                            @typescript-eslint/no-this-alias
+  692:3   error    'jQuery' is not defined                                                                    no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/jquery-taphold.js
+   17:21  error    'jQuery' is not defined                                                                    no-undef
+   20:9   error    'settings' is not defined                                                                  no-undef
+   20:20  error    'jQuery' is not defined                                                                    no-undef
+   40:25  error    'settings' is not defined                                                                  no-undef
+   42:49  error    'settings' is not defined                                                                  no-undef
+   59:35  error    'jQuery' is not defined                                                                    no-undef
+   59:56  error    'jQuery' is not defined                                                                    no-undef
+   62:16  error    'settings' is not defined                                                                  no-undef
+   68:21  error    'jQuery' is not defined                                                                    no-undef
+   83:53  error    'jQuery' is not defined                                                                    no-undef
+   83:74  error    'jQuery' is not defined                                                                    no-undef
+   92:27  warning  'event' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+  102:9   warning  'taphold' is assigned a value but never used. Allowed unused vars must match /^(_|\$\$)/u  @typescript-eslint/no-unused-vars
+  110:28  warning  'namespaces' is defined but never used. Allowed unused args must match /^_/u               @typescript-eslint/no-unused-vars
+  117:4   error    'jQuery' is not defined                                                                    no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/jquery.unveil.js
+  19:9  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/moment.js
+     3:37   error    'define' is not defined                                                       no-undef
+     3:50   error    'define' is not defined                                                       no-undef
+    35:25   error    Do not access Object.prototype method 'hasOwnProperty' from target object     no-prototype-builtins
+   544:34   error    Unnecessary escape character: \[                                              no-useless-escape
+   546:39   error    Unnecessary escape character: \[                                              no-useless-escape
+   656:127  error    Unnecessary escape character: \/                                              no-useless-escape
+   661:74   warning  'localeData' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   676:78   error    Unnecessary escape character: \[                                              no-useless-escape
+   682:29   error    Unnecessary escape character: \/                                              no-useless-escape
+   925:40   error    Unnecessary escape character: \[                                              no-useless-escape
+  1705:56   warning  'config' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  1731:50   warning  'config' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  1736:52   warning  'config' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  1836:25   error    Empty block statement                                                         no-empty
+  2159:143  error    Unnecessary escape character: \+                                              no-useless-escape
+  2159:145  error    Unnecessary escape character: \-                                              no-useless-escape
+  2160:135  error    Unnecessary escape character: \+                                              no-useless-escape
+  2160:137  error    Unnecessary escape character: \-                                              no-useless-escape
+  2192:39   error    Unnecessary escape character: \-                                              no-useless-escape
+  2811:26   error    Unnecessary escape character: \+                                              no-useless-escape
+  2811:28   error    Unnecessary escape character: \-                                              no-useless-escape
+  3001:26   error    Unnecessary escape character: \-                                              no-useless-escape
+  3001:52   error    Unnecessary escape character: \:                                              no-useless-escape
+  3001:62   error    Unnecessary escape character: \:                                              no-useless-escape
+  3029:20   error    Redundant double negation                                                     no-extra-boolean-cast
+  3039:20   error    Redundant double negation                                                     no-extra-boolean-cast
+  3486:13   error    Unexpected aliasing of 'this' to local variable                               @typescript-eslint/no-this-alias
+  3491:13   error    Unexpected aliasing of 'this' to local variable                               @typescript-eslint/no-this-alias
+  4505:62   warning  'isFuture' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  5022:36   warning  'minute' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  5022:44   warning  'isUpper' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+  5227:36   warning  'minute' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  5227:44   warning  'isLower' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+  5543:44   warning  'isLower' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/nouislider.min.js
+  3:41     error  'define' is not defined                                                    no-undef
+  3:52     error  'define' is not defined                                                    no-undef
+  3:1861   error  Expected to return a value in method 'get'                                 getter-return
+  3:1931   error  Empty block statement                                                      no-empty
+  3:3478   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  3:7754   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  3:13321  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+  3:18211  error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/raven.min.js
+  2:124    error    'define' is not defined                                                    no-undef
+  2:135    error    'define' is not defined                                                    no-undef
+  2:750    warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:905    warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:1210   warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:2226   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:2595   error    Unnecessary escape character: \[                                           no-useless-escape
+  2:2599   error    Unnecessary escape character: \/                                           no-useless-escape
+  2:2835   error    Unnecessary escape character: \/                                           no-useless-escape
+  2:2853   error    Unnecessary escape character: \/                                           no-useless-escape
+  2:4603   error    Unnecessary escape character: \.                                           no-useless-escape
+  2:4823   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:5710   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:5958   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:6483   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:9313   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:9692   error    Empty block statement                                                      no-empty
+  2:9715   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:9885   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:10403  warning  'b' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:10405  warning  'd' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:10626  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  2:10791  error    Empty block statement                                                      no-empty
+  2:11120  error    Empty block statement                                                      no-empty
+  2:11160  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:11931  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:12221  warning  'd' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:12320  error    Empty block statement                                                      no-empty
+  2:12390  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:12695  warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:12697  warning  'd' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:13920  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:14533  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:15861  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  2:15959  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  2:16726  error    Empty block statement                                                      no-empty
+  2:17620  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2:18844  error    'XDomainRequest' is not defined                                            no-undef
+  2:19558  warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:19917  warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:20304  warning  'c' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:20926  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  2:21286  error    'm' is already defined                                                     no-redeclare
+  2:22500  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:22743  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:22865  error    'q' is already defined                                                     no-redeclare
+  2:23256  warning  'd' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  2:23922  error    Empty block statement                                                      no-empty
+  2:24162  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  2:24213  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/select2/select2.js
+  1:121    error    'define' is not defined                                              no-undef
+  1:132    error    'define' is not defined                                              no-undef
+  1:198    error    'jQuery' is not defined                                              no-undef
+  1:306    error    'b' is already defined                                               no-redeclare
+  1:3299   error    '$' is not defined                                                   no-undef
+  1:5933   error    Unnecessary escape character: \/                                     no-useless-escape
+  1:7751   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:9276   warning  'c' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:9283   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:11952  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:13730  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:13737  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:14672  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:15375  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:15548  warning  'd' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:15928  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:15935  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:16245  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:16286  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:16314  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:17010  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:17012  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:17282  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:17284  warning  'c' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:17291  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:18399  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:19185  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:20880  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:21232  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:21985  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:22381  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:23510  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:31114  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31116  warning  'c' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31215  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31320  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31322  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31424  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31426  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  1:31842  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  1:31976  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:323    error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:668    warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:675    error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:935    error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:2990   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:4343   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:5496   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:5782   warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:6505   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:8040   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:8707   warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:8709   warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:8842   warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:9257   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:9419   warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:10002  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:10144  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:10146  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:11059  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:12152  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:12990  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:13083  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:13347  warning  'b' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:13457  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:14992  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  2:15670  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:16203  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:20521  error    Unexpected control character(s) in regular expression: \x00          no-control-regex
+  2:24387  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:25935  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:26844  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:26959  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:27223  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:27333  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:27435  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:28851  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  2:29954  warning  'a' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/tablesorter.js
+   163:19  error    Unnecessary escape character: \-                                           no-useless-escape
+   163:49  error    Unnecessary escape character: \-                                           no-useless-escape
+   170:32  error    Unnecessary escape character: \.                                           no-useless-escape
+   175:22  error    Unnecessary escape character: \-                                           no-useless-escape
+   245:22  error    Unnecessary escape character: \-                                           no-useless-escape
+  1321:24  error    'jQuery' is not defined                                                    no-undef
+  1649:65  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  2425:8   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  2445:3   error    Read-only global 'console' should not be modified                          no-global-assign
+  2528:29  error    Unnecessary escape character: \/                                           no-useless-escape
+  2528:31  error    Unnecessary escape character: \-                                           no-useless-escape
+  2528:42  error    Unnecessary escape character: \/                                           no-useless-escape
+  2528:44  error    Unnecessary escape character: \-                                           no-useless-escape
+  2534:27  warning  'table' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  2577:27  warning  'table' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  2585:38  error    Unnecessary escape character: \/                                           no-useless-escape
+  2585:51  error    Unnecessary escape character: \/                                           no-useless-escape
+  2585:71  error    Unnecessary escape character: \/                                           no-useless-escape
+  2585:84  error    Unnecessary escape character: \/                                           no-useless-escape
+  2587:32  error    Unnecessary escape character: \-                                           no-useless-escape
+  2589:37  error    Unnecessary escape character: \/                                           no-useless-escape
+  2589:52  error    Unnecessary escape character: \/                                           no-useless-escape
+  2590:35  error    Unnecessary escape character: \/                                           no-useless-escape
+  2590:50  error    Unnecessary escape character: \/                                           no-useless-escape
+  2638:27  warning  'table' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  2713:5   error    'jQuery' is not defined                                                    no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/prebundled/timezone-map/timezone-picker.js
+   9:5   error    '$' is not defined                                                   no-undef
+  29:20  error    '$' is not defined                                                   no-undef
+  54:5   error    '$' is not defined                                                   no-undef
+  60:22  error    '$' is not defined                                                   no-undef
+  83:28  warning  'e' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  84:18  error    '$' is not defined                                                   no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/user_profile.js
+  21:14  warning  'e' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  24:14  warning  'e' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  47:37  error    'gettext' is not defined                                             no-undef
+  64:13  error    'ngettext' is not defined                                            no-undef
+  69:17  error    'ngettext' is not defined                                            no-undef
+  74:17  error    'ngettext' is not defined                                            no-undef
+  88:26  error    'ngettext' is not defined                                            no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/vnoj/daterangepicker/daterangepicker.min.js
+  7:46     error    'define' is not defined                                                    no-undef
+  7:57     error    'define' is not defined                                                    no-undef
+  7:145    error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  7:23276  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  7:23959  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  7:24428  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  7:29030  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  7:29118  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+
+/home/ducanh/Documents/Web/vnoj/resources/vnoj/diff2html/diff2html-ui.min.js
+  1:123     error    'define' is not defined                                                    no-undef
+  1:134     error    'define' is not defined                                                    no-undef
+  1:2013    error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:4369    error    's' is a function                                                          no-func-assign
+  1:4985    error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  1:19061   error    Unnecessary escape character: \-                                           no-useless-escape
+  1:19063   error    Unnecessary escape character: \-                                           no-useless-escape
+  1:19065   error    Unnecessary escape character: \-                                           no-useless-escape
+  1:19242   error    Unnecessary escape character: \-                                           no-useless-escape
+  1:19244   error    Unnecessary escape character: \-                                           no-useless-escape
+  1:19246   error    Unnecessary escape character: \-                                           no-useless-escape
+  1:21207   error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  1:26141   warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:26266   warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:26404   warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:26936   warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:77755   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:78677   warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:79416   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:84988   error    Unnecessary escape character: \$                                           no-useless-escape
+  1:90593   error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:94383   error    Unnecessary escape character: \*                                           no-useless-escape
+  1:102294  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:104729  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:105827  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:105984  error    Unnecessary escape character: \)                                           no-useless-escape
+  1:106163  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:106343  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:106540  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:106741  error    Unnecessary escape character: \)                                           no-useless-escape
+  1:106770  error    Unnecessary escape character: \{                                           no-useless-escape
+  1:118845  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:122956  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:126746  error    Unnecessary escape character: \*                                           no-useless-escape
+  1:131392  error    Unnecessary escape character: \*                                           no-useless-escape
+  1:135655  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:144418  error    Unnecessary escape character: \(                                           no-useless-escape
+  1:144585  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:144658  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:149581  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:153351  error    Unnecessary escape character: \*                                           no-useless-escape
+  1:163136  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:168978  error    Unnecessary escape character: \$                                           no-useless-escape
+  1:176577  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:182594  error    Unnecessary escape character: \-                                           no-useless-escape
+  1:184121  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:184189  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:188313  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:191164  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:195349  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:195387  error    Unexpected control character(s) in regular expression: \x01                no-control-regex
+  1:195410  error    Unexpected control character(s) in regular expression: \x01                no-control-regex
+  1:195486  error    Unexpected control character(s) in regular expression: \x01                no-control-regex
+  1:195512  error    Unexpected control character(s) in regular expression: \x01                no-control-regex
+  1:195596  error    Unexpected control character(s) in regular expression: \x01                no-control-regex
+  1:196097  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:196187  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:196210  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:196238  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:196322  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:202181  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:281644  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:284363  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:284370  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:284591  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:293536  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:293543  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:293764  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:295501  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:299274  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:300979  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:376068  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:378409  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:382886  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:382977  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:382988  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:383742  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:390555  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:390744  error    Unnecessary escape character: \{                                           no-useless-escape
+  1:391013  error    Unnecessary escape character: \(                                           no-useless-escape
+  1:394288  error    Unexpected control character(s) in regular expression: \x00                no-control-regex
+  1:394434  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:397927  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:418336  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:418409  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:418551  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:434978  error    Unnecessary escape character: \^                                           no-useless-escape
+  1:434980  error    Unnecessary escape character: \+                                           no-useless-escape
+  1:434982  error    Unnecessary escape character: \*                                           no-useless-escape
+  1:435823  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:435914  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:435991  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:603383  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:606242  error    Unnecessary escape character: \(                                           no-useless-escape
+  1:606410  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:606483  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:612936  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:628358  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:628380  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:628436  error    Unnecessary escape character: \/                                           no-useless-escape
+  1:654664  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:655716  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:655718  error    Unnecessary escape character: \-                                           no-useless-escape
+  1:659863  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:671215  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:675905  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:678642  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:680063  warning  'n' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:690419  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:703927  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:703950  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:703978  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:704071  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:704422  error    Unnecessary escape character: \[                                           no-useless-escape
+  1:717051  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:757757  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:758269  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:759335  error    Unnecessary escape character: \.                                           no-useless-escape
+  1:802627  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:806000  error    Unexpected combined character in character class                           no-misleading-character-class
+  1:810515  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:811284  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:817413  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:825893  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:827790  error    Unnecessary escape character: \$                                           no-useless-escape
+  1:865302  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:873761  error    Unnecessary escape character: \"                                           no-useless-escape
+  1:874859  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:876263  warning  'n' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:876265  warning  'a' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:879170  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:879172  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:879174  warning  'n' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  1:879682  error    'key' is not defined                                                       no-undef
+  1:879738  error    'key' is not defined                                                       no-undef
+  1:879757  error    'key' is not defined                                                       no-undef
+  1:881971  error    Unnecessary escape character: \'                                           no-useless-escape
+  1:881979  error    Unnecessary escape character: \"                                           no-useless-escape
+  1:881991  error    Unnecessary escape character: \"                                           no-useless-escape
+  1:881993  error    Unnecessary escape character: \'                                           no-useless-escape
+  1:883904  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:884018  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886250  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886279  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886308  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886362  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886408  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886456  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886504  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886554  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886604  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886756  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886810  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886862  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:886941  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:887007  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:887060  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  1:887947  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:888786  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:889488  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:890047  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:890509  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:891203  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:892437  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:892687  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:893181  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:893707  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:894190  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:894673  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:895155  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:896055  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:896366  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:897887  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:898090  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:898299  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:898508  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:904133  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:904975  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:914540  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:915415  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:920648  error    The array literal notation [] is preferable                                @typescript-eslint/no-array-constructor
+  1:922080  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:925325  error    The array literal notation [] is preferable                                @typescript-eslint/no-array-constructor
+
+/home/ducanh/Documents/Web/vnoj/resources/vnoj/jquery.dirty.min.js
+  7:662   error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  7:1884  warning  'i' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  7:1891  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  7:2751  error    Unexpected aliasing of 'this' to local variable                      @typescript-eslint/no-this-alias
+  7:3405  error    Expected a 'break' statement before 'case'                           no-fallthrough
+  7:3435  error    Expected a 'break' statement before 'case'                           no-fallthrough
+  7:3890  error    'jQuery' is not defined                                              no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/vnoj/jquery.formset.js
+  251:4  error  'jQuery' is not defined  no-undef
+
+/home/ducanh/Documents/Web/vnoj/resources/vnoj/jsdiff/diff.min.js
+  1:107    error  'define' is not defined                                                    no-undef
+  1:118    error  'define' is not defined                                                    no-undef
+  1:246    error  'e' is already defined                                                     no-redeclare
+  1:349    error  Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  1:604    error  'e' is already defined                                                     no-redeclare
+  1:909    error  'r' is assigned to itself                                                  no-self-assign
+  1:2588   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  1:3451   error  'd' is a function                                                          no-func-assign
+  1:4861   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  1:5094   error  'n' is already defined                                                     no-redeclare
+  1:5116   error  'n' is already defined                                                     no-redeclare
+  1:5588   error  Unnecessary escape character: \-                                           no-useless-escape
+  1:5590   error  Unnecessary escape character: \-                                           no-useless-escape
+  1:5592   error  Unnecessary escape character: \-                                           no-useless-escape
+  1:5765   error  Unnecessary escape character: \-                                           no-useless-escape
+  1:5767   error  Unnecessary escape character: \-                                           no-useless-escape
+  1:5769   error  Unnecessary escape character: \-                                           no-useless-escape
+  1:7784   error  'r' is already defined                                                     no-redeclare
+  1:8159   error  'b' is already defined                                                     no-redeclare
+  1:10643  error  'n' is already defined                                                     no-redeclare
+  1:11305  error  'n' is already defined                                                     no-redeclare
+
+/home/ducanh/Documents/Web/vnoj/resources/vnoj/jszip/jszip.min.js
+  13:124    error    'define' is not defined                                                    no-undef
+  13:135    error    'define' is not defined                                                    no-undef
+  13:1412   error    Unnecessary escape character: \+                                           no-useless-escape
+  13:1414   error    Unnecessary escape character: \/                                           no-useless-escape
+  13:1416   error    Unnecessary escape character: \=                                           no-useless-escape
+  13:1906   warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:2320   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:3151   warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:3338   warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:4047   warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:4970   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:5221   warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:8722   error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:9300   error    Empty block statement                                                      no-empty
+  13:10232  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:10906  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:11328  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:12412  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:12644  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:13165  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:13269  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:13567  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:14119  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:16601  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:17858  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:17918  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:18800  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:19257  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:19489  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:19524  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:19560  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:19749  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:20067  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:20609  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:20954  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:21683  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:21995  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:22341  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:22746  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:22849  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:24069  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:25196  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:25872  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  13:26216  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:26430  error    Empty block statement                                                      no-empty
+  13:27587  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:35126  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  13:36064  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:40762  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:41484  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  13:42879  warning  't' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:44590  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:46348  warning  'e' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:47273  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:49635  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:50026  error    Unexpected aliasing of 'this' to local variable                            @typescript-eslint/no-this-alias
+  13:50379  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:56025  error    Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+  13:58426  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:58625  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:59057  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:60524  error    Empty block statement                                                      no-empty
+  13:71249  error    Empty block statement                                                      no-empty
+  13:73550  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:73745  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:77562  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  13:79061  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:79256  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:79440  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:79669  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:79949  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:80198  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:80442  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:80770  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:80903  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:80935  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:81443  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:81461  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:81472  error    Expected a conditional expression and instead saw an assignment            no-cond-assign
+  13:81852  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:82187  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:83342  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:83360  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:84062  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:84233  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:84644  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:84874  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:85532  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:85703  error    Expected a 'break' statement before 'case'                                 no-fallthrough
+  13:86830  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:88447  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:95208  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  13:95456  warning  'r' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+
+✖ 1023 problems (824 errors, 199 warnings)
+  5 errors and 0 warnings potentially fixable with the `--fix` option.
+

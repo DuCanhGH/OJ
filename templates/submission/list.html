@@ -1,39 +1,48 @@
 {% extends "common-content.html" %}
 {% block js_media %}
-    <script type="text/javascript">
-        {% if dynamic_update and EVENT_LAST_MSG %}
-            {% if dynamic_contest_id %}
-                window.dynamic_contest_id = {{ dynamic_contest_id }};
-            {% else %}
+    {{ results_json|json_script:"results-json" }}
+    {{ results_colors_json|json_script:"results-colors-json" }}
+    <script type="text/javascript" data-dynamic-update="{{ dynamic_update }}" data-show-problem="{{ show_problem }}">
+        const dynamicUpdate = document.currentScript.dataset.dynamicUpdate === "True";
+        const dynamicContestId = Number("{{ dynamic_contest_id|default:0 }}");
+        const dynamicProblemId = Number("{{ dynamic_problem_id|default:0 }}");
+        const dynamicUserId = Number("{{ dynamic_user_id|default:0 }}");
+        const showProblem = document.currentScript.data.showProblem === "True";
+        const EVENT_LAST_MSG = Number("{{ EVENT_LAST_MSG|default:0 }}");
+        if (dynamicUpdate && EVENT_LAST_MSG) {
+            if (dynamicContestId) {
+                window.dynamic_contest_id = dynamicContestId;
+            } else {
                 window.dynamic_contest_id = null;
-            {% endif %}
-            {% if dynamic_user_id %}
-                window.dynamic_user_id = {{ dynamic_user_id }};
-            {% else %}
+            }
+            if (dynamicUserId) {
+                window.dynamic_user_id = dynamicUserId;
+            } else {
                 window.dynamic_user_id = null;
-            {% endif %}
-            {% if dynamic_problem_id %}
-                window.dynamic_problem_id = {{ dynamic_problem_id }};
-            {% else %}
+            }
+            if (dynamicProblemId) {
+                window.dynamic_problem_id = dynamicProblemId;
+            } else {
                 window.dynamic_problem_id = null;
-            {% endif %}
-            {% if show_problem %}
+            }
+            if (showProblem) {
                 window.show_problem = 1;
-            {% else %}
+            } else {
                 window.show_problem = 0;
-            {% endif %}
-        {% endif %}
-        window.results_json = {{ results_json }};
+            }
+        }
+        window.results_json = JSON.parse(document.getElementById("results-json").textContent);
+        window.results_colors_json = JSON.parse(document.getElementById("results-colors-json")).textContent;
     </script>
 
     {% compress js %}
         {% if request.user.is_authenticated and perms.judge.rejudge_submission %}
             <script type="text/javascript">
-                window.rejudge_submission = function (id, e) {
+                window.rejudge_submission = (id, e) => {
                     if ((typeof e !== 'undefined' && e.ctrlKey) ||
-                        confirm('{{ _('Are you sure you want to rejudge?') }}')) {
+                        confirm("{{ _('Are you sure you want to rejudge?') }}")) {
                         $.ajax({
-                            url: '{{ url('submission_rejudge') }}',
+                            url: "{{ url('submission_rejudge') }}",
                             type: "POST",
                             data: {
                                 id: id
@@ -44,14 +53,15 @@
             </script>
         {% endif %}
 
-        <script src="{{ static('libs/chart.js/Chart.js') }}"></script>
-        <script type="text/javascript">
-            $(function () {
-                var info_float = $('.info-float');
-                var container = $('#content-right');
+        <script type="module">
+            import "$prebundled/chart.js/Chart.js";
+            
+            $(() => {
+                const info_float = $('.info-float');
+                const container = $('#content-right');
                 if (!featureTest('position', 'sticky')) {
                     fix_div(info_float, 55);
-                    $(window).resize(function () {
+                    $(window).resize(() => {
                         info_float.width(container.width());
                     });
                     info_float.width(container.width());
@@ -71,7 +81,7 @@
                 $('#status').select2({
                     theme: '{{ DMOJ_SELECT2_THEME }}',
                     multiple: 1,
-                    placeholder: '{{ _('Filter by status...') }}',
+                    placeholder: "{{ _('Filter by status...') }}",
                     matcher: idAndTextMatcher,
                     width: '100%',
                 }).css({'visibility': 'visible'});
@@ -79,7 +89,7 @@
                 $('#language').select2({
                     theme: '{{ DMOJ_SELECT2_THEME }}',
                     multiple: 1,
-                    placeholder: '{{ _('Filter by language...') }}',
+                    placeholder: "{{ _('Filter by language...') }}",
                     matcher: idAndTextMatcher,
                     width: '100%',
                 }).css({'visibility': 'visible'});
@@ -93,12 +103,10 @@
             });
 
             // Draw the statistics graph.
-            var chart = null;
+            let chart = null;
             function stats_graph(raw_data) {
-                var colors = {{ results_colors_json }};
-
-                var ctx = $('#status-graph').find('canvas')[0].getContext('2d');
-                var font = $('body').css('font-family');
+                const ctx = $('#status-graph').find('canvas')[0].getContext('2d');
+                const font = $('body').css('font-family');
                 if (chart !== null) {
                     chart.destroy();
                 }
@@ -106,14 +114,14 @@
                     type: 'pie',
                     data: {
                         datasets: [{
-                            data: raw_data.categories.map(function(entry) {
+                            data: raw_data.categories.map((entry) => {
                                 return entry.count;
                             }),
-                            backgroundColor: raw_data.categories.map(function(entry) {
-                                return colors[entry.code];
+                            backgroundColor: raw_data.categories.map((entry) => {
+                                return window.results_colors_json[entry.code];
                             }),
                         }],
-                        labels: raw_data.categories.map(function(entry) {
+                        labels: raw_data.categories.map((entry) => {
                             return entry.name;
                         }),
                     },
@@ -133,24 +141,24 @@
                 $('#total-submission-count').text(raw_data.total);
             }
 
-            $(function () {
+            $(() => {
                 stats_graph(window.results_json);
             });
 
             function load_dynamic_update() {
-                var _collect = function (e) {
+                const _collect = (e) => {
                     return e.value;
                 };
-                var language_filter = $.map($('select#language option[selected]'), _collect);
-                var status_filter = $.map($('select#status option[selected]'), _collect);
-                var organization_filter = $.map($('select#organization option[selected]'), _collect);
+                const language_filter = $.map($('select#language option[selected]'), _collect);
+                const status_filter = $.map($('select#status option[selected]'), _collect);
+                const organization_filter = $.map($('select#organization option[selected]'), _collect);
 
-                var table = $('#submissions-table');
-                var statistics = $("#statistics-table");
-                var doing_ajax = false;
-                var first = parseInt(table.find('>div:first-child').attr('id'));
+                const table = $('#submissions-table');
+                const statistics = $("#statistics-table");
+                let doing_ajax = false;
+                let first = parseInt(table.find('>div:first-child').attr('id'));
 
-                var update_submission = function (message, force) {
+                const update_submission = (message, force) => {
                     if (language_filter.length && 'language' in message &&
                         language_filter.indexOf(message.language) == -1)
                         return;
@@ -160,67 +168,67 @@
                     if (organization_filter.length && 'organizations' in message &&
                         message.organizations.indexOf(parseInt(organization_filter[0])) == -1)
                         return;
-                    var id = message.id;
-                    var row = table.find('div#' + id);
+                    const id = message.id;
+                    let row = table.find('div#' + id);
                     if (row.length < 1) {
                         if (id < first)
                             return;
                         first = id;
                         row = $('<div>', {id: id, 'class': 'submission-row'}).hide().prependTo(table);
-                        if (table.find('>div').length >= {{ paginator.per_page }})
-                            table.find('>div:last-child').slideUp('slow', function () {
+                        if (table.find('>div').length >= Number("{{ paginator.per_page }}"))
+                            table.find('>div:last-child').slideUp('slow', () => {
                                 $(this).remove();
                             });
                     }
                     if (force || !doing_ajax) {
                         if (!force) doing_ajax = true;
                         $.ajax({
-                            url: '{{ url('submission_single_query') }}',
+                            url: "{{ url('submission_single_query') }}",
                             data: {id: id, show_problem: show_problem}
-                        }).done(function (data) {
-                            var was_shown = row.is(':visible');
+                        }).done((data) => {
+                            const was_shown = row.is(':visible');
                             row.html(data);
                             register_time(row.find('.time-with-rel'));
                             if (!was_shown) {
                                 row.slideDown('slow');
                             }
                             if (!force)
-                                setTimeout(function () {
+                                setTimeout(() => {
                                     doing_ajax = false;
                                 }, 1000);
-                        }).fail(function () {
+                        }).fail(() => {
                             console.log('Failed to update submission: ' + id);
                             if (!force) doing_ajax = false;
                         });
                     }
                 };
 
-                var stats_outdated = false;
-                var last_stat_update = Date.now();
-                var stats_update_interval = {{ stats_update_interval|default(0) * 1000 }};
+                let stats_outdated = false;
+                let last_stat_update = Date.now();
+                const stats_update_interval = Number("{{ stats_update_interval|default:0 }}") * 1000;
 
                 function update_stats() {
                     if (Date.now() - last_stat_update < stats_update_interval)
                         return;
                     $.ajax({
                         url: '?results'
-                    }).done(function (data) {
+                    }).done((data) => {
                         last_stat_update = Date.now();
                         stats_graph(data);
-                    }).fail(function () {
+                    }).fail(() => {
                         console.log('Failed to update statistics table!' + id);
-                    }).always(function () {
+                    }).always(() => {
                         stats_outdated = false;
                     });
                 }
 
-                $(window).on('dmoj:window-visible', function () {
+                $(window).on('dmoj:window-visible', () => {
                     if (stats_outdated)
                         update_stats();
                 });
 
                 var $body = $(document.body);
-                event_dispatcher.on('submissions', function (message) {
+                event_dispatcher.on('submissions', (message) => {
                         if (dynamic_user_id && message.user != dynamic_user_id ||
                             dynamic_problem_id && message.problem != dynamic_problem_id ||
                             dynamic_contest_id && message.contest != dynamic_contest_id)
@@ -239,13 +247,13 @@
                         }
                     }
                 );
-                event_dispatcher.onwsclose(function (event) {
+                event_dispatcher.onwsclose((event) => {
                     if (event.code == 1001) {
                         console.log('Navigated away');
                         return;
                     }
                     console.log('You probably should refresh?');
-                    $('.ws-closed').show().find('a').click(function () {
+                    $('.ws-closed').show().find('a').click(() => {
                         window.location.reload();
                     });
                 });
@@ -255,7 +263,7 @@
 
     {% if dynamic_update and EVENT_LAST_MSG %}
         <script type="text/javascript">
-            $(function () {
+            $(() => {
                 load_dynamic_update();
             });
         </script>

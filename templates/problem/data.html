@@ -3,28 +3,30 @@
 {% block js_media %}
     {{data_form.media.js}}
     {% include "leave-warning.html" %}
-    <script type="text/javascript" src="{{ static('libs/jquery-sortable.js') }}"></script>
-    <script type="text/javascript" src="{{ static('libs/featherlight/featherlight.min.js') }}"></script>
-    <script type="text/javascript" src="{{ static('vnoj/jszip/jszip.min.js') }}"></script>
-    <script type="text/javascript">
-        window.valid_files = {{valid_files_json}}.sort();
-        window.testcase_limit = {{testcase_limit}};
-        window.testcase_soft_limit = {{testcase_soft_limit}};
+    {{ valid_files_json|json_script:"valid-files-json" }}
+    <script type="module">
+        import "$prebundled/jquery-sortable.js";
+        import "$prebundled/featherlight/featherlight.min.js";
+        import "$vnoj/jszip/jszip.min.js";
 
-        $(function () {
+        window.valid_files = JSON.parse(document.getElementById("valid-files-json").textContent).sort();
+        window.testcase_limit = Number("{{ testcase_limit }}");
+        window.testcase_soft_limit = Number("{{ testcase_soft_limit }}");
+
+        $(() => {
             function autofill_if_exists($select, file) {
                 if (!$select.val() && ~window.valid_files.indexOf(file))
                     $select.append(new Option(file, file, true, true)).change();
             }
 
-            var valid_files_options = window.valid_files.map(function (file) {
+            const valid_files_options = window.valid_files.map((file) => {
                 return {id: file, text: file};
             });
 
-            var select2_settings = {
+            const select2_settings = {
                 theme: '{{ DMOJ_SELECT2_THEME }}',
                 ajax: {
-                    transport: function (params, success) {
+                    transport(params, success) {
                         success({results: valid_files_options});
                     },
                 },
@@ -32,17 +34,18 @@
                 placeholder: ''
             };
 
-            var $table = $('#case-table');
-            $table.on('add-row', function (e, $tr) {
-                $tr.find('input').filter('[id$=file]').each(function () {
-                    var $select, val = $(this).replaceWith($select = $('<select>').attr({
+            const $table = $('#case-table');
+            $table.on('add-row', (e, $tr) => {
+                $tr.find('input').filter('[id$=file]').each(() => {
+                    let $select;
+                    const val = $(this).replaceWith($select = $('<select>').attr({
                         id: $(this).attr('id'),
                         name: $(this).attr('name'),
                         style: 'width: 100%'
                     })).val();
-                    var option = new Option(val, val, true, true);
-                    $select.select2(select2_settings).append(option).change().on('change', function () {
-                        var val = $select.val();
+                    const option = new Option(val, val, true, true);
+                    $select.select2(select2_settings).append(option).change().on('change', () => {
+                        const val = $select.val();
                         if (val) {
                             if ($select.attr('id').endsWith('input_file'))
                                 autofill_if_exists($tr.find('select[id$=output_file]'), val.replace(/in(?!.*?in)/, 'out'));
@@ -53,11 +56,11 @@
                 });
             });
 
-            var order = 0;
+            let order = 0;
 
             function handle_table_reorder() {
-                var in_batch = false;
-                $table.find('tbody:first tr').each(function () {
+                let in_batch = false;
+                $table.find('tbody:first tr').each(() => {
                     switch ($(this).attr('data-type')) {
                         case 'C':
                             $(this).find('input[id$=points], input[id$=pretest]').toggle(!in_batch);
@@ -79,30 +82,29 @@
                 }
             }
 
-            var $checker = $('#id_problem-data-checker');
-            var $args = $('#id_problem-data-checker_args');
-
-            var $custom_checker_file = $('#id_problem-data-custom_checker');
-            var $custom_checker_type = $('#id_problem-data-checker_type');
-            var $tr_custom_checker_file = $custom_checker_file.parent().parent();
-            var $tr_custom_checker_type = $custom_checker_type.parent().parent();
-            var init = true;
+            const $args = $('#id_problem-data-checker_args');
+            const $checker = $('#id_problem-data-checker');
+            const $custom_checker_file = $('#id_problem-data-custom_checker');
+            const $custom_checker_type = $('#id_problem-data-checker_type');
+            const $tr_custom_checker_file = $custom_checker_file.parent().parent();
+            const $tr_custom_checker_type = $custom_checker_type.parent().parent();
+            let init = true;
 
             (function checker_args_auto_fill() {
                 // auto fill for float checker
-                var $td = $checker.parent();
-                var $precision = $('<input>', {
+                const $td = $checker.parent();
+                const $precision = $('<input>', {
                     type: 'number',
                     value: try_parse_json($args.val()).precision || 6,
-                    title: '{{ _('precision (decimal digits)') }}',
+                    title: "{{ _('precision (decimal digits)') }}",
                     style: 'width: 4em'
-                }).change(function () {
+                }).change(() => {
                     if ($checker.val().startsWith('floats'))
                         $args.val(JSON.stringify({precision: parseInt($(this).val())}));
                 }).appendTo($td);
 
                 // auto fill for custom checker
-                $custom_checker_file.change(function () {
+                $custom_checker_file.change(() => {
                     if ($checker.val() === 'bridged' && !init) {
                         $file_name = $custom_checker_file.val().split('\\').pop();
                         // Handle case that the current file is null but we have a file in database
@@ -128,10 +130,10 @@
                     }
                 });
 
-                $custom_checker_type.change(function() {
+                $custom_checker_type.change(() =>  {
                     if (!$args.val() || init)
                         return;
-                    var old_args = try_parse_json($args.val());
+                    const old_args = try_parse_json($args.val());
                     if ("type" in old_args) {
                         old_args["type"] = $custom_checker_type.find(":selected").val();
                     }
@@ -139,12 +141,12 @@
                 });
 
                 if (init && $args.val()) {
-                    var old_args = try_parse_json($args.val());
+                    const old_args = try_parse_json($args.val());
                     if ("type" in old_args)
                         $custom_checker_type.val(old_args["type"]);
                 }
 
-                $checker.change(function () {
+                $checker.change(() => {
                     $custom_checker_file.toggle($checker.val() === 'bridged').change();
                     $custom_checker_type.toggle($checker.val() === 'bridged').change();
                     $tr_custom_checker_file.toggle($checker.val() === 'bridged');
@@ -156,35 +158,35 @@
                 }).change();
             })();
 
-            var $grader = $('#id_problem-data-grader');
-            var $io_method = $('#id_problem-data-io_method');
-            var $io_input_file = $('#id_problem-data-io_input_file');
-            var $io_output_file = $('#id_problem-data-io_output_file');
-            var $custom_grader_file = $('#id_problem-data-custom_grader');
-            var $custom_header_file = $('#id_problem-data-custom_header');
-            var $grader_args = $('#id_problem-data-grader_args');
+            const $grader = $('#id_problem-data-grader');
+            const $io_method = $('#id_problem-data-io_method');
+            const $io_input_file = $('#id_problem-data-io_input_file');
+            const $io_output_file = $('#id_problem-data-io_output_file');
+            const $custom_grader_file = $('#id_problem-data-custom_grader');
+            const $custom_header_file = $('#id_problem-data-custom_header');
+            const $grader_args = $('#id_problem-data-grader_args');
 
-            var $tr_io_method = $io_method.parent().parent();
-            var $tr_io_input_file = $io_input_file.parent().parent();
-            var $tr_io_output_file = $io_output_file.parent().parent();
-            var $tr_custom_grader_file = $custom_grader_file.parent().parent();
-            var $tr_custom_header_file = $custom_header_file.parent().parent();
-            var $tr_grader_args = $grader_args.parent().parent();
+            const $tr_io_method = $io_method.parent().parent();
+            const $tr_io_input_file = $io_input_file.parent().parent();
+            const $tr_io_output_file = $io_output_file.parent().parent();
+            const $tr_custom_grader_file = $custom_grader_file.parent().parent();
+            const $tr_custom_header_file = $custom_header_file.parent().parent();
+            const $tr_grader_args = $grader_args.parent().parent();
 
             function clean_io_method() {
-                var old_args = try_parse_json($grader_args.val());
+                const old_args = try_parse_json($grader_args.val());
                 delete old_args.io_method;
                 delete old_args.io_input_file;
                 delete old_args.io_output_file;
                 $grader_args.val(JSON.stringify(old_args));
             }
 
-            $grader.change(function () {
-                var grader = $grader.val();
-                var standard_grader = grader === 'standard';
-                var signature_grader = grader === 'signature';
-                var output_only = grader === 'output_only';
-                var standard_io = $io_method.val() === 'standard';
+            $grader.change(() => {
+                const grader = $grader.val();
+                const standard_grader = grader === 'standard';
+                const signature_grader = grader === 'signature';
+                const output_only = grader === 'output_only';
+                const standard_io = $io_method.val() === 'standard';
 
                 if (!standard_grader) {
                     clean_io_method();
@@ -198,28 +200,28 @@
                 $tr_grader_args.toggle(signature_grader);
             }).change();
 
-            $io_method.change(function () {
-                var standard_io = $io_method.val() === 'standard';
+            $io_method.change(() => {
+                const standard_io = $io_method.val() === 'standard';
                 $tr_io_input_file.toggle(!standard_io);
                 $tr_io_output_file.toggle(!standard_io);
 
                 if (standard_io) {
                     clean_io_method();
                 } else {
-                    var old_args = try_parse_json($grader_args.val());
+                    const old_args = try_parse_json($grader_args.val());
                     old_args['io_method'] = $io_method.val();
                     $grader_args.val(JSON.stringify(old_args));
                 }
             });
 
-            $io_input_file.change(function () {
-                var old_args = try_parse_json($grader_args.val());
+            $io_input_file.change(() => {
+                const old_args = try_parse_json($grader_args.val());
                 old_args['io_input_file'] = $io_input_file.val();
                 $grader_args.val(JSON.stringify(old_args));
             });
 
-            $io_output_file.change(function () {
-                var old_args = try_parse_json($grader_args.val());
+            $io_output_file.change(() => {
+                const old_args = try_parse_json($grader_args.val());
                 old_args['io_output_file'] = $io_output_file.val();
                 $grader_args.val(JSON.stringify(old_args));
             });
@@ -233,14 +235,14 @@
             }
 
             $td = $checker.parent();
-            var $sample = $("<a/>",{
+            const $sample = $("<a/>",{
                 text: "{{_('Instruction')}}",
                 style: "margin-left:3em;",
                 target: "_blank",
                 href: "/custom_checkers"
             }).appendTo($td);
 
-            var $file_test = $('#id_problem-data-zipfile');
+            const $file_test = $('#id_problem-data-zipfile');
             $("<br>").appendTo($file_test.parent());
             $("<input/>", {
                 type: "submit",
@@ -251,8 +253,8 @@
             }).appendTo($file_test.parent());
 
             function swap_row($a, $b) {
-                var $a_order = $a.find('input[id$=order]'), $b_order = $b.find('input[id$=order]');
-                var order = $a_order.val();
+                const $a_order = $a.find('input[id$=order]'), $b_order = $b.find('input[id$=order]');
+                const order = $a_order.val();
                 $a_order.val($b_order.val());
                 $b_order.val(order);
                 $b.after($a);
@@ -261,16 +263,17 @@
                 handle_table_reorder();
             }
 
-            $table.on('add-row', function (e, $tr) {
-                var $order = $tr.find('input').filter('[id$=order]').attr('type', 'hidden').val(++order);
+            $table.on('add-row', (e, $tr) => {
+                const $order = $tr.find('input').filter('[id$=order]').attr('type', 'hidden').val(++order);
                 $order.after($('<span>', {'class': 'order'}).text($order.val()))
                     .after($('<i>', {'class': 'fa fa-fw fa-lg fa-ellipsis-v'}));
 
-                var $opts = $tr.find('input').slice(2, 6);
-                var $files = $tr.find('select').slice(1, 3);
-                var $checker = $files.end().last();
-                $tr.find('select[id$=type]').change(function () {
-                    var $this = $(this), val = $this.val(), disabled;
+                const $opts = $tr.find('input').slice(2, 6);
+                const $files = $tr.find('select').slice(1, 3);
+                const $checker = $files.end().last();
+                $tr.find('select[id$=type]').change(() => {
+                    const $this = $(this), val = $this.val();
+                    let disabled;
                     switch (val) {
                         case 'S':
                         case 'E':
@@ -283,7 +286,7 @@
                             $opts.toggle(val == 'C');
                             $files.siblings('.select2').toggle(val == 'C');
                             $checker.toggle(val == 'C');
-                            var $prevs = $tr.prevAll('tr[data-type=S], tr[data-type=E]');
+                            const $prevs = $tr.prevAll('tr[data-type=S], tr[data-type=E]');
                             disabled = $prevs.length && $prevs.get(0).getAttribute('data-type') == 'S';
                             $tr.find('input[id$=points], input[id$=pretest]').toggle(val == 'C' && !disabled);
                     }
@@ -291,18 +294,18 @@
                         .find('input[id$=points], input[id$=pretest]').toggle(!disabled);
                 }).change();
 
-                var tooltip_classes = 'tooltipped tooltipped-s';
-                $tr.find('a.edit-generator-args').mouseover(function () {
+                const tooltip_classes = 'tooltipped tooltipped-s';
+                $tr.find('a.edit-generator-args').mouseover(() => {
                     switch ($tr.attr('data-type')) {
                         case 'C':
                         case 'S':
-                            var $this = $(this).addClass(tooltip_classes);
+                            const $this = $(this).addClass(tooltip_classes);
                             $this.attr('aria-label', $this.prev().val() || '(none)');
                     }
-                }).mouseout(function () {
+                }).mouseout(() => {
                     $(this).removeClass(tooltip_classes).removeAttr('aria-label');
                 }).featherlight($('.generator-args-editor'), {
-                    beforeOpen: function () {
+                    beforeOpen: () => {
                         switch ($tr.attr('data-type')) {
                             case 'C':
                             case 'S':
@@ -311,26 +314,26 @@
                                 return false;
                         }
                     },
-                    afterOpen: function () {
-                        var $input = this.$currentTarget.prev();
+                    afterOpen: () => {
+                        const $input = this.$currentTarget.prev();
                         this.$instance.find('.generator-args-editor')
                             .find('textarea').val($input.val()).end()
-                            .find('.button').click(function () {
+                            .find('.button').click(() => {
                             $input.val($(this).prev().val());
                             $.featherlight.current().close();
                         }).end()
                             .show();
                     }
                 });
-            }).find('tbody:first').find('tr').each(function () {
+            }).find('tbody:first').find('tr').each(() => {
                 $table.trigger('add-row', [$(this)]);
             });
 
-            $('form').submit(function () {
-                $table.find('tbody:first').find('tr').each(function () {
-                    var filled = false;
-                    $(this).find('input, select').each(function () {
-                        var $this = $(this);
+            $('form').submit(() => {
+                $table.find('tbody:first').find('tr').each(() => {
+                    let filled = false;
+                    $(this).find('input, select').each(() => {
+                        const $this = $(this);
                         if (!$this.attr('name'))
                             return;
                         if ($this.attr('type') === 'checkbox')
@@ -344,17 +347,17 @@
 
                 // Check all hidden "Clear" checkboxes
                 // so the corresponding files are cleaned up automatically by django-cleanup
-                $(':checkbox').filter(function() { return this.id.endsWith('clear_id') }).each(function () {
+                $(':checkbox').filter(() => { return this.id.endsWith('clear_id') }).each(() => {
                     if ($(this).parent().is(':hidden')) {
                         $(this).attr('checked', true);
                     }
                 });
             });
 
-            var $total = $('#id_cases-TOTAL_FORMS');
-            var alerted = false;
+            const $total = $('#id_cases-TOTAL_FORMS');
+            let alerted = false;
 
-            $('a#add-case-row').click(function () {
+            $('a#add-case-row').click(() => {
                 total = parseInt($total.val());
                 if (total >= window.testcase_soft_limit) {
                     if (!alerted) {
@@ -371,7 +374,7 @@
                     alert(s);
                     return true;
                 }
-                var $tr;
+                let $tr;
                 $table.find('tbody:first').append($tr = $($table.find('.extra-row-body').html()
                     .replace(/__prefix__/g, $total.val())));
                 $tr.find('.type-column select option[value="C"]').attr('selected', true);
@@ -382,14 +385,14 @@
 
             function reordering_row(oldIndex, newIndex, $item) {
                 if (newIndex > oldIndex) {
-                    var order = parseInt($item.parent().children().slice(oldIndex, newIndex).each(function () {
-                        var $order = $(this).find('input[id$=order]');
+                    const order = parseInt($item.parent().children().slice(oldIndex, newIndex).each(() => {
+                        const $order = $(this).find('input[id$=order]');
                         $order.val(parseInt($order.val()) - 1).siblings('span.order').text($order.val());
                     }).last().after($item).find('input[id$=order]').val());
                     $item.find('input[id$=order]').val(order + 1).siblings('span.order').text(order + 1);
                 } else if (newIndex < oldIndex) {
-                    var order = parseInt($item.parent().children().slice(newIndex + 1, oldIndex + 1).each(function () {
-                        var $order = $(this).find('input[id$=order]');
+                    const order = parseInt($item.parent().children().slice(newIndex + 1, oldIndex + 1).each(() => {
+                        const $order = $(this).find('input[id$=order]');
                         $order.val(parseInt($order.val()) + 1).siblings('span.order').text($order.val());
                     }).first().before($item).find('input[id$=order]').val());
                     $item.find('input[id$=order]').val(order - 1).siblings('span.order').text(order - 1);
@@ -398,26 +401,26 @@
                     handle_table_reorder();
             };
 
-            $('a#add-case-first-row').click(function () {
-                var cntRow = parseInt($total.val());
+            $('a#add-case-first-row').click(() => {
+                const cntRow = parseInt($total.val());
                 $('a#add-case-row').click();
                 if (cntRow == parseInt($total.val()))
                     return false;
-                var newIndex = -1;
-                var oldIndex = parseInt($total.val()) - 1;
+                const newIndex = -1;
+                const oldIndex = parseInt($total.val()) - 1;
                 $item = $($table.find('tbody:first').children()[oldIndex]);
                 reordering_row(oldIndex, newIndex, $item);
                 return false;
             });
 
-            $('#case-table tbody').on("click", ".add-case-row-below", function (event) {
-                var cntRow = parseInt($total.val());
+            $('#case-table tbody').on("click", ".add-case-row-below", (event) => {
+                const cntRow = parseInt($total.val());
                 $('a#add-case-row').click();
                 if (cntRow == parseInt($total.val()))
                     return false;
-                var $current_row = $(this).parent().parent();
-                var newIndex = parseInt($current_row.find('input[id$=order]').val()) - 1;
-                var oldIndex = parseInt($total.val()) - 1;
+                const $current_row = $(this).parent().parent();
+                const newIndex = parseInt($current_row.find('input[id$=order]').val()) - 1;
+                const oldIndex = parseInt($total.val()) - 1;
                 $item = $($current_row.parent().children()[oldIndex]);
                 reordering_row(oldIndex, newIndex, $item);
                 return false;
@@ -425,10 +428,10 @@
 
             function fill_testcases() {
                 console.log("Filling testcase...");
-                var inFiles = [], outFiles = [];
-                var input_re = new RegExp(/^(?=.*?\.in|in).*?(?:(?:^|\W)(\d+)[^\d\s]+)?(\d+)[^\d\s]*$/);
-                var output_re = new RegExp(/^(?=.*?\.out|.*?\.ok|.*?\.ans|out|ok|ans).*?(?:(?:^|\W)(\d+)[^\d\s]+)?(\d+)[^\d\s]*$/);
-                for (var i = 0; i < window.valid_files.length; i++) {
+                const inFiles = [], outFiles = [];
+                const input_re = new RegExp(/^(?=.*?\.in|in).*?(?:(?:^|\W)(\d+)[^\d\s]+)?(\d+)[^\d\s]*$/);
+                const output_re = new RegExp(/^(?=.*?\.out|.*?\.ok|.*?\.ans|out|ok|ans).*?(?:(?:^|\W)(\d+)[^\d\s]+)?(\d+)[^\d\s]*$/);
+                for (let i = 0; i < window.valid_files.length; i++) {
                     if (input_re.test(window.valid_files[i].toLowerCase().replace('/', '.'))) {
                         inFiles.push(window.valid_files[i]);
                     }
@@ -453,11 +456,11 @@
                     $('a#add-case-row').click();
                 }
                 // natsort
-                var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+                const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
                 inFiles.sort(collator.compare);
                 outFiles.sort(collator.compare);
                 // fill cases
-                for (var i = 0; i < n_test; i++) {
+                for (let i = 0; i < n_test; i++) {
                     $("#id_cases-" + i + "-input_file").append(new Option(inFiles[i], inFiles[i], true, true)).change();
                     $("#id_cases-" + i + "-output_file").append(new Option(outFiles[i], outFiles[i], true, true)).change();
                     $("#id_cases-" + i + "-points").val("1").change();
@@ -474,25 +477,25 @@
                 return false;
             };
 
-            var oldIndex;
+            let oldIndex;
             $table.sortable({
                 containerSelector: 'table',
                 itemPath: '> tbody:first',
                 itemSelector: 'tr',
                 handle: 'i.fa-ellipsis-v',
                 placeholder: '<tr class="placeholder">',
-                onDragStart: function ($item, container, _super) {
+                onDragStart($item, container, _super) {
                     oldIndex = $item.index();
                     _super($item, container);
                 },
-                onDrop: function ($item, container, _super) {
-                    var newIndex = $item.index();
+                onDrop($item, container, _super) {
+                    const newIndex = $item.index();
                     reordering_row(oldIndex, newIndex, $item);
                     _super($item, container);
                 }
             });
 
-            $('input#delete-all').change(function() {
+            $('input#delete-all').change(() =>  {
                 if (this.checked) {
                     $("input[name$='DELETE']").attr('checked', true);
                 }
@@ -500,7 +503,7 @@
                     $("input[name$='DELETE']").attr('checked', false);
                 }
             });
-            $('#problem-data-zipfile-clear_id').change(function(){
+            $('#problem-data-zipfile-clear_id').change(() => {
                 if (this.checked) {
                     $('input#delete-all').attr('checked', true);
                 }
@@ -515,12 +518,12 @@
 
             $("#id_problem-data-zipfile").change((event) => {
                 let fileInput = event.target.files[0];
-                var reader = new FileReader();
-                reader.onload = function(ev) {
-                    JSZip.loadAsync(ev.target.result).then(function(zip) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    JSZip.loadAsync(ev.target.result).then((zip) => {
                         window.valid_files = Object.keys(zip.files).sort();
                         fill_testcases();
-                    }).catch(function(err) {
+                    }).catch((err) => {
                         console.log(err);
                         console.error("Failed to open as ZIP file");
                         alert("{{ _('Test file must be a ZIP file') }}");

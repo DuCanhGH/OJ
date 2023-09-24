@@ -2,9 +2,9 @@
 {% block js_media %}
     {% if not submission.is_graded and EVENT_LAST_MSG %}
         <script type="text/javascript">
-            $(function () {
-                var blocked = false, request = false;
-                var list = $('#test-cases');
+            $(() => {
+                let blocked = false, request = false;
+                const list = $('#test-cases');
 
                 function update() {
                     if (blocked) {
@@ -14,18 +14,18 @@
                     request = false;
                     blocked = true;
                     $.ajax({
-                        url: '{{ url('submission_testcases_query') }}',
+                        url: "{{ url('submission_testcases_query') }}",
                         data: {id: '{{ submission.id }}'}
-                    }).done(function (data) {
-                        list.empty().html(data).find('.toggle').each(function () {
+                    }).done((data) => {
+                        list.empty().html(data).find('.toggle').each(() => {
                             register_toggle($(this));
                         });
-                        setTimeout(function () {
+                        setTimeout(() => {
                             blocked = false;
                             if (request)
                                 update();
                         }, 500);
-                    }).fail(function (data) {
+                    }).fail((data) => {
                         console.log('Failed to update testcases!');
                     });
 
@@ -33,7 +33,7 @@
                         $("html, body").animate({scrollTop: $(document).height()}, 0);
                 }
 
-                event_dispatcher.on('sub_{{ submission.id_secret }}', function (message) {
+                event_dispatcher.on('sub_{{ submission.id_secret }}', (message) => {
                         switch (message.type) {
                             case 'internal-error':
                             case 'grading-end':
@@ -52,8 +52,8 @@
     {% endif %}
     {% if not submission.is_graded %}
         <script type="text/javascript">
-            $(function () {
-                $(document).keydown(function(e) {
+            $(() => {
+                $(document).keydown((e) => {
                     // Ctrl-Enter or Command-Enter
                     if ((e.metaKey || e.ctrlKey) && e.which == 13) {
                         $('#abort-button form').submit();
@@ -79,7 +79,7 @@
     {% if perms.judge.rejudge_submission and can_edit and not submission.is_locked %}
         {% compress js %}
             <script type="text/javascript">
-                window.confirm_and_rejudge = function (form) {
+                window.confirm_and_rejudge = (form) => {
                     if (confirm("{{ _('Are you sure you want to rejudge?') }}")) {
                         form.submit();
                     }

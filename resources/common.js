@@ -1,21 +1,3 @@
-if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function (searchString, position) {
-        return this.substr(position || 0, searchString.length) === searchString;
-    };
-}
-
-if (!String.prototype.endsWith) {
-    String.prototype.endsWith = function (searchString, position) {
-        var subjectString = this.toString();
-        if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
-            position = subjectString.length;
-        }
-        position -= searchString.length;
-        var lastIndex = subjectString.lastIndexOf(searchString, position);
-        return lastIndex !== -1 && lastIndex === position;
-    };
-}
-
 // http://stackoverflow.com/a/1060034/1090657
 $(function () {
     var hidden = 'hidden';

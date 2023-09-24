@@ -22,12 +22,12 @@
 
 {% block content_js_media %}
     <script type="text/javascript">
-        $(function () {
-            $('.contest-moss').click(function () {
-                return confirm('{{ _('Are you sure you want to MOSS the contest?') }}');
+        $(() => {
+            $('.contest-moss').click(() => {
+                return confirm("{{ _('Are you sure you want to MOSS the contest?') }}");
             });
-            $('.contest-moss-delete').click(function () {
-                return confirm('{{ _('Are you sure you want to delete the MOSS results?') }}');
+            $('.contest-moss-delete').click(() => {
+                return confirm("{{ _('Are you sure you want to delete the MOSS results?') }}");
             });
         });
     </script>
