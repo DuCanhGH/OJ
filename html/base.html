@@ -32,7 +32,7 @@
     {% if og_image %}
         <meta property="og:image" content="{{ request.build_absolute_uri(og_image) }}">
     {% else %}
-        <meta property="og:image" content='{{ request.build_absolute_uri("/logo.png") }}'>
+        <meta property="og:image" content="{{ request.build_absolute_uri('/logo.png') }}">
     {% endif %}
     {% block og_title %}{% endblock %}
     <meta property="og:site_name" content="{{ SITE_LONG_NAME }}">
@@ -70,33 +70,29 @@
         </style>
     {% endif %}
     {% block media %}{% endblock %}
-    {% if not INLINE_JQUERY %}
-        <script src="{{ JQUERY_JS }}"></script>
-    {% endif %}
-
     {% compress js %}
-        <script>{{ inlinei18n(LANGUAGE_CODE)|safe }}</script>
-        {% if INLINE_JQUERY %}
-            <script src="/resources/prebundled/jquery-3.4.1.min.js"></script>
-        {% endif %}
-        <script type="module" src="/resources/prebundled/jquery-cookie.js"></script>
+        <script>Function(`
+            {{ inlinei18n(LANGUAGE_CODE)|safe }}
+        `)()</script>
+        <script src="/resources/prebundled/jquery-3.4.1.min.js"></script>
         <script src="/resources/prebundled/jquery-taphold.js"></script>
         <script src="/resources/prebundled/jquery.unveil.js"></script>
-        <script src="/resources/prebundled/moment.js"></script>
         <script type="module" src="/resources/prebundled/select2/select2.js"></script>
-        {% include "extra_js.html" %}
+        <script src="/resources/prebundled/moment.js"></script>
         <script src="/resources/common.js"></script>
-        <script src="/resources/event.js"></script>
         <script>
             moment.locale('{{ LANGUAGE_CODE }}');
             $(() => {
                 $('img.unveil').unveil(200);
             });
         </script>
+        {% include "extra_js.html" %}
     {% endcompress %}
     {% block js_media %}{% endblock %}
     {% if EVENT_LAST_MSG %}
-        <script>
+        <script type="module">
+            import { WSEventDispatcher } from "$resources/event.js";
+
             window.event_dispatcher = new WSEventDispatcher(
                 '{{ EVENT_DAEMON_LOCATION }}',
                 '{{ EVENT_DAEMON_POLL_LOCATION }}',
@@ -109,10 +105,12 @@
             type="module" 
             data-should-push="{{ EVENT_LAST_MSG and request.participation.contest.push_announcements and request.participation.virtual <= 0 }}"
         >
+            import { count_down } from "$resources/common_utils.js";
+            
             $(() => {
                 count_down($("#contest-time-remaining"));
 
-                var selected = null,
+                let selected = null,
                     x_pos = 0, y_pos = 0,
                     x_elem = 0, y_elem = 0;
 
@@ -161,8 +159,8 @@
 
                 if (shouldPush) {
                     $(() => {
-                        event_dispatcher.auto_reconnect = true;
-                        event_dispatcher.on('contest_{{ request.participation.contest.id_secret }}', (data) => {
+                        window.event_dispatcher.auto_reconnect = true;
+                        window.event_dispatcher.on('contest_{{ request.participation.contest.id_secret }}', (data) => {
                             alert(data.title + '\n\n' + data.message);
                         });
                     })
@@ -189,15 +187,18 @@
 
     {# Don't run userscript since it may be malicious #}
     {% if request.user.is_authenticated and request.profile.user_script and not request.user.is_impersonate and not tfa_in_progress and not ignore_user_script %}
-        <script type="text/javascript">{{ request.profile.user_script|safe }}</script>
+        <script type="text/javascript">eval("{{ request.profile.user_script|safe }}")</script>
     {% endif %}
     <script>
-        function submmit_language(lang) {
+        function submit_language(lang) {
             if (lang != "{{ LANGUAGE_CODE }}" ) {
                 $("input[name=language]").val(lang)
                 $("#set_language").submit()
             }
         }
+
+        $("#flag_vi").on("click", () => submit_language("vi"));
+        $("#flag_en").on("click", () => submit_language("en"));
     </script>
     <noscript>
         <style>
@@ -258,23 +259,18 @@
         </ul>
 
         <span id="user-links">
-            <a href=
-                {% if request.resolver_match.view_name == "problem_detail" and problem %}
-                    "{{ url('new_problem_ticket', problem.code) }}"
-                {% else %}
-                    "/tickets/new?issue_url={{ request.build_absolute_uri()|urlencode }}"
-                {% endif %}
+            <a href="{{ url('new_problem_ticket', problem.code) if request.resolver_match.view_name == 'problem_detail' and problem else '/tickets/new?issue_url={{ request.build_absolute_uri()|urlencode }}' }}"
             style="margin-right: 5px;">
                 <span title="{{ _('Report issue') }}">
                     <i class="fa fa-exclamation-triangle" style="color: yellow;"></i>
                 </span>
             </a>
-            <a id="flag_vi" href="#" onclick="submmit_language('vi')" style="margin-right: 5px; margin-top: 4px;">
-                <img src="/resources/icons/vi_flag.svg" alt="VI" height="24">
-            </a>
-            <a id="flag_en" href="#" onclick="submmit_language('en')" style="margin-right: 5px; margin-top: 4px;">
-                <img src="/resources/icons/gb_flag.svg" alt="EN" height="24">
-            </a>
+            <button id="flag_vi" style="margin-right: 5px; margin-top: 4px;" aria-label="EN">
+                <img src="/resources/icons/vi_flag.svg" alt="" height="24">
+            </button>
+            <button id="flag_en" style="margin-right: 5px; margin-top: 4px;" aria-label="VI">
+                <img src="/resources/icons/gb_flag.svg" alt="" height="24">
+            </button>
             {% if request.user.is_authenticated %}
                 <ul>
                     <li>

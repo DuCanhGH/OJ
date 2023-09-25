@@ -2,14 +2,18 @@
   "name": "@vnoi-admin/oj",
   "type": "module",
   "scripts": {
-    "build": "rimraf fe-output && parcel build --no-source-maps --no-cache \"templates/**/*.html\"",
+    "build:prepare": "rimraf bundled/ templates/",
+    "build:parcel": "parcel build --no-source-maps --no-cache \"html/**/*.html\"",
+    "build:style": "sh ./scripts/make_style.sh",
+    "build:cleanup": "sh ./scripts/cleanup_frontend.sh",
+    "build": "npm run build:prepare && npm run build:style && npm run build:parcel && npm run build:cleanup",
     "format": "prettier --write websocket",
     "format:check": "prettier --check websocket"
   },
   "browserslist": "> 0.25%, not dead",
   "targets": {
     "default": {
-      "distDir": "./fe-output",
+      "distDir": "./bundled",
       "publicUrl": "/static"
     }
   },
@@ -17,7 +21,8 @@
     "$lib": "./resources/lib",
     "$prebundled": "./resources/prebundled",
     "$resources": "./resources",
-    "$vnoj": "./resources/vnoj"
+    "$vnoj": "./resources/vnoj",
+    "jquery": "./resources/prebundled/jquery-3.4.1.min.js"
   },
   "@parcel/transformer-css": {
     "errorRecovery": true
@@ -26,7 +31,6 @@
     "@commander-js/extra-typings": "11.0.0",
     "commander": "11.0.0",
     "flatpickr": "4.6.13",
-    "jquery": "3.7.1",
     "mathjax": "3.2.2",
     "pagedown": "1.1.0",
     "ws": "8.14.0"

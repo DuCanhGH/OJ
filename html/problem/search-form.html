@@ -1,3 +1,4 @@
+<!-- temporarily invalid -->
 <div class="sidebox">
     <h3>{{ _('Problem search') }} <i class="fa fa-search"></i>
     </h3>
@@ -9,26 +10,28 @@
             </div>
             {% if has_fts %}
                 <div>
-                    <input id="full_text" type="checkbox" name="full_text" value="1"
-                           {% if full_text %}checked{% endif %}>
+                    <input id="full_text" type="checkbox" name="full_text" value="1" checked="{{ 'true' if full_text else 'false' }}">
                     <label for="full_text">{{ _('Full text search') }}</label>
                 </div>
             {% endif %}
             {% if request.user.is_authenticated %}
                 <div>
-                    <input id="hide_solved" type="checkbox" name="hide_solved" value="1"
-                           {% if hide_solved %}checked{% endif %}>
+                    <input id="hide_solved" type="checkbox" name="hide_solved" value="1" checked="{{ 'true' if hide_solved else 'false' }}">
                     <label for="hide_solved">{{ _('Hide solved problems') }}</label>
                 </div>
             {% endif %}
             <div>
-                <input id="has_public_editorial" type="checkbox" name="has_public_editorial" value="1"
-                        {% if has_public_editorial %} checked{% endif %}>
+                <input 
+                    id="has_public_editorial" 
+                    type="checkbox" 
+                    name="has_public_editorial" 
+                    value="1" 
+                    checked="{{ 'true' if has_public_editorial else 'false' }}"
+                >
                 <label for="has_public_editorial">{{ _('Has editorial') }}</label>
             </div>
             <div>
-                <input id="show_types" type="checkbox" name="show_types" value="1"
-                        {% if show_types %} checked{% endif %}>
+                <input id="show_types" type="checkbox" name="show_types" value="1" checked="{{ 'true' if show_types else 'false' }}">
                 <label for="show_types">{{ _('Show problem types') }}</label>
             </div>
             <div class="filter-form-group">
@@ -40,7 +43,7 @@
                         <option value="">{{ _('All') }}</option>{% endif %}
                     <option disabled="disabled">---</option>
                     {% for group in categories %}
-                        <option value="{{ group.id }}"{% if group.id == category %} selected{% endif %}>
+                        <option value="{{ group.id }}" selected="{{ 'true' if group.id == category else 'false' }}">
                             {{ group.full_name }}
                         </option>
                     {% endfor %}
@@ -50,7 +53,7 @@
                 <label for="type"><i>{{ _('Problem types') }}</i></label>
                 <select id="types" name="type" multiple>
                     {% for type in problem_types %}
-                        <option value="{{ type.id }}"{% if type.id in selected_types %} selected{% endif %}>
+                        <option value="{{ type.id }}" selected="{{ 'true' if type.id in selected_types else 'false' }}">
                             {{ user_trans(type.full_name) }}
                         </option>
                     {% endfor %}
@@ -60,8 +63,20 @@
                 <div class="form-label">{{ _('Point range') }}</div>
                 <div id="point-slider"></div>
             {% endif %}
-            <input id="point-start" type="hidden" name="point_start" {% if point_start and point_start != point_values.min %}value="{{ point_start }}"{% else %}disabled{% endif %}>
-            <input id="point-end" type="hidden" name="point_end" {% if point_end and point_end != point_values.max %}value="{{ point_end }}"{% else %}disabled{% endif %}>
+            <input 
+                id="point-start" 
+                type="hidden" 
+                name="point_start" 
+                value="{{ point_start if point_start and point_start != point_values.min else '' }}" 
+                disabled="'true' if point_start and point_start != point_values.min else 'false'"
+            >
+            <input 
+                id="point-end" 
+                type="hidden" 
+                name="point_end"
+                value="{{ point_end if point_end and point_end != point_values.max else '' }}" 
+                disabled="'true' if point_end and point_end != point_values.max else 'false'"
+            >
             <div class="form-submit-group">
                 <a id="go" class="button">{{ _('Go') }}</a>
                 <a id="random" class="button">{{ _('Random') }}</a>

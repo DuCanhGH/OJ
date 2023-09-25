@@ -2,7 +2,7 @@
 
 {% block user_name_display scoped %}
     {% if user.virtual > 0 %}
-    {{ link_user(user) }}<sup class="virtual-participation" title="{{ _("%(cnt)s virtual participation of this user", cnt=ordinal(user.virtual)) }}">[{{user.virtual}}]</sup>
+    {{ link_user(user) }}<sup class="virtual-participation" title="{{ _('%(cnt)s virtual participation of this user', cnt=ordinal(user.virtual)) }}">[{{user.virtual}}]</sup>
     {% else %}
         {{ link_user(user) }}
     {% endif %}
@@ -100,7 +100,7 @@
 
 {% block after_user_list %}
     <tr>
-        <td colspan={% if is_ICPC_format %}4{% else %}3{% endif %}>Total AC</td>
+        <td colspan="{% if is_ICPC_format %}4{% else %}3{% endif %}">Total AC</td>
         {% for problem in problems %}
             <td class="total-ac" id='{{- contest.get_label_for_problem(loop.index0) }}-total'>{{ total_ac.get(str(problem.id), 0) }}</td>
         {% endfor %}

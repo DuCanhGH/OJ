@@ -41,4 +41,5 @@ tmp.sh
 fc_*
 local_urls.py
 .parcel-cache
-fe-output
+templates/
+bundled/

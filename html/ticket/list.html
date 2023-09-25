@@ -12,7 +12,7 @@
             $('input#open, input#own').click(() => {
                 ($('<form>').attr('action', window.location.pathname + '?' + $('form#filter-form').serialize())
                     .append($('<input>').attr('type', 'hidden').attr('name', 'csrfmiddlewaretoken')
-                        .attr('value', $.cookie('csrftoken')))
+                        .attr('value', window.parsedToken['csrftoken']))
                     .attr('method', 'POST').appendTo($('body')).submit());
             });
 

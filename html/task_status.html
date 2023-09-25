@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <title>Task Progress - {{ SITE_LONG_NAME }}</title>
     <link rel="stylesheet" href="/resources/task_status.css">
+    <script src="/resources/prebundled/jquery-3.4.1.min.js"></script>
     <script type="module">
-        import $ from "jquery";
-
         $(() => {
             const $jumbotron = $('.jumbotron');
             const task_id = $jumbotron.attr('data-task-id');

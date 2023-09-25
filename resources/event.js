@@ -1,4 +1,4 @@
-function WSEventDispatcher(websocket_path, polling_base, last_msg) {
+export function WSEventDispatcher(websocket_path, polling_base, last_msg) {
     this.websocket_path = websocket_path;
     this.polling_path = polling_base;
     this.connected = false;

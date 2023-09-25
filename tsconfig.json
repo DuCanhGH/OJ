@@ -27,6 +27,6 @@
             "$vnoj": ["./resources/vnoj/*"]
         }
     },
-    "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.html"],
+    "include": ["globals.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.cjs", "**/*.html"],
     "exclude": ["node_modules", "dist", "resources/prebundled"]
 }

@@ -16,11 +16,10 @@
 {% endblock %}
 
 {% block js_media %}
-    {{ point_values|json_script:"point-values" }}
     <script>
         window.point_start = Number("{{point_start}}");
         window.point_end = Number("{{point_end}}");
-        window.point_values = JSON.parse(document.getElementById("point-values").textContent);
+        window.point_values = JSON.parse("{{point_values|json|safe}}");
     </script>
     {% compress js %}
         <script src="{{ static('libs/nouislider.min.js') }}" type="text/javascript"></script>
@@ -70,7 +69,7 @@
                     prep_form();
                     ($('<form>').attr('action', window.location.pathname + '?' + $form.serialize())
                         .append($('<input>').attr('type', 'hidden').attr('name', 'csrfmiddlewaretoken')
-                            .attr('value', $.cookie('csrftoken')))
+                            .attr('value', window.parsedToken['csrftoken']))
                         .attr('method', 'POST').appendTo($('body')).submit());
                 });
 
