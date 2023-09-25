@@ -51,4 +51,4 @@ jobs:
       - name: Install npm packages
         run: npm ci
       - name: Build style.css
-        run: ./make_style.sh
+        run: ./scripts/make_style.sh
