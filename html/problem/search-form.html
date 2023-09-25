@@ -1,4 +1,3 @@
-<!-- temporarily invalid -->
 <div class="sidebox">
     <h3>{{ _('Problem search') }} <i class="fa fa-search"></i>
     </h3>
@@ -10,13 +9,13 @@
             </div>
             {% if has_fts %}
                 <div>
-                    <input id="full_text" type="checkbox" name="full_text" value="1" checked="{{ 'true' if full_text else 'false' }}">
+                    <input id="full_text" type="checkbox" name="full_text" value="1" {{ full_text|yesno:"checked" }}>
                     <label for="full_text">{{ _('Full text search') }}</label>
                 </div>
             {% endif %}
             {% if request.user.is_authenticated %}
                 <div>
-                    <input id="hide_solved" type="checkbox" name="hide_solved" value="1" checked="{{ 'true' if hide_solved else 'false' }}">
+                    <input id="hide_solved" type="checkbox" name="hide_solved" value="1" {% if hide_solved %} checked {% endif %}>
                     <label for="hide_solved">{{ _('Hide solved problems') }}</label>
                 </div>
             {% endif %}
@@ -31,7 +30,7 @@
                 <label for="has_public_editorial">{{ _('Has editorial') }}</label>
             </div>
             <div>
-                <input id="show_types" type="checkbox" name="show_types" value="1" checked="{{ 'true' if show_types else 'false' }}">
+                <input id="show_types" type="checkbox" name="show_types" value="1" {{ show_types|yesno:"checked" }}>
                 <label for="show_types">{{ _('Show problem types') }}</label>
             </div>
             <div class="filter-form-group">
@@ -43,7 +42,7 @@
                         <option value="">{{ _('All') }}</option>{% endif %}
                     <option disabled="disabled">---</option>
                     {% for group in categories %}
-                        <option value="{{ group.id }}" selected="{{ 'true' if group.id == category else 'false' }}">
+                        <option value="{{ group.id }}" {{ group.id == category|yesno:"selected" }}>
                             {{ group.full_name }}
                         </option>
                     {% endfor %}
@@ -53,7 +52,7 @@
                 <label for="type"><i>{{ _('Problem types') }}</i></label>
                 <select id="types" name="type" multiple>
                     {% for type in problem_types %}
-                        <option value="{{ type.id }}" selected="{{ 'true' if type.id in selected_types else 'false' }}">
+                        <option value="{{ type.id }}" {{ type.id in selected_types|yesno:"selected" }}>
                             {{ user_trans(type.full_name) }}
                         </option>
                     {% endfor %}

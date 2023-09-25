@@ -239,18 +239,20 @@ export default function collectDependencies(asset, ast) {
         }
 
         for (let attr in attrs) {
-            // Ignore all Django templating
-            if (isDjangoTemplating(attrs[attr])) {
-                continue;
-            }
-            // Check for virtual paths
-            if (tag === "a" && attrs[attr].split("#")[0].lastIndexOf(".") < 1) {
-                continue;
-            }
+            if (typeof attrs[attr] === "string") {
+                // Ignore all Django templating
+                if (isDjangoTemplating(attrs[attr])) {
+                    continue;
+                }
+                // Check for virtual paths
+                if (tag === "a" && attrs[attr].split("#")[0].lastIndexOf(".") < 1) {
+                    continue;
+                }
 
-            // Check for id references
-            if (attrs[attr][0] === "#") {
-                continue;
+                // Check for id references
+                if (attrs[attr][0] === "#") {
+                    continue;
+                }
             }
 
             let elements = ATTRS[attr];

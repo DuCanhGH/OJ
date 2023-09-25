@@ -71,9 +71,7 @@
     {% endif %}
     {% block media %}{% endblock %}
     {% compress js %}
-        <script>Function(`
-            {{ inlinei18n(LANGUAGE_CODE)|safe }}
-        `)()</script>
+        <script src="{{ statici18n(LANGUAGE_CODE) }}"></script>
         <script src="/resources/prebundled/jquery-3.4.1.min.js"></script>
         <script src="/resources/prebundled/jquery-taphold.js"></script>
         <script src="/resources/prebundled/jquery.unveil.js"></script>

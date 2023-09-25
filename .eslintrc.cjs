@@ -27,5 +27,6 @@ module.exports = {
     },
     globals: {
         $: "readonly",
+        moment: "readonly"
     },
 };

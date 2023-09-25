@@ -4,7 +4,7 @@ from urllib.parse import quote
 
 from jinja2.ext import Extension
 from mptt.utils import get_cached_trees
-from statici18n.templatetags.statici18n import inlinei18n
+from statici18n.templatetags.statici18n import statici18n
 
 from judge.highlight_code import highlight_code
 from judge.user_translations import gettext
@@ -19,7 +19,7 @@ registry.filter('highlight', highlight_code)
 registry.filter('urlquote', quote)
 registry.filter('roundfloat', round)
 registry.function('ordinal', lambda n: '%d%s' % (n, 'tsnrhtdd'[(n // 10 % 10 != 1) * (n % 10 < 4) * n % 10::4]))
-registry.function('inlinei18n', inlinei18n)
+registry.function('statici18n', statici18n)
 registry.function('mptt_tree', get_cached_trees)
 registry.function('user_trans', gettext)
 

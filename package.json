@@ -22,7 +22,12 @@
     "$prebundled": "./resources/prebundled",
     "$resources": "./resources",
     "$vnoj": "./resources/vnoj",
-    "jquery": "./resources/prebundled/jquery-3.4.1.min.js"
+    "jquery": {
+      "global": "$"
+    },
+    "moment": {
+      "global": "moment"
+    }
   },
   "@parcel/transformer-css": {
     "errorRecovery": true
@@ -31,7 +36,6 @@
     "@commander-js/extra-typings": "11.0.0",
     "commander": "11.0.0",
     "flatpickr": "4.6.13",
-    "mathjax": "3.2.2",
     "pagedown": "1.1.0",
     "ws": "8.14.0"
   },
@@ -53,7 +57,6 @@
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-html": "7.1.0",
-    "moment": "2.29.4",
     "nullthrows": "1.1.1",
     "parcel": "2.9.3",
     "postcss": "8.4.29",
