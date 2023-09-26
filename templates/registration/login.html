@@ -65,17 +65,17 @@
             <h4>{{ _('Or log in with...') }}</h4>
             <div>
                 {% if form.has_google_auth %}
-                    <a href="{{ url('social:begin', "google-oauth2") }}?next={{ next }}" class="social google-icon">
+                    <a href="{{ url('social:begin', 'google-oauth2') }}?next={{ next }}" class="social google-icon">
                         <i class="fa fa-google-plus-square"></i>
                     </a>
                 {% endif %}
                 {% if form.has_facebook_auth %}
-                    <a href="{{ url('social:begin', "facebook") }}?next={{ next }}" class="social facebook-icon">
+                    <a href="{{ url('social:begin', 'facebook') }}?next={{ next }}" class="social facebook-icon">
                         <i class="fa fa-facebook-square"></i>
                     </a>
                 {% endif %}
                 {% if form.has_github_auth %}
-                    <a href="{{ url('social:begin', "github-secure") }}?next={{ next }}" class="social github-icon">
+                    <a href="{{ url('social:begin', 'github-secure') }}?next={{ next }}" class="social github-icon">
                         <i class="fa fa-github-square"></i>
                     </a>
                 {% endif %}

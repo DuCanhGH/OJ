@@ -11,7 +11,7 @@ export function featureTest(property, value, noPrefixes) {
     return !!mStyle[property];
 }
 
-export function count_down(label) {
+export function countDown(label) {
     var initial = parseInt(label.attr('data-secs'));
     var start = Date.now();
 

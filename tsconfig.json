@@ -19,14 +19,13 @@
         "removeComments": false,
         "checkJs": true,
         "noEmit": true,
-        // match this with package.json.alias
+        "baseUrl": ".",
         "paths": {
-            "$lib/*": ["./resources/lib/*"],
-            "$prebundled": ["./resources/prebundled/*"],
-            "$resources": ["./resources/*"],
-            "$vnoj": ["./resources/vnoj/*"]
+            "$prebundled/*": ["./resources/prebundled/*"],
+            "$resources/*": ["./resources/*"],
+            "$vnoj/*": ["./resources/vnoj/*"]
         }
     },
-    "include": ["globals.d.ts", "**/*.ts", "**/*.js", "**/*.cjs", "html/**/*.html"],
-    "exclude": ["node_modules", "dist", "resources/prebundled"]
+    "include": ["globals.d.ts", "js/**/*.ts", "js/**/*.js", "**/*.cjs"],
+    "exclude": ["node_modules", "dist"]
 }

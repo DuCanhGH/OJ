@@ -2,50 +2,21 @@
   "name": "@vnoi-admin/oj",
   "type": "module",
   "scripts": {
-    "build:prepare": "rimraf bundled/ templates/",
-    "build:parcel": "parcel build --no-source-maps --no-cache \"html/**/*.html\"",
+    "build:prepare": "rimraf resources/bundled",
+    "build:esbuild": "node scripts/esbuild.js",
     "build:style": "sh ./scripts/make_style.sh",
-    "build:cleanup": "sh ./scripts/cleanup_frontend.sh",
-    "build": "npm run build:prepare && npm run build:style && npm run build:parcel && npm run build:cleanup",
+    "build": "npm run build:prepare && npm run build:style && npm run build:esbuild",
     "format": "prettier --write websocket",
     "format:check": "prettier --check websocket"
   },
   "browserslist": "> 0.25%, not dead",
-  "targets": {
-    "default": {
-      "distDir": "./bundled",
-      "publicUrl": "/static"
-    }
-  },
-  "alias": {
-    "$lib": "./resources/lib",
-    "$prebundled": "./resources/prebundled",
-    "$resources": "./resources",
-    "$vnoj": "./resources/vnoj",
-    "jquery": {
-      "global": "$"
-    },
-    "moment": {
-      "global": "moment"
-    }
-  },
-  "@parcel/transformer-css": {
-    "errorRecovery": true
-  },
   "dependencies": {
     "@commander-js/extra-typings": "11.0.0",
     "commander": "11.0.0",
     "flatpickr": "4.6.13",
-    "pagedown": "1.1.0",
     "ws": "8.14.0"
   },
   "devDependencies": {
-    "@parcel/diagnostic": "2.9.3",
-    "@parcel/packager-raw-url": "2.9.3",
-    "@parcel/rust": "2.9.4-nightly.2988",
-    "@parcel/transformer-jsonld": "2.9.3",
-    "@parcel/transformer-webmanifest": "2.9.3",
-    "@parcel/types": "2.9.3",
     "@types/jquery": "3.5.19",
     "@types/mathjax": "0.0.37",
     "@types/semver": "7.5.2",
@@ -54,21 +25,16 @@
     "@typescript-eslint/parser": "6.7.2",
     "autoprefixer": "10.4.15",
     "buffer": "6.0.3",
+    "esbuild": "0.19.3",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-html": "7.1.0",
-    "nullthrows": "1.1.1",
-    "parcel": "2.9.3",
+    "fast-glob": "3.3.1",
     "postcss": "8.4.29",
     "postcss-cli": "10.1.0",
-    "posthtml": "0.16.6",
-    "posthtml-parser": "0.11.0",
-    "posthtml-render": "3.0.0",
     "prettier": "3.0.3",
     "process": "0.11.10",
     "rimraf": "5.0.1",
-    "sass": "1.66.1",
-    "semver": "7.5.4",
-    "srcset": "4.0.0"
+    "sass": "1.66.1"
   }
 }

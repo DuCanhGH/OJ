@@ -24,6 +24,7 @@ module.exports = {
             "warn",
             { ignoreRestSiblings: true, varsIgnorePattern: "^(_|\\$\\$)", argsIgnorePattern: "^_" },
         ],
+        "@typescript-eslint/no-explicit-any": "off",
     },
     globals: {
         $: "readonly",

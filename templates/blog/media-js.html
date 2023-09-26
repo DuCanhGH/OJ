@@ -1,0 +1,7 @@
+{% compress js %}
+<script
+    src="{{ static('bundled/blog/media-js.js') }}"
+    data-upvote-url="{{ url('blog_upvote') }}"
+    data-downvote-url="{{ url('blog_downvote') }}"
+></script>
+{% endcompress %}

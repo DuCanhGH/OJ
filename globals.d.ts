@@ -4,5 +4,9 @@ declare global {
     interface Window {
         event_dispatcher: WSEventDispatcher;
         parsedCookie: Record<string, string>;
+        DjangoPagedown: any;
+        editors: any;
     }
 }
+
+export {};

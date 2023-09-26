@@ -128,7 +128,7 @@
             {
                 name: 'Full screen',
                 bindKey: {win: 'Ctrl-F11', mac: 'Command-F11'},
-                exec: (editor) => {
+                exec(editor) {
                     minimizeMaximize(widget, main_block, editor);
                 },
                 readOnly: true // false if this command should not apply in readOnly mode

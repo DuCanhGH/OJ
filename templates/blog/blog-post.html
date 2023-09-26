@@ -4,7 +4,7 @@
     <div style="display: flex; gap: 0.5em;">
         <div class="vote">
             {% if logged_in %}
-                <a href="javascript:blog_upvote({{ post.id }})"
+                <a href="javascript:blogUpvote({{ post.id }})"
                 class="upvote-link fa fa-chevron-up fa-fw{% if post.vote_score == 1 %} voted{% endif %}"></a>
             {% else %}
                 <a href="javascript:alert('{{ _('Please log in to vote')|escapejs }}')" title="{{ _('Please log in to vote') }}"
@@ -13,7 +13,7 @@
             <br>
             <div id="post-score" class="comment-score">{{ post.score }}</div>
             {% if logged_in %}
-                <a href="javascript:blog_downvote({{ post.id }})"
+                <a href="javascript:blogDownvote({{ post.id }})"
                 class="downvote-link fa fa-chevron-down fa-fw{% if post.vote_score == -1 %} voted{% endif %}"></a>
             {% else %}
                 <a href="javascript:alert('{{ _('Please log in to vote')|escapejs }}')" title="{{ _('Please log in to vote') }}"

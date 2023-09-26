@@ -15,29 +15,7 @@
 {% block js_media %}
     {% include "blog/media-js.html" %}
 
-    <script type="text/javascript">
-        $(document).ready(() => {
-            $('.time-remaining').each(() => {
-                count_down($(this));
-            });
-
-            $('.blog-sidebar').hide();
-            $('#blog-tab').find('a').click((e) => {
-                e.preventDefault();
-                $('#blog-tab').addClass('active');
-                $('#event-tab').removeClass('active');
-                $('.blog-content').show();
-                $('.blog-sidebar').hide();
-            });
-            $('#event-tab').find('a').click((e) => {
-                e.preventDefault();
-                $('#event-tab').addClass('active');
-                $('#blog-tab').removeClass('active');
-                $('.blog-content').hide();
-                $('.blog-sidebar').show();
-            });
-        });
-    </script>
+    <script src="{{ static('bundled/blog/list.js') }}"></script>
 {% endblock %}
 
 {% block body %}
