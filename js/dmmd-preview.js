@@ -83,21 +83,21 @@ $(() => {
         /**
          * @type {ReturnType<typeof setTimeout> | null}
          */
-        let last_event = null;
-        let last_text = $textarea.val();
+        let lastEvent = null;
+        let lastText = $textarea.val();
         if (timeout) {
             const parsedTimeout = parseInt(timeout);
             $textarea.on("keyup paste", () => {
                 let text = $textarea.val();
-                if (last_text == text) return;
-                last_text = text;
+                if (lastText == text) return;
+                lastText = text;
 
                 $preview.addClass("dmmd-preview-stale");
-                if (last_event) clearTimeout(last_event);
-                last_event = setTimeout(
+                if (lastEvent) clearTimeout(lastEvent);
+                lastEvent = setTimeout(
                     () => {
                         $update.trigger("click");
-                        last_event = null;
+                        lastEvent = null;
                     },
                     isNaN(parsedTimeout) ? 0 : parsedTimeout,
                 );

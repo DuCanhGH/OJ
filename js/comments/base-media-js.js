@@ -1,19 +1,22 @@
 import "$prebundled/featherlight/featherlight.min.js";
 
+import { getI18n } from "../utils.js";
+
 const upvoteCommentUrl = document.currentScript?.dataset.upvoteCommentUrl;
 const downvoteCommentUrl = document.currentScript?.dataset.downvoteCommentUrl;
 const hideCommentUrl = document.currentScript?.dataset.hideCommentUrl;
-// TODO: add a resolveI18n function
-const i18n = {
-    replyComment: document.currentScript?.dataset.i18nReplyComment ?? "",
-    confirmCode: document.currentScript?.dataset.i18nConfirmCode ?? "",
-    editText: document.currentScript?.dataset.i18nEditText ?? "",
-    failedToEditComment: document.currentScript?.dataset.i18nFailedToEditComment ?? "",
-    failedToVote: document.currentScript?.dataset.i18nFailedToVote ?? "",
-    confirmHideComment: document.currentScript?.dataset.i18nConfirmHideComment ?? "",
-    failedToHideComment: document.currentScript?.dataset.i18nFailedToHideComment ?? "",
-    failedToUpdateCommentBody: document.currentScript?.dataset.i18nFailedToUpdateCommentBody ?? "",
-};
+const i18n = getI18n(document.currentScript?.dataset, {
+    replyComment: "i18nReplyComment",
+    confirmCode: "i18nConfirmCode",
+    editText: "i18nEditText",
+    failedToEditComment: "i18nFailedToEditComment",
+    failedToVote: "i18nFailedToVote",
+    confirmHideComment: "i18nConfirmHideComment",
+    failedToHideComment: "i18nFailedToHideComment",
+    failedToUpdateCommentBody: "i18nFailedToUpdateCommentBody",
+    original: "i18nOriginal",
+    edited: "i18nEdited",
+});
 
 $(document).on("ready", () => {
     window.replyComment = (parent) => {
@@ -104,9 +107,9 @@ $(document).on("ready", () => {
             let editText = i18n.editText.replace("{edits}", "" + showRevision);
 
             if (showRevision == 0) {
-                editText = "{{ _('original') }}";
+                editText = i18n.original;
             } else if (showRevision == maxRevision && maxRevision == 1) {
-                editText = "{{ _('edited') }}";
+                editText = i18n.edited;
             }
 
             $comment.find(".comment-edit-text").text(" " + editText + " ");
@@ -176,6 +179,12 @@ $(document).on("ready", () => {
     const $comments = $(".comments");
     $comments.find("a.hide-comment").on("click", (e) => {
         e.preventDefault();
+
+        if (!hideCommentUrl) {
+            alert("Hiding comments is not supported as the URL to the API is not provided.");
+            return;
+        }
+
         if (!(e.ctrlKey || e.metaKey || confirm(i18n.confirmHideComment))) return;
 
         const id = $(e.currentTarget).attr("data-id");
@@ -212,7 +221,6 @@ $(document).on("ready", () => {
                 if (!actionUrl) return;
                 $.post(actionUrl, $(event.currentTarget).serialize())
                     .done(() => {
-                        // @ts-expect-error Featherlight doesn't exist in JQuery's definitions
                         $.featherlight.current().close();
                         $.ajax({
                             url: readback,

@@ -25,6 +25,8 @@ module.exports = {
             { ignoreRestSiblings: true, varsIgnorePattern: "^(_|\\$\\$)", argsIgnorePattern: "^_" },
         ],
         "@typescript-eslint/no-explicit-any": "off",
+        "no-undef": "off",
+        "no-var": "off",
     },
     globals: {
         $: "readonly",

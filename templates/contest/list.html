@@ -5,68 +5,18 @@
 
 {% block js_media %}
     <script 
-        type="module" 
-        data-official-contest-mode="{{ request.official_contest_mode }}" 
-        data-in-contest="{{ request.in_contest }}"
-        data-hide-private-contests="{{ hide_private_contests }}"
-    >
-        import "$prebundled/featherlight/featherlight.min.js";
-
-        const officialContestMode = document.currentScript.dataset.officialContestMode === "True";
-        const inContest = document.currentScript.dataset.inContest === "True";
-        const hidePrivateContests = document.currentScript.dataset.hidePrivateContests;
-
-        $(document).ready(() => {
-            $('.time-remaining').each(() => {
-                count_down($(this));
-            });
-
-            $('.contest-tag').find('a[data-featherlight]').featherlight();
-
-            if (officialContestMode) {
-                $('.join-warning').click(() => {
-                    return confirm("{{ _('Are you sure you want to join?') }}\n" +
-                        "{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}"
-                            + inContest ? "\n{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}" : ''
-                    );
-                });
-            }
-
-            if (inContest) {
-                $('.spectate-warning').click(() => {
-                    return confirm("{{ _('Are you sure you want to spectate?') }}\n" +
-                        "{{ _('Spectating this contest will leave %(contest)s.', contest=request.participation.contest.name) }}");
-                });
-            }
-
-            $('.register-warning').click(() => {
-                return confirm("{{ _('Are you sure you want to register?') }}");
-            });
-
-            if (hidePrivateContests !== "None") {
-                if (hidePrivateContests === "True") {
-                    $('#hide-private-contests-checkbox').prop('checked', true);
-                }
-
-                $('#hide-private-contests-checkbox').click(function () {
-                    const parser = new URL(window.location.href);
-                    parser.searchParams.set('hide_private_contests', "{{ 'false' if hide_private_contests else 'true' }}");
-                    window.location.href = parser.href;
-                });
-            }
-
-            // var tooltip_classes = 'tooltipped tooltipped-e';
-            //
-            // $('.contest-tag').each(function () {
-            //     var link = $(this);//
-            //     link.mouseenter(function (e) {
-            //         link.addClass(tooltip_classes).attr('aria-label', link.attr('data-description'));
-            //     }).mouseleave(function (e) {
-            //         link.removeClass(tooltip_classes).removeAttr('aria-label');
-            //     });
-            // });
-        });
-    </script>
+        src="{{ static('contest/list.js') }}"
+        data-official-contest-mode="{{ 'true' if request.official_contest_mode else 'false' }}" 
+        data-in-contest="{{ 'true' if request.in_contest else 'false' }}"
+        {% if hide_private_contests is not none %}
+        data-hide-private-contests="{{ 'true' if hide_private_contests else 'false' }}"
+        {% endif %}
+        data-i18n-confirm-join="{{ _('Are you sure you want to join?') }}"
+        data-i18n-confirm-join-start-timer="{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}"
+        data-i18n-confirm-join-leave-contest="{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}"
+        data-i18n-confirm-spectate="{{ _('Are you sure you want to spectate?') }}"
+        data-i18n-confirm-spectate-leave-contest="{{ _('Spectating this contest will leave %(contest)s.', contest=request.participation.contest.name) }}"
+    ></script>
 {% endblock %}
 
 {% block title_ruler %}{% endblock %}

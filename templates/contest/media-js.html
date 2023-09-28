@@ -1,33 +1,11 @@
-<script 
-    type="module" 
-    data-official-contest-mode="{{ request.official_contest_mode }}" 
-    data-in-contest="{{ request.in_contest }}"
->
-    $(function () {
-        const officialContestMode = document.currentScript.dataset.officialContestMode === "True";
-        const inContest = document.currentScript.dataset.inContest === "True";
-
-        $('.leaving-forever').click(function () {
-            return confirm("{{ _('Are you sure you want to leave?') }}\n" +
-                "{{ _('You cannot come back to a virtual participation. You will have to start a new one.') }}");
-        });
-
-        if (!officialContestMode) {
-            $('.first-join').click(function () {
-                return confirm("{{ _('Are you sure you want to join?') }}\n" +
-                    "{{ _('Joining a contest starts your timer, after which it becomes unstoppable.') }}");
-            });
-        }
-
-        if (inContest) {
-            $('.contest-join').click(function () {
-                return confirm("{{ _('Are you sure you want to join?') }}\n" +
-                    "{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}");
-            });
-        }
-
-        $('.register-warning').click(function () {
-            return confirm("{{ _('Are you sure you want to register?') }}");
-        });
-    });
-</script>
+<script
+    src="{{ static('contest/media-js.js') }}"
+    data-official-contest-mode="{{ 'true' if request.official_contest_mode else 'false' }}"
+    data-in-contest="{{ 'true' if request.in_contest else 'false' }}"
+    data-i18n-confirm-leave="{{ _('Are you sure you want to leave?') }}"
+    data-i18n-confirm-leave-no-return="{{ _('You cannot come back to a virtual participation. You will have to start a new one.') }}"
+    data-i18n-confirm-join="{{ _('Are you sure you want to join?') }}"
+    data-i18n-confirm-join-start-timer="{{ _('Joining a contest starts your timer, after which it becomes unstoppable.') }}"
+    data-i18n-confirm-join-leave-contest="{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}"
+    data-i18n-confirm-register="{{ _('Are you sure you want to register?') }}"
+></script>

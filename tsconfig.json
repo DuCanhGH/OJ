@@ -23,7 +23,8 @@
         "paths": {
             "$prebundled/*": ["./resources/prebundled/*"],
             "$resources/*": ["./resources/*"],
-            "$vnoj/*": ["./resources/vnoj/*"]
+            "$vnoj/*": ["./resources/vnoj/*"],
+            "$js/*": ["./js/*"]
         }
     },
     "include": ["globals.d.ts", "js/**/*.ts", "js/**/*.js", "**/*.cjs"],
