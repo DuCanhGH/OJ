@@ -60,6 +60,5 @@ $(document).on("ready", () => {
         });
     };
 
-    // @ts-expect-error featherlight doesn't exist in JQuery elements' types
     $("votes-link").find("a[data-featherlight]").featherlight();
 });

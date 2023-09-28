@@ -1,6 +1,6 @@
 <script src="{{ static('bundled/mathjax-config.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
-<script type="module">
+<script>
     MathJax.typesetPromise().then(() => {
         $(".tex-image").hide();
         $(".tex-text").show();

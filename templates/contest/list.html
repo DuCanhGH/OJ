@@ -5,7 +5,7 @@
 
 {% block js_media %}
     <script 
-        src="{{ static('contest/list.js') }}"
+        src="{{ static('bundled/contest/list.js') }}"
         data-official-contest-mode="{{ 'true' if request.official_contest_mode else 'false' }}" 
         data-in-contest="{{ 'true' if request.in_contest else 'false' }}"
         {% if hide_private_contests is not none %}

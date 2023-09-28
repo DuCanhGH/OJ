@@ -33,7 +33,7 @@ $(() => {
     });
 
     $(document).on("keyup", "#id_private_contestants + .select2 .select2-search__field", (e) => {
-        if (e.keyCode === 13) {
+        if (e.code === "Enter") {
             const $idPrivateContestants = $("#id_private_contestants");
             const contestants = String($(e.currentTarget).val()).split(/[\s,]+/);
             if (contestants.length <= 1) {

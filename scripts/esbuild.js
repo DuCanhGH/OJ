@@ -22,6 +22,7 @@ await esbuild.build({
     bundle: true,
     minify: true,
     tsconfigRaw,
+    target: ["chrome58", "firefox57", "node12", "safari11"],
 });
 
 console.log(`Compiled JS files successfully!`);

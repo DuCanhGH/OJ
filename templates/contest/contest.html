@@ -19,13 +19,7 @@
 {% endblock %}
 
 {% block content_js_media %}
-    <script type="text/javascript">
-        $(document).ready(() => {
-            $('.time-remaining').each(() => {
-                count_down($(this));
-            });
-        });
-    </script>
+    <script src="{{ static('bundled/contest/contest.js') }}"></script>
     {% include "contest/media-js.html" %}
     {% if not comment_lock %}
         {% include "comments/media-js.html" %}

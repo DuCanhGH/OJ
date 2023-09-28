@@ -2,7 +2,10 @@
 
 {% block js_media %}
     {% include "leave-warning.html" %}
-    <script src="{{ static('bundled/blog/edit/warning.js') }}"></script>
+    <script 
+        src="{{ static('bundled/blog/edit/warning.js') }}"
+        data-i18n-confirm-delete-blog="{{ _('Are you sure you want to delete this blog post?') }}"
+    ></script>
     {{ form.media.js }}
 {% endblock %}
 
