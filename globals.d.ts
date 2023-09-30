@@ -9,8 +9,20 @@ declare global {
         DjangoPagedown: any;
         editors: any;
     }
-    declare var npgettext: (name: string, format1: string, format2: string, time: number) => string;
-    declare var pgettext: (name: string, format: string) => string;
+    declare var gettext: (name: string) => string;
+    declare var ngettext: (singular: string, plural: string, count: number) => string;
+    declare var pgettext: (context: string, name: string) => string;
+    declare var npgettext: (
+        context: string,
+        singular: string,
+        plural: string,
+        count: number,
+    ) => string;
+    declare var interpolate: <T extends boolean>(
+        fmt: string,
+        obj: T extends true ? Record<string, string> : string[],
+        named: T,
+    ) => string;
     declare namespace MathJax {
         export const typesetPromise: (args: HTMLElement[]) => Promise<void>;
     }

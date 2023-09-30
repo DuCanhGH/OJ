@@ -51,9 +51,6 @@
         data-url="{{ url('contest_participation', contest.key, '__username__') }}"
         data-search-contest-url="{{ url('contest_user_search_select2_ajax', contest.key) }}"
         data-select2-theme="{{ DMOJ_SELECT2_THEME }}"
-        data-i18n-search-org-placeholder="{{ _('Search organizations') }}"
-        data-i18n-confirm-disqualify-participation="{{ _('Are you sure you want to disqualify this participation?') }}"
-        data-i18n-confirm-undisqualify-participation="{{ _('Are you sure you want to un-disqualify this participation?') }}"
     ></script>
     {% if not contest.ended %}
         <script 

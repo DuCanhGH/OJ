@@ -1,35 +1,39 @@
-import { getI18n } from "$js/utils.js";
-
-const i18n = getI18n(document.currentScript?.dataset, {
-    confirmLeave: "i18nConfirmLeave",
-    confirmLeaveNoReturn: "i18nConfirmLeaveNoReturn",
-    confirmJoin: "i18nConfirmJoin",
-    confirmJoinStartTimer: "i18nConfirmJoinStartTimer",
-    confirmJoinLeaveContest: "i18nConfirmJoinLeaveContest",
-    confirmRegister: "i18nConfirmRegister",
-});
+const contest = document.currentScript?.dataset.contestName ?? "(unknown contest)";
+const officialContestMode = document.currentScript?.dataset.officialContestMode === "true";
+const inContest = document.currentScript?.dataset.inContest === "true";
 
 $(() => {
-    const officialContestMode = document.currentScript?.dataset.officialContestMode === "true";
-    const inContest = document.currentScript?.dataset.inContest === "true";
-
     $(".leaving-forever").on("click", () => {
-        return confirm(`${i18n.confirmLeave}\n${i18n.confirmLeaveNoReturn}`);
+        return confirm(
+            `${gettext("Are you sure you want to leave?")}\n${gettext(
+                "You cannot come back to a virtual participation. You will have to start a new one.",
+            )}`,
+        );
     });
 
     if (!officialContestMode) {
         $(".first-join").on("click", () => {
-            return confirm(`${i18n.confirmJoin}\n${i18n.confirmJoinStartTimer}`);
+            return confirm(
+                `${gettext("Are you sure you want to join?")}\n${gettext(
+                    "Joining a contest starts your timer, after which it becomes unstoppable.",
+                )}`,
+            );
         });
     }
 
     if (inContest) {
         $(".contest-join").on("click", () => {
-            return confirm(`${i18n.confirmJoin}\n${i18n.confirmJoinLeaveContest}`);
+            return confirm(
+                `${gettext("Are you sure you want to join?")}\n${interpolate(
+                    gettext("Joining this contest will leave %(contest)s."),
+                    { contest },
+                    true,
+                )}`,
+            );
         });
     }
 
     $(".register-warning").on("click", () => {
-        return confirm(i18n.confirmRegister);
+        return confirm(gettext("Are you sure you want to register?"));
     });
 });

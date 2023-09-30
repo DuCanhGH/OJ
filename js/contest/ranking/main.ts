@@ -1,5 +1,3 @@
-import { getI18n } from "$js/utils.js";
-
 import { getOrganizationCodes, restoreChecklistOptions } from "./utils.js";
 
 const showVirtual = document.currentScript?.dataset.showVirtual === "true";
@@ -7,11 +5,6 @@ const select2Theme = document.currentScript?.dataset.select2Theme;
 const contestKey = document.currentScript?.dataset.contestKey;
 const url = document.currentScript?.dataset.url;
 const searchContestUrl = document.currentScript?.dataset.searchContestUrl;
-const i18n = getI18n(document.currentScript?.dataset, {
-    searchOrgPlaceholder: "i18nSearchOrgPlaceholder",
-    confirmDisqualifyParticipation: "i18nConfirmDisqualifyParticipation",
-    confirmUndisqualifyParticipation: "i18nConfirmUndisqualifyParticipation",
-});
 
 declare global {
     interface Window {
@@ -140,7 +133,7 @@ $(() => {
             theme: select2Theme,
             multiple: true,
             closeOnSelect: false,
-            placeholder: i18n.searchOrgPlaceholder,
+            placeholder: gettext("Search organizations"),
         });
 
         const selection = $("#org-check-list").data().select2.selection;
@@ -306,13 +299,13 @@ $(() => {
     window.enableAdminOperations = () => {
         $("a.disqualify-participation").on("click", (e) => {
             e.preventDefault();
-            if (e.ctrlKey || e.metaKey || confirm(i18n.confirmDisqualifyParticipation)) {
+            if (e.ctrlKey || e.metaKey || confirm(gettext("Are you sure you want to disqualify this participation?"))) {
                 $(e.currentTarget).closest("form").trigger("submit");
             }
         });
         $("a.un-disqualify-participation").on("click", (e) => {
             e.preventDefault();
-            if (e.ctrlKey || e.metaKey || confirm(i18n.confirmUndisqualifyParticipation)) {
+            if (e.ctrlKey || e.metaKey || confirm(gettext("Are you sure you want to un-disqualify this participation?"))) {
                 $(e.currentTarget).closest("form").trigger("submit");
             }
         });

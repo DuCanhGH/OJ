@@ -21,11 +21,7 @@
 {% endblock %}
 
 {% block content_js_media %}
-    <script 
-        src="{{ static('bundled/contest/moss.js') }}" 
-        data-i18n-confirm-moss="{{ _('Are you sure you want to MOSS the contest?') }}"
-        data-i18n-confirm-delete-moss="{{ _('Are you sure you want to delete the MOSS results?') }}"
-    ></script>
+    <script src="{{ static('bundled/contest/moss.js') }}"></script>
 {% endblock %}
 {% block body %}
     {% if has_results %}

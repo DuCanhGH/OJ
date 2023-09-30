@@ -2,12 +2,7 @@ import "$vnoj/jquery.formset.js";
 
 import flatpickr from "flatpickr";
 
-import { getI18n } from "../utils.js";
-
 const contestProblemFormsetPrefix = document.currentScript?.dataset.contestProblemFormsetPrefix;
-const i18n = getI18n(document.currentScript?.dataset, {
-    enterToSelectMultipleUsers: "i18nEntToSelMulUsers",
-});
 
 // This code activates flatpickr on fields with the 'datetimefield' class when the document has loaded
 window.addEventListener("DOMContentLoaded", () => {
@@ -25,7 +20,7 @@ $(() => {
         prefix: contestProblemFormsetPrefix,
     });
 
-    const noResults = () => i18n.enterToSelectMultipleUsers;
+    const noResults = () => gettext("Press Enter to select multiple users...");
 
     $(document).one("click", "#id_private_contestants + .select2", () => {
         $("#id_private_contestants").data().select2.options.get("translations").dict["noResults"] =
@@ -49,6 +44,7 @@ $(() => {
                 },
                 success(response) {
                     for (const contestant of response.results) {
+                        // @ts-expect-error weird...
                         $idPrivateContestants.select2("trigger", "select", {
                             data: contestant,
                         });

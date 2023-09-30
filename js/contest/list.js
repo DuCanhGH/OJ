@@ -1,20 +1,11 @@
 import "$prebundled/featherlight/featherlight.min.js";
 
 import { countDown } from "$js/common-utils.js";
-import { getI18n } from "$js/utils.js";
 
 const officialContestMode = document.currentScript?.dataset.officialContestMode === "true";
 const inContest = document.currentScript?.dataset.inContest === "true";
 const hidePrivateContestsAttr = document.currentScript?.dataset.hidePrivateContests;
-
-const i18n = getI18n(document.currentScript?.dataset, {
-    confirmJoin: "i18nConfirmJoin",
-    confirmJoinStartTimer: "i18nConfirmJoinStartTimer",
-    confirmJoinLeaveContest: "i18nConfirmJoinLeaveContest",
-    confirmSpectate: "i18nConfirmSpectate",
-    confirmSpectateLeaveContest: "i18nConfirmSpectateLeaveContest",
-    confirmRegister: "i18nConfirmRegister",
-});
+const contest = document.currentScript?.dataset.contest ?? "(unknown contest)";
 
 $(document).on("ready", () => {
     $(".time-remaining").each((_, el) => {
@@ -25,22 +16,35 @@ $(document).on("ready", () => {
 
     if (officialContestMode) {
         $(".join-warning").on("click", () => {
+            const warningLeaveContest = inContest
+                ? `\n${interpolate(
+                      gettext("Joining this contest will leave %(contest)s."),
+                      { contest },
+                      true,
+                  )}`
+                : "";
             return confirm(
-                `${i18n.confirmJoin}\n` + i18n.confirmJoinStartTimer + inContest
-                    ? `\n${i18n.confirmJoinLeaveContest}`
-                    : "",
+                `${gettext("Are you sure you want to join?")}\n${gettext(
+                    "Joining a contest for the first time starts your timer, after which it becomes unstoppable.",
+                )}${warningLeaveContest}`,
             );
         });
     }
 
     if (inContest) {
         $(".spectate-warning").on("click", () => {
-            return confirm(`${i18n.confirmSpectate}\n` + i18n.confirmSpectateLeaveContest);
+            return confirm(
+                `${gettext("Are you sure you want to spectate?")}\n${interpolate(
+                    gettext("Spectating this contest will leave %(contest)s."),
+                    { contest },
+                    true,
+                )}`,
+            );
         });
     }
 
     $(".register-warning").on("click", () => {
-        return confirm("{{ _('Are you sure you want to register?') }}");
+        return confirm(gettext("Are you sure you want to register?"));
     });
 
     if (typeof hidePrivateContestsAttr !== "undefined") {

@@ -6,12 +6,7 @@
 
 {% block js_media %}
     {% compress js %}
-        <script 
-            src="{{ static('bundled/common-content-logic.js') }}" 
-            data-i18n-click-to-copy="{{ _('Click to copy') }}"
-            data-i18n-copy="{{ _('Copy') }}"
-            data-i18n-copied="{{ _('Copied!') }}"
-        ></script>
+        <script src="{{ static('bundled/common-content-logic.js') }}"></script>
     {% endcompress %}
     {% block content_js_media %}{% endblock %}
 {% endblock %}

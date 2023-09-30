@@ -5576,7 +5576,7 @@ msgstr ""
 
 #: templates/problem/data.html:359
 #, python-brace-format
-msgid "You are about to create more than {testcase_soft_limit} testcases."
+msgid "You are about to create more than %(testcaseSoftLimit)s testcases."
 msgstr ""
 
 #: templates/problem/data.html:360
@@ -5589,7 +5589,7 @@ msgstr ""
 
 #: templates/problem/data.html:368 templates/problem/data.html:467
 #, python-brace-format
-msgid "Number of testcases must not exceed ${window.testcase_limit}"
+msgid "Number of testcases must not exceed %(testcaseLimit)s"
 msgstr ""
 
 #: templates/problem/data.html:438
@@ -5601,15 +5601,13 @@ msgstr ""
 #: templates/problem/data.html:442
 #, python-brace-format
 msgid ""
-"The number of input files (${inFiles.length}) do not match the number of "
-"output files (${outFiles.length})!"
+"Number of input files (%(inFiles)s) do not match the number of output files (%(outFiles)s)!"
 msgstr ""
 
 #: templates/problem/data.html:469
 #, python-brace-format
 msgid ""
-"Because of that, only the first ${window.testcase_limit} testcases will be "
-"saved!"
+"Because of that, only the first %(testcaseLimit)s testcases will be saved!"
 msgstr ""
 
 #: templates/problem/data.html:635

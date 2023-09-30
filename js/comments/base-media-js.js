@@ -1,22 +1,8 @@
 import "$prebundled/featherlight/featherlight.min.js";
 
-import { getI18n } from "../utils.js";
-
 const upvoteCommentUrl = document.currentScript?.dataset.upvoteCommentUrl;
 const downvoteCommentUrl = document.currentScript?.dataset.downvoteCommentUrl;
 const hideCommentUrl = document.currentScript?.dataset.hideCommentUrl;
-const i18n = getI18n(document.currentScript?.dataset, {
-    replyComment: "i18nReplyComment",
-    confirmCode: "i18nConfirmCode",
-    editText: "i18nEditText",
-    failedToEditComment: "i18nFailedToEditComment",
-    failedToVote: "i18nFailedToVote",
-    confirmHideComment: "i18nConfirmHideComment",
-    failedToHideComment: "i18nFailedToHideComment",
-    failedToUpdateCommentBody: "i18nFailedToUpdateCommentBody",
-    original: "i18nOriginal",
-    edited: "i18nEdited",
-});
 
 $(document).on("ready", () => {
     window.replyComment = (parent) => {
@@ -25,7 +11,7 @@ $(document).on("ready", () => {
         const newId = "id" + parent + "_body";
         if ($commentReply.find("#" + replyId).length === 0) {
             const $replyForm = $("#new-comment").clone(true).prop("id", replyId);
-            $replyForm.find("h3").html(i18n.replyComment);
+            $replyForm.find("h3").html(gettext("Replying to comment"));
             $replyForm.prepend('<a class="close">x</a>');
             $replyForm.find("form.comment-submit-form input#id_parent").val(parent);
             $replyForm.find("div#id_body-wmd-wrapper").prop("id", newId + "-wmd-wrapper");
@@ -46,9 +32,14 @@ $(document).on("ready", () => {
         }
         $commentReply.fadeIn();
 
+        const $commentReplyOffset = $commentReply.offset();
+        const $navigationHeight = $("#navigation").height();
+
+        if (!$commentReplyOffset || !$navigationHeight) return;
+
         $("html, body").animate(
             {
-                scrollTop: $commentReply.offset().top - $("#navigation").height() - 4,
+                scrollTop: $commentReplyOffset.top - $navigationHeight - 4,
             },
             500,
         );
@@ -104,12 +95,12 @@ $(document).on("ready", () => {
                 .css({ visibility: showRevision == maxRevision ? "hidden" : "" });
             const $content = $comment.find(".content").html(body);
 
-            let editText = i18n.editText.replace("{edits}", "" + showRevision);
+            let editText = gettext("edit {edits}").replace("{edits}", "" + showRevision);
 
             if (showRevision == 0) {
-                editText = i18n.original;
+                editText = gettext("original");
             } else if (showRevision == maxRevision && maxRevision == 1) {
-                editText = i18n.edited;
+                editText = gettext("edited");
             }
 
             $comment.find(".comment-edit-text").text(" " + editText + " ");
@@ -139,7 +130,7 @@ $(document).on("ready", () => {
                 onSuccess?.();
             },
             error(data) {
-                alert(i18n.failedToVote.replace("{error}", data.responseText));
+                alert(gettext("Could not vote: {error}").replace("{error}", data.responseText));
             },
         });
     }
@@ -185,7 +176,8 @@ $(document).on("ready", () => {
             return;
         }
 
-        if (!(e.ctrlKey || e.metaKey || confirm(i18n.confirmHideComment))) return;
+        if (!(e.ctrlKey || e.metaKey || confirm("Are you sure you want to hide this comment?")))
+            return;
 
         const id = $(e.currentTarget).attr("data-id");
         $.post(hideCommentUrl, { id })
@@ -194,7 +186,7 @@ $(document).on("ready", () => {
                 $("#comment-" + id + "-children").remove();
             })
             .catch(() => {
-                alert(i18n.failedToHideComment);
+                alert(gettext("Could not hide comment."));
             });
     });
 
@@ -206,9 +198,12 @@ $(document).on("ready", () => {
                     window.DjangoPagedown.createEditor($wmd.get(0));
                     if ("MathJax" in window) {
                         const preview = $(".featherlight div.wmd-preview")[0];
-                        window.editors[$wmd.attr("id")].hooks.chain("onPreviewRefresh", () => {
-                            MathJax.typesetPromise([preview]);
-                        });
+                        const wmdId = $wmd.attr("id");
+                        if (wmdId) {
+                            window.editors[wmdId].hooks.chain("onPreviewRefresh", () => {
+                                MathJax.typesetPromise([preview]);
+                            });
+                        }
                         MathJax.typesetPromise([preview]);
                     }
                 }
@@ -232,14 +227,19 @@ $(document).on("ready", () => {
                                 updateMath($comment);
                                 window.addCodeCopyButtons?.($area);
                                 const $edits = $comment.find(".comment-edits").first();
-                                $edits.text("{{ _('updated') }}");
+                                $edits.text(gettext("updated"));
                             })
                             .fail(() => {
-                                alert(i18n.failedToUpdateCommentBody);
+                                alert(gettext("Failed to update comment body."));
                             });
                     })
                     .fail((data) => {
-                        alert(i18n.failedToEditComment.replace("{error}", data.responseText));
+                        alert(
+                            gettext("Could not edit comment: {error}").replace(
+                                "{error}",
+                                data.responseText,
+                            ),
+                        );
                     });
             });
         },
@@ -272,7 +272,6 @@ $(document).on("ready", () => {
         return false;
     });
 
-    // @ts-expect-error We don't have jquery-unveil's typings.
     $("img.unveil").unveil(200);
 
     window.commentShowContent = (commentId) => {
@@ -286,7 +285,13 @@ $(document).on("ready", () => {
         const form = $(e.currentTarget).parents("form");
         const text = form.find("#id_body").val();
         if (text && codeRegex.some((regex) => regex.test(String(text)))) {
-            if (!confirm(i18n.confirmCode)) {
+            if (
+                !confirm(
+                    gettext(
+                        "Looks like you're trying to post a source code!\n\nThe comment section are not for posting source code.\nIf you want to submit your solution, please use the 'Submit solution' button.\n\nAre you sure you want to post this?",
+                    ),
+                )
+            ) {
                 e.preventDefault();
             }
         }

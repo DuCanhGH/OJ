@@ -2,19 +2,11 @@ import "$prebundled/jquery-sortable.js";
 import "$prebundled/featherlight/featherlight.min.js";
 import "$vnoj/jszip/jszip.min.js";
 
-import { getI18n } from "$js/utils.js";
-
 const select2Theme = document.currentScript?.dataset.select2Theme;
 
 let validFiles = (JSON.parse($("#valid-files-json").text()) as string[]).sort();
 const testcaseLimit = Number(document.currentScript?.dataset.testcaseLimit);
 const testcaseSoftLimit = Number(document.currentScript?.dataset.testcaseSoftLimit);
-const i18n = getI18n(document.currentScript?.dataset, {
-    precisionDecimalDigits: "i18nPrecisionDecimalDigits",
-    invalidCheckerExtension: "i18nInvalidCheckerExtension",
-    testcaseLimitExceeded: "i18nTestcaseLimitExceeded",
-    testcaseLimitExceededInfo: "i18nTestcaseLimitExceededInfo",
-});
 
 $(() => {
     function autofillIfExists($select: JQuery<HTMLElement>, file: string) {
@@ -119,7 +111,7 @@ $(() => {
         const $precision = $("<input>", {
             type: "number",
             value: tryParseJson($args.val() as string).precision || 6,
-            title: i18n.precisionDecimalDigits,
+            title: gettext("precision (decimal digits)"),
             style: "width: 4em",
         })
             .on("change", (e) => {
@@ -145,7 +137,11 @@ $(() => {
                     const $fileExt = $fileName?.split(".").pop();
                     if ($fileExt) {
                         if (!["cpp", "pas", "java"].includes($fileExt)) {
-                            alert(`${i18n.invalidCheckerExtension}${$fileExt}'`);
+                            alert(
+                                `${gettext(
+                                    "Expected checker's extension must be in [cpp, pas, java], found ",
+                                )}'${$fileExt}'`,
+                            );
                         } else {
                             let $lang = $fileExt.toUpperCase();
                             if ($lang == "CPP") $lang = "CPP17";
@@ -288,7 +284,7 @@ $(() => {
     const $td = $checker.parent();
 
     $("<a/>", {
-        text: "{{_('Instruction')}}",
+        text: gettext("Instruction"),
         style: "margin-left:3em;",
         target: "_blank",
         href: "/custom_checkers",
@@ -298,7 +294,7 @@ $(() => {
     $("<br>").appendTo($file_test.parent());
     $("<input/>", {
         type: "submit",
-        value: "{{ _('Please press this button if you have just updated the zip data') }}",
+        value: gettext("Please press this button if you have just updated the zip data"),
         class: "button",
         style: "display: inherit",
         id: "submit-button",
@@ -434,16 +430,21 @@ $(() => {
         const total = parseInt($total.val() as string);
         if (total >= testcaseSoftLimit) {
             if (!alerted) {
-                const s = `${i18n.testcaseLimitExceeded.replace(
-                    "{testcase_soft_limit}",
-                    "" + testcaseSoftLimit,
-                )}\n${i18n.testcaseLimitExceededInfo}`;
+                const s = `${interpolate(
+                    gettext("You are about to create more than %(testcaseSoftLimit)s testcases."),
+                    { testcaseSoftLimit: "" + testcaseSoftLimit },
+                    true,
+                )}\n${gettext("Please do not create too many testcases if not really necessary.")}`;
                 alert(s);
                 alerted = true;
             }
         }
         if (total >= testcaseLimit) {
-            const s = `{{_('Too many testcases')}}: ${total}\n{{_('Number of testcases must not exceed ${testcaseLimit}')}}`;
+            const s = `${gettext("Too many testcases")}: ${total}\n${interpolate(
+                gettext("Number of testcases must not exceed %(testcaseLimit)s"),
+                { testcaseLimit: "" + testcaseLimit },
+                true,
+            )}`;
             alert(s);
             return true;
         }
@@ -554,15 +555,20 @@ $(() => {
         }
         if (inFiles.length == 0) {
             alert(
-                "{{_('No input/output files. Make sure your files are following themis/cms test format')}}",
+                gettext(
+                    "No input/output files. Make sure your files are following themis/cms test format",
+                ),
             );
             return false;
         }
         if (inFiles.length != outFiles.length) {
-            const s =
-                `{{_('The number of input files (${inFiles.length}) do not match the number of output files (${outFiles.length})!')}}` +
-                `Input: ${inFiles}\n=====================\n` +
-                `Output: ${outFiles}\n`;
+            const s = `${interpolate(
+                gettext(
+                    "Number of input files (%(inFiles)s) do not match the number of output files (%(outFiles)s)!",
+                ),
+                { inFiles: "" + inFiles.length, outFiles: "" + outFiles.length },
+                true,
+            )}Input: ${inFiles}\n=====================\nOutput: ${outFiles}\n`;
             alert(s);
             return false;
         }
@@ -589,9 +595,19 @@ $(() => {
         }
         $("#fill-test-case-noti").show();
         if (inFiles.length > testcaseLimit) {
-            const s =
-                `{{_('Too many testcases')}}: ${inFiles.length}\n{{_('Number of testcases must not exceed ${testcaseLimit}')}}\n` +
-                `{{_('Because of that, only the first ${testcaseLimit} testcases will be saved!')}}`;
+            const s = `${gettext("Too many testcases")}: ${inFiles.length}\n${interpolate(
+                gettext("Number of testcases must not exceed %(testcaseLimit)s"),
+                {
+                    testcaseLimit: "" + testcaseLimit,
+                },
+                true,
+            )}\n${interpolate(
+                gettext("Because of that, only the first %(testcaseLimit)s testcases will be saved!"),
+                {
+                    testcaseLimit: "" + testcaseLimit,
+                },
+                true,
+            )}`;
             alert(s);
         }
         return false;
@@ -654,7 +670,7 @@ $(() => {
                     .catch((err) => {
                         console.log(err);
                         console.error("Failed to open as ZIP file");
-                        alert("{{ _('Test file must be a ZIP file') }}");
+                        alert(gettext("Test file must be a ZIP file"));
                         (event.target as HTMLInputElement).value = "";
                     });
             }

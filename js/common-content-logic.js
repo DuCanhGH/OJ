@@ -1,14 +1,6 @@
 import "$prebundled/clipboard/clipboard.js";
 import "$prebundled/clipboard/tooltip.js";
 
-import { getI18n } from "./utils.js";
-
-const i18n = getI18n(document.currentScript?.dataset, {
-    clickToCopy: "i18nClickToCopy",
-    copy: "i18nCopy",
-    copied: "i18nCopied",
-});
-
 $(() => {
     window.addCodeCopyButtons = ($container) => {
         $container.find("pre code").each((_, el) => {
@@ -20,8 +12,8 @@ $(() => {
                         (copyButton = $("<span>", {
                             class: "btn-clipboard",
                             "data-clipboard-text": $(el).text(),
-                            title: i18n.clickToCopy,
-                        }).text(i18n.copy)),
+                            title: gettext("Click to copy"),
+                        }).text(gettext("Copy"))),
                     ),
                 );
 
@@ -40,7 +32,7 @@ $(() => {
             // @ts-expect-error Not our Clipboard
             curClipboard.on("success", (e) => {
                 e.clearSelection();
-                showTooltip(e.trigger, i18n.copied);
+                showTooltip(e.trigger, gettext("Copied!"));
             });
 
             // @ts-expect-error Not our Clipboard

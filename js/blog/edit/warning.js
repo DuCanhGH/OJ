@@ -1,11 +1,5 @@
 import flatpickr from "flatpickr";
 
-import { getI18n } from "$js/utils.js";
-
-const i18n = getI18n(document.currentScript?.dataset, {
-    confirmDeleteBlog: "i18nConfirmDeleteBlog",
-});
-
 // This code activates flatpickr on fields with the 'datetimefield' class when the document has loaded
 window.addEventListener("DOMContentLoaded", () => {
     // @ts-expect-error weird typings
@@ -19,6 +13,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 $(() => {
     $("#delete-button").on("click", () => {
-        return confirm(i18n.confirmDeleteBlog);
+        return confirm(gettext("Are you sure you want to delete this blog post?"));
     });
 });

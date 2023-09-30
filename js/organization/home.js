@@ -1,17 +1,12 @@
-import { getI18n } from "$js/utils.js";
-
 const isOrgOpen = document.currentScript?.dataset.isOrgOpen === "true";
-const i18n = getI18n(document.currentScript?.dataset, {
-    confirmLeave: "i18nConfirmLeave",
-    warnRejoinToShowUp: "i18nWarnRejoinToShowUp",
-    warnRequestMembershipToJoin: "i18nWarnRequestMembershipToJoin",
-});
 
 $(() => {
     $(".leave-organization").on("click", () => {
         return confirm(
-            `${i18n.confirmLeave}\n${
-                isOrgOpen ? i18n.warnRejoinToShowUp : i18n.warnRequestMembershipToJoin
+            `${gettext("Are you sure you want to leave this organization?")}\n${
+                isOrgOpen
+                    ? gettext("You will have to rejoin to show up on the organization leaderboard.")
+                    : gettext("You will have to request membership in order to join again.")
             }`,
         );
     });

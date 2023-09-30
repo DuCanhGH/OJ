@@ -8,14 +8,10 @@
         src="{{ static('bundled/contest/list.js') }}"
         data-official-contest-mode="{{ 'true' if request.official_contest_mode else 'false' }}" 
         data-in-contest="{{ 'true' if request.in_contest else 'false' }}"
+        data-contest-name="{{ request.participation.contest.name }}"
         {% if hide_private_contests is not none %}
         data-hide-private-contests="{{ 'true' if hide_private_contests else 'false' }}"
         {% endif %}
-        data-i18n-confirm-join="{{ _('Are you sure you want to join?') }}"
-        data-i18n-confirm-join-start-timer="{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}"
-        data-i18n-confirm-join-leave-contest="{{ _('Joining this contest will leave %(contest)s.', contest=request.participation.contest.name) }}"
-        data-i18n-confirm-spectate="{{ _('Are you sure you want to spectate?') }}"
-        data-i18n-confirm-spectate-leave-contest="{{ _('Spectating this contest will leave %(contest)s.', contest=request.participation.contest.name) }}"
     ></script>
 {% endblock %}
 

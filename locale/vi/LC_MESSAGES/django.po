@@ -5820,8 +5820,8 @@ msgstr "Nhấn nút này nếu bạn mới thay đổi file test"
 
 #: templates/problem/data.html:360
 #, python-brace-format
-msgid "You are about to create more than {testcase_soft_limit} testcases."
-msgstr "Bạn đang tạo nhiều hơn {testcase_soft_limit} testcase."
+msgid "You are about to create more than %(testcaseSoftLimit)s testcases."
+msgstr "Bạn đang tạo nhiều hơn %(testcaseSoftLimit)s testcase."
 
 #: templates/problem/data.html:361
 msgid "Please do not create too many testcases if not really necessary."
@@ -5833,10 +5833,9 @@ msgstr "Quá nhiều testcase"
 
 #: templates/problem/data.html:369 templates/problem/data.html:468
 #, python-brace-format
-msgid "Number of testcases must not exceed ${window.testcase_limit}"
+msgid "Number of testcases must not exceed %(testcaseLimit)s"
 msgstr ""
-"Quá nhiều testcase, số lượng testcase không được vượt quá ${window."
-"testcase_limit}"
+"Quá nhiều testcase, số lượng testcase không được vượt quá %(testcaseLimit)s"
 
 #: templates/problem/data.html:439
 msgid ""
@@ -5849,18 +5848,15 @@ msgstr ""
 #: templates/problem/data.html:443
 #, python-brace-format
 msgid ""
-"The number of input files (${inFiles.length}) do not match the number of "
-"output files (${outFiles.length})!"
+"Number of input files (%(inFiles)s) do not match the number of output files (%(outFiles)s)!"
 msgstr ""
-"Số lượng file input (${inFiles.length}) không khớp với số lượng file output "
-"(${outFiles.length})!"
+"Số lượng file input (%(inFiles)s) không khớp với số lượng file output (%(outFiles)s)!"
 
 #: templates/problem/data.html:470
 #, python-brace-format
 msgid ""
-"Because of that, only the first ${window.testcase_limit} testcases will be "
-"saved!"
-msgstr "Do đó, chỉ ${window.testcase_limit} các test đầu tiên sẽ được lưu lại!"
+"Because of that, only the first %(testcaseLimit)s testcases will be saved!"
+msgstr "Do đó, chỉ %(testcaseLimit)s test đầu tiên sẽ được lưu lại!"
 
 #: templates/problem/data.html:525
 msgid "Test file must be a ZIP file"

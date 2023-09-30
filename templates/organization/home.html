@@ -37,13 +37,7 @@
 
 {% block js_media %}
     {% include "blog/media-js.html" %}
-    <script 
-        src="{{ static('bundled/organization/home.js') }}"
-        data-is-org-open="{{ 'true' if organization.is_open else 'false' }}"
-        data-i18n-confirm-leave="{{ _('Are you sure you want to leave this organization?') }}"
-        data-i18n-warn-rejoin-to-show-up="{{ _('You will have to rejoin to show up on the organization leaderboard.') }}"
-        data-i18n-warn-request-membership-to-join="{{ _('You will have to request membership in order to join again.') }}"
-    ></script>
+    <script src="{{ static('bundled/organization/home.js') }}" data-is-org-open="{{ 'true' if organization.is_open else 'false' }}"></script>
 {% endblock %}
 
 {% block title_row %}
