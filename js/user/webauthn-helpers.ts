@@ -1,17 +1,17 @@
-function urlSafeBase64Decode(text) {
+export function urlSafeBase64Decode(text: string) {
     return Uint8Array.from([...atob(text.replace(/_/g, '/').replace(/-/g, '+'))], x => x.charCodeAt(0));
 }
 
-function urlSafeBase64Encode(buffer) {
+export function urlSafeBase64Encode(buffer: ArrayBuffer) {
     return btoa(String.fromCharCode(...new Uint8Array(buffer)))
         .replace(/\//g, '_')
         .replace(/\+/g, '-')
         .replace(/=+/g, '');
 }
 
-function decodeJSONBytes(object) {
+export function decodeJSONBytes(object: Record<string, any>) {
     for (const key in object) {
-        if (object.hasOwnProperty(key)) {
+        if (Object.hasOwnProperty.call(object, key)) {
             const value = object[key];
             if (Array.isArray(value)) {
                 value.forEach((element, index, array) => {

@@ -17,38 +17,10 @@
 {% endblock %}
 
 {% block js_media %}
-    {% include "user/webauthn-helpers.js" %}
-    <script>
-        $(() => {
-
-            function buf2hex(buffer) {
-                return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
-            }
-
-            $('#use-webauthn').click(event => {
-                event.preventDefault();
-
-                $.getJSON("{{ url('webauthn_assert') }}")
-                    .done(publicKey => {
-                        decodeJSONBytes(publicKey);
-                        navigator.credentials.get({publicKey})
-                            .then(credential => {
-                                credential = {
-                                    id: credential.id,
-                                    response: {
-                                        authData: urlSafeBase64Encode(credential.response.authenticatorData),
-                                        clientData: urlSafeBase64Encode(credential.response.clientDataJSON),
-                                        signature: buf2hex(credential.response.signature),
-                                    }
-                                };
-                                $('#id_webauthn_response').val(JSON.stringify(credential));
-                                $('#2fa-form').submit();
-                            });
-                    })
-                    .fail(() => alert("{{ _('Failed to contact server.') }}"));
-            })
-        });
-    </script>
+    <script 
+        src="{{ static('bundled/registration/two-factor-auth.js') }}"
+        data-webauthn-assert="{{ url('webauthn_assert') }}"
+    ></script>
 {% endblock %}
 
 {% block body %}

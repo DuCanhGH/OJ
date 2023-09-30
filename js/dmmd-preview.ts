@@ -1,3 +1,13 @@
+declare global {
+    interface Window {
+        /**
+         * This method is only available when you include `dmmd-preview.js`.
+         * @param $preview
+         */
+        registerDmmdPreview($preview: JQuery<HTMLElement>): void;
+    }
+}
+
 $(() => {
     window.registerDmmdPreview = ($preview) => {
         const $form = $preview.parents("form").first();
@@ -80,15 +90,12 @@ $(() => {
             .trigger("click");
 
         const timeout = $preview.attr("data-timeout");
-        /**
-         * @type {ReturnType<typeof setTimeout> | null}
-         */
-        let lastEvent = null;
+        let lastEvent: ReturnType<typeof setTimeout> | null = null;
         let lastText = $textarea.val();
         if (timeout) {
             const parsedTimeout = parseInt(timeout);
             $textarea.on("keyup paste", () => {
-                let text = $textarea.val();
+                const text = $textarea.val();
                 if (lastText == text) return;
                 lastText = text;
 
@@ -110,16 +117,16 @@ $(() => {
     });
 
     if ("django" in window && "jQuery" in window.django)
-        django.jQuery(document).on("formset:added", (_, $row) => {
+        django.jQuery(document).on("formset:added", (_, $row: JQuery<HTMLElement>) => {
             const $preview = $row.find(".dmmd-preview");
             if ($preview.length) {
-                let id = $row.attr("id");
-                id = id.substr(id.lastIndexOf("-") + 1);
-                $preview.attr(
-                    "data-textarea-id",
-                    $preview.attr("data-textarea-id").replace("__prefix__", id),
-                );
+                let id = $row.attr("id") as string;
+                id = id.substring(id.lastIndexOf("-") + 1);
+                const oldTextAreaId = $preview.attr("data-textarea-id") as string;
+                $preview.attr("data-textarea-id", oldTextAreaId.replace("__prefix__", id));
                 window.registerDmmdPreview($preview);
             }
         });
 });
+
+export {};
