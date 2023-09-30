@@ -5576,7 +5576,7 @@ msgstr ""
 
 #: templates/problem/data.html:359
 #, python-brace-format
-msgid "You are about to create more than ${testcase_soft_limit} testcases."
+msgid "You are about to create more than {testcase_soft_limit} testcases."
 msgstr ""
 
 #: templates/problem/data.html:360

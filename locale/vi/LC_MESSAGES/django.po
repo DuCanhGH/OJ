@@ -5820,8 +5820,8 @@ msgstr "Nhấn nút này nếu bạn mới thay đổi file test"
 
 #: templates/problem/data.html:360
 #, python-brace-format
-msgid "You are about to create more than ${testcase_soft_limit} testcases."
-msgstr "Bạn đang tạo nhiều hơn ${testcase_soft_limit} testcase."
+msgid "You are about to create more than {testcase_soft_limit} testcases."
+msgstr "Bạn đang tạo nhiều hơn {testcase_soft_limit} testcase."
 
 #: templates/problem/data.html:361
 msgid "Please do not create too many testcases if not really necessary."

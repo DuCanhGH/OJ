@@ -2,16 +2,24 @@ import "$prebundled/jquery-sortable.js";
 import "$prebundled/featherlight/featherlight.min.js";
 import "$vnoj/jszip/jszip.min.js";
 
+import { getI18n } from "$js/utils.js";
+
 const select2Theme = document.currentScript?.dataset.select2Theme;
 
 let validFiles = (JSON.parse($("#valid-files-json").text()) as string[]).sort();
-const testcaseLimit = Number("{{ testcase_limit }}");
-const testcaseSoftLimit = Number("{{ testcase_soft_limit }}");
+const testcaseLimit = Number(document.currentScript?.dataset.testcaseLimit);
+const testcaseSoftLimit = Number(document.currentScript?.dataset.testcaseSoftLimit);
+const i18n = getI18n(document.currentScript?.dataset, {
+    precisionDecimalDigits: "i18nPrecisionDecimalDigits",
+    invalidCheckerExtension: "i18nInvalidCheckerExtension",
+    testcaseLimitExceeded: "i18nTestcaseLimitExceeded",
+    testcaseLimitExceededInfo: "i18nTestcaseLimitExceededInfo",
+});
 
 $(() => {
-    function autofillIfExists($select, file) {
+    function autofillIfExists($select: JQuery<HTMLElement>, file: string) {
         if (!$select.val() && ~validFiles.indexOf(file))
-            $select.append(new Option(file, file, true, true)).change();
+            $select.append(new Option(file, file, true, true)).trigger("change");
     }
 
     const validFilesOptions = validFiles.map((file) => {
@@ -19,7 +27,7 @@ $(() => {
     });
 
     const $table = $("#case-table");
-    $table.on("add-row", (e, $tr) => {
+    $table.on("add-row", (_, $tr: JQuery<HTMLElement>) => {
         $tr.find("input")
             .filter("[id$=file]")
             .each((_, el) => {
@@ -110,13 +118,15 @@ $(() => {
         const $td = $checker.parent();
         const $precision = $("<input>", {
             type: "number",
-            value: tryParseJson($args.val()).precision || 6,
-            title: "{{ _('precision (decimal digits)') }}",
+            value: tryParseJson($args.val() as string).precision || 6,
+            title: i18n.precisionDecimalDigits,
             style: "width: 4em",
         })
             .on("change", (e) => {
-                if ($checker.val().startsWith("floats")) {
-                    $args.val(JSON.stringify({ precision: parseInt($(e.currentTarget).val()) }));
+                if (($checker.val() as string).startsWith("floats")) {
+                    $args.val(
+                        JSON.stringify({ precision: parseInt($(e.currentTarget).val() as string) }),
+                    );
                 }
             })
             .appendTo($td);
@@ -124,33 +134,31 @@ $(() => {
         // auto fill for custom checker
         $customCheckerFile.on("change", () => {
             if ($checker.val() === "bridged" && !init) {
-                let $file_name = $customCheckerFile.val().split("\\").pop();
+                let $fileName = ($customCheckerFile.val() as string).split("\\").pop();
                 // Handle case that the current file is null but we have a file in database
                 const $old_file = $customCheckerFile.parent().find("a")[0];
-                if ($old_file && $file_name == "") {
-                    $file_name = $old_file.innerText;
+                if ($old_file && $fileName == "") {
+                    $fileName = $old_file.innerText;
                 }
-                if (!($file_name == "")) {
-                    $file_name = $file_name.split("/").pop();
-                    $file_ext = $file_name.split(".").pop();
-                    if (!["cpp", "pas", "java"].includes($file_ext)) {
-                        alert(
-                            "{{ _('Expected checker's extension must be in [cpp, pas, java], found ') }}'" +
-                                $file_ext +
-                                "'",
-                        );
-                    } else {
-                        $lang = $file_ext.toUpperCase();
-                        if ($lang == "CPP") $lang = "CPP17";
-                        if ($lang == "JAVA") $lang = "JAVA8";
-                        $args.val(
-                            JSON.stringify({
-                                files: $file_name,
-                                lang: $lang,
-                                type: $customCheckerType.find(":selected").val(),
-                            }),
-                        );
-                        if ($lang == "PY") $args.val("");
+                if (!($fileName === undefined || $fileName == "")) {
+                    $fileName = $fileName.split("/").pop();
+                    const $fileExt = $fileName?.split(".").pop();
+                    if ($fileExt) {
+                        if (!["cpp", "pas", "java"].includes($fileExt)) {
+                            alert(`${i18n.invalidCheckerExtension}${$fileExt}'`);
+                        } else {
+                            let $lang = $fileExt.toUpperCase();
+                            if ($lang == "CPP") $lang = "CPP17";
+                            if ($lang == "JAVA") $lang = "JAVA8";
+                            $args.val(
+                                JSON.stringify({
+                                    files: $fileName,
+                                    lang: $lang,
+                                    type: $customCheckerType.find(":selected").val(),
+                                }),
+                            );
+                            if ($lang == "PY") $args.val("");
+                        }
                     }
                 }
             }
@@ -158,107 +166,122 @@ $(() => {
 
         $customCheckerType.on("change", () => {
             if (!$args.val() || init) return;
-            const old_args = tryParseJson($args.val());
-            if ("type" in old_args) {
-                old_args["type"] = $customCheckerType.find(":selected").val();
+            const oldArgs = tryParseJson($args.val() as string);
+            if ("type" in oldArgs) {
+                oldArgs["type"] = $customCheckerType.find(":selected").val();
             }
-            $args.val(JSON.stringify(old_args));
+            $args.val(JSON.stringify(oldArgs));
         });
 
         if (init && $args.val()) {
-            const old_args = tryParseJson($args.val());
-            if ("type" in old_args) $customCheckerType.val(old_args["type"]);
+            const oldArgs = tryParseJson($args.val() as string);
+            if ("type" in oldArgs) $customCheckerType.val(oldArgs["type"]);
         }
 
         $checker
             .on("change", () => {
-                $customCheckerFile.toggle($checker.val() === "bridged").change();
-                $customCheckerType.toggle($checker.val() === "bridged").change();
+                $customCheckerFile.toggle($checker.val() === "bridged").trigger("change");
+                $customCheckerType.toggle($checker.val() === "bridged").trigger("change");
                 $trCustomCheckerFile.toggle($checker.val() === "bridged");
                 $trCustomCheckerType.toggle($checker.val() === "bridged");
-                $precision.toggle($checker.val().startsWith("floats")).change();
-                if (!($checker.val() === "bridged" || $checker.val().startsWith("floats")))
+                const $checkerVal = $checker.val();
+                if (typeof $checkerVal === "string") {
+                    $precision.toggle($checkerVal.startsWith("floats")).trigger("change");
+                }
+                if (
+                    !(
+                        typeof $checkerVal === "string" &&
+                        ($checkerVal === "bridged" || $checkerVal.startsWith("floats"))
+                    )
+                ) {
                     $args.val("");
+                }
                 init = false;
             })
             .trigger("change");
     })();
 
     const $grader = $("#id_problem-data-grader");
-    const $io_method = $("#id_problem-data-io_method");
-    const $io_input_file = $("#id_problem-data-io_input_file");
-    const $io_output_file = $("#id_problem-data-io_output_file");
-    const $custom_grader_file = $("#id_problem-data-custom_grader");
-    const $custom_header_file = $("#id_problem-data-custom_header");
-    const $grader_args = $("#id_problem-data-grader_args");
+    const $ioMethod = $("#id_problem-data-io_method");
+    const $ioInputFile = $("#id_problem-data-io_input_file");
+    const $ioOutputFile = $("#id_problem-data-io_output_file");
+    const $customGraderFile = $("#id_problem-data-custom_grader");
+    const $customHeaderFile = $("#id_problem-data-custom_header");
+    const $graderArgs = $("#id_problem-data-grader_args");
 
-    const $tr_io_method = $io_method.parent().parent();
-    const $tr_io_input_file = $io_input_file.parent().parent();
-    const $tr_io_output_file = $io_output_file.parent().parent();
-    const $tr_custom_grader_file = $custom_grader_file.parent().parent();
-    const $tr_custom_header_file = $custom_header_file.parent().parent();
-    const $tr_grader_args = $grader_args.parent().parent();
+    const $trIoMethod = $ioMethod.parent().parent();
+    const $trIoInputFile = $ioInputFile.parent().parent();
+    const $trIoOutputFile = $ioOutputFile.parent().parent();
+    const $trCustomGraderFile = $customGraderFile.parent().parent();
+    const $trCustomHeaderFile = $customHeaderFile.parent().parent();
+    const $trGraderArgs = $graderArgs.parent().parent();
 
     function clean_io_method() {
-        const old_args = tryParseJson($grader_args.val());
-        delete old_args.io_method;
-        delete old_args.io_input_file;
-        delete old_args.io_output_file;
-        $grader_args.val(JSON.stringify(old_args));
+        const oldArgs = tryParseJson($graderArgs.val() as string);
+        delete oldArgs.io_method;
+        delete oldArgs.io_input_file;
+        delete oldArgs.io_output_file;
+        $graderArgs.val(JSON.stringify(oldArgs));
     }
 
     $grader
         .on("change", () => {
             const grader = $grader.val();
-            const standard_grader = grader === "standard";
-            const signature_grader = grader === "signature";
-            const output_only = grader === "output_only";
-            const standard_io = $io_method.val() === "standard";
+            const standardGrader = grader === "standard";
+            const signatureGrader = grader === "signature";
+            const outputOnly = grader === "output_only";
+            const standardIo = $ioMethod.val() === "standard";
 
-            if (!standard_grader) {
+            if (!standardGrader) {
                 clean_io_method();
             }
 
-            $tr_io_method.toggle(standard_grader);
-            $tr_io_input_file.toggle(standard_grader && !standard_io);
-            $tr_io_output_file.toggle(standard_grader && !standard_io);
-            $tr_custom_grader_file.toggle(!standard_grader && !output_only && !!grader);
-            $tr_custom_header_file.toggle(signature_grader);
-            $tr_grader_args.toggle(signature_grader);
+            $trIoMethod.toggle(standardGrader);
+            $trIoInputFile.toggle(standardGrader && !standardIo);
+            $trIoOutputFile.toggle(standardGrader && !standardIo);
+            $trCustomGraderFile.toggle(!standardGrader && !outputOnly && !!grader);
+            $trCustomHeaderFile.toggle(signatureGrader);
+            $trGraderArgs.toggle(signatureGrader);
         })
         .trigger("change");
 
-    $io_method.on("change", () => {
-        const standard_io = $io_method.val() === "standard";
-        $tr_io_input_file.toggle(!standard_io);
-        $tr_io_output_file.toggle(!standard_io);
+    $ioMethod.on("change", () => {
+        const standard_io = $ioMethod.val() === "standard";
+        $trIoInputFile.toggle(!standard_io);
+        $trIoOutputFile.toggle(!standard_io);
 
         if (standard_io) {
             clean_io_method();
         } else {
-            const old_args = tryParseJson($grader_args.val());
-            old_args["io_method"] = $io_method.val();
-            $grader_args.val(JSON.stringify(old_args));
+            const old_args = tryParseJson($graderArgs.val() as string);
+            old_args["io_method"] = $ioMethod.val();
+            $graderArgs.val(JSON.stringify(old_args));
         }
     });
 
-    $io_input_file.on("change", () => {
-        const old_args = tryParseJson($grader_args.val());
-        old_args["io_input_file"] = $io_input_file.val();
-        $grader_args.val(JSON.stringify(old_args));
+    $ioInputFile.on("change", () => {
+        const old_args = tryParseJson($graderArgs.val() as string);
+        old_args["io_input_file"] = $ioInputFile.val();
+        $graderArgs.val(JSON.stringify(old_args));
     });
 
-    $io_output_file.on("change", () => {
-        const old_args = tryParseJson($grader_args.val());
-        old_args["io_output_file"] = $io_output_file.val();
-        $grader_args.val(JSON.stringify(old_args));
+    $ioOutputFile.on("change", () => {
+        const old_args = tryParseJson($graderArgs.val() as string);
+        old_args["io_output_file"] = $ioOutputFile.val();
+        $graderArgs.val(JSON.stringify(old_args));
     });
 
     if ($grader.val() === "standard") {
-        $io_method.val(tryParseJson($grader_args.val()).io_method || "standard").change();
-        if ($io_method.val() === "file") {
-            $io_input_file.val(tryParseJson($grader_args.val()).io_input_file || "").change();
-            $io_output_file.val(tryParseJson($grader_args.val()).io_output_file || "").change();
+        $ioMethod
+            .val(tryParseJson($graderArgs.val() as string).io_method || "standard")
+            .trigger("change");
+        if ($ioMethod.val() === "file") {
+            $ioInputFile
+                .val(tryParseJson($graderArgs.val() as string).io_input_file || "")
+                .trigger("change");
+            $ioOutputFile
+                .val(tryParseJson($graderArgs.val() as string).io_output_file || "")
+                .trigger("change");
         }
     }
 
@@ -282,63 +305,66 @@ $(() => {
     }).appendTo($file_test.parent());
 
     $table
-        .on("add-row", (e, $tr) => {
+        .on("add-row", (_, $tr: JQuery<HTMLElement>) => {
             const $order = $tr
                 .find("input")
                 .filter("[id$=order]")
                 .attr("type", "hidden")
                 .val(++order);
+
             $order
-                .after($("<span>", { class: "order" }).text($order.val()))
+                .after($("<span>", { class: "order" }).text($order.val() as any))
                 .after($("<i>", { class: "fa fa-fw fa-lg fa-ellipsis-v" }));
 
             const $opts = $tr.find("input").slice(2, 6);
             const $files = $tr.find("select").slice(1, 3);
             const $checker = $files.end().last();
             $tr.find("select[id$=type]")
-                .change((e) => {
+                .on("change", (e) => {
                     const $this = $(e.currentTarget),
                         val = $this.val();
-                    let disabled;
+                    let disabled: boolean;
                     switch (val) {
                         case "S":
                         case "E":
-                            disabled = val == "S";
-                            $opts.toggle(val == "S");
+                            disabled = val === "S";
+                            $opts.toggle(val === "S");
                             $files.siblings(".select2").hide();
                             $checker.toggle(val == "S");
                             break;
                         default: {
                             $opts.toggle(val == "C");
-                            $files.siblings(".select2").toggle(val == "C");
+                            $files.siblings(".select2").toggle(val === "C");
                             $checker.toggle(val == "C");
                             const $prevs = $tr.prevAll("tr[data-type=S], tr[data-type=E]");
                             disabled =
-                                $prevs.length && $prevs.get(0).getAttribute("data-type") == "S";
+                                $prevs.length > 0 &&
+                                $prevs.get(0)?.getAttribute("data-type") === "S";
                             $tr.find("input[id$=points], input[id$=pretest]").toggle(
-                                val == "C" && !disabled,
+                                val === "C" && !disabled,
                             );
                         }
                     }
-                    $tr.attr("data-type", val)
+                    $tr.attr("data-type", val as string)
                         .nextUntil('tr[data-type=S], tr[data-type=E], tr[data-type=""]')
                         .find("input[id$=points], input[id$=pretest]")
                         .toggle(!disabled);
                 })
-                .change();
+                .trigger("change");
 
-            const tooltip_classes = "tooltipped tooltipped-s";
+            const tooltipClasses = "tooltipped tooltipped-s";
             $tr.find("a.edit-generator-args")
-                .mouseover(() => {
+                .on("mouseover", (e) => {
                     switch ($tr.attr("data-type")) {
                         case "C":
-                        case "S":
-                            const $this = $(this).addClass(tooltip_classes);
-                            $this.attr("aria-label", $this.prev().val() || "(none)");
+                        case "S": {
+                            const $this = $(e.currentTarget).addClass(tooltipClasses);
+                            $this.attr("aria-label", ($this.prev().val() as string) || "(none)");
+                        }
                     }
                 })
-                .mouseout(() => {
-                    $(this).removeClass(tooltip_classes).removeAttr("aria-label");
+                .on("mouseout", (e) => {
+                    $(e.currentTarget).removeClass(tooltipClasses).removeAttr("aria-label");
                 })
                 .featherlight($(".generator-args-editor"), {
                     beforeOpen: () => {
@@ -350,16 +376,16 @@ $(() => {
                                 return false;
                         }
                     },
-                    afterOpen: () => {
-                        const $input = this.$currentTarget.prev();
-                        this.$instance
+                    afterOpen(e) {
+                        const $input = $(e.currentTarget).prev();
+                        $(e.currentTarget)
                             .find(".generator-args-editor")
                             .find("textarea")
-                            .val($input.val())
+                            .val($input.val() as string | number)
                             .end()
                             .find(".button")
-                            .click(() => {
-                                $input.val($(this).prev().val());
+                            .on("click", (ev) => {
+                                $input.val($(ev.currentTarget).prev().val() as string | number);
                                 $.featherlight.current().close();
                             })
                             .end()
@@ -369,8 +395,8 @@ $(() => {
         })
         .find("tbody:first")
         .find("tr")
-        .each(() => {
-            $table.trigger("add-row", [$(this)]);
+        .each((_, el) => {
+            $table.trigger("add-row", [$(el)]);
         });
 
     $("form").on("submit", () => {
@@ -405,10 +431,13 @@ $(() => {
     let alerted = false;
 
     $("a#add-case-row").on("click", () => {
-        const total = parseInt($total.val());
+        const total = parseInt($total.val() as string);
         if (total >= testcaseSoftLimit) {
             if (!alerted) {
-                const s = `{{_('You are about to create more than ${testcaseSoftLimit} testcases.')}}\n{{_('Please do not create too many testcases if not really necessary.')}}`;
+                const s = `${i18n.testcaseLimitExceeded.replace(
+                    "{testcase_soft_limit}",
+                    "" + testcaseSoftLimit,
+                )}\n${i18n.testcaseLimitExceededInfo}`;
                 alert(s);
                 alerted = true;
             }
@@ -424,33 +453,33 @@ $(() => {
                 $table
                     .find(".extra-row-body")
                     .html()
-                    .replace(/__prefix__/g, $total.val()),
+                    .replace(/__prefix__/g, $total.val() as string),
             )),
         );
-        $tr.find('.type-column select option[value="C"]').attr("selected", true);
-        $total.val(parseInt($total.val()) + 1);
+        $tr.find('.type-column select option[value="C"]').attr("selected", "");
+        $total.val(parseInt($total.val() as string) + 1);
         $table.trigger("add-row", [$tr]);
         return false;
     });
 
-    function reordering_row(oldIndex, newIndex, $item) {
+    function reorderingRow(oldIndex: number, newIndex: number, $item: JQuery<HTMLElement>) {
         if (newIndex > oldIndex) {
             const order = parseInt(
                 $item
                     .parent()
                     .children()
                     .slice(oldIndex, newIndex)
-                    .each(() => {
-                        const $order = $(this).find("input[id$=order]");
+                    .each((_, el) => {
+                        const $order = $(el).find("input[id$=order]");
                         $order
-                            .val(parseInt($order.val()) - 1)
+                            .val(parseInt($order.val() as string) - 1)
                             .siblings("span.order")
-                            .text($order.val());
+                            .text($order.val() as string);
                     })
                     .last()
                     .after($item)
                     .find("input[id$=order]")
-                    .val(),
+                    .val() as string,
             );
             $item
                 .find("input[id$=order]")
@@ -463,17 +492,17 @@ $(() => {
                     .parent()
                     .children()
                     .slice(newIndex + 1, oldIndex + 1)
-                    .each(() => {
-                        const $order = $(this).find("input[id$=order]");
+                    .each((_, el) => {
+                        const $order = $(el).find("input[id$=order]");
                         $order
-                            .val(parseInt($order.val()) + 1)
+                            .val(parseInt($order.val() as string) + 1)
                             .siblings("span.order")
-                            .text($order.val());
+                            .text($order.val() as string);
                     })
                     .first()
                     .before($item)
                     .find("input[id$=order]")
-                    .val(),
+                    .val() as string,
             );
             $item
                 .find("input[id$=order]")
@@ -485,29 +514,29 @@ $(() => {
     }
 
     $("a#add-case-first-row").on("click", () => {
-        const cntRow = parseInt($total.val());
+        const cntRow = parseInt($total.val() as string);
         $("a#add-case-row").trigger("click");
-        if (cntRow == parseInt($total.val())) return false;
+        if (cntRow == parseInt($total.val() as string)) return false;
         const newIndex = -1;
-        const oldIndex = parseInt($total.val()) - 1;
+        const oldIndex = parseInt($total.val() as string) - 1;
         const $item = $($table.find("tbody:first").children()[oldIndex]);
-        reordering_row(oldIndex, newIndex, $item);
+        reorderingRow(oldIndex, newIndex, $item);
         return false;
     });
 
     $("#case-table tbody").on("click", ".add-case-row-below", (event) => {
-        const cntRow = parseInt($total.val());
+        const cntRow = parseInt($total.val() as string);
         $("a#add-case-row").trigger("click");
-        if (cntRow == parseInt($total.val())) return false;
+        if (cntRow == parseInt($total.val() as string)) return false;
         const $current_row = $(event.currentTarget).parent().parent();
-        const newIndex = parseInt($current_row.find("input[id$=order]").val()) - 1;
-        const oldIndex = parseInt($total.val()) - 1;
+        const newIndex = parseInt($current_row.find("input[id$=order]").val() as string) - 1;
+        const oldIndex = parseInt($total.val() as string) - 1;
         const $item = $($current_row.parent().children()[oldIndex]);
-        reordering_row(oldIndex, newIndex, $item);
+        reorderingRow(oldIndex, newIndex, $item);
         return false;
     });
 
-    function fill_testcases() {
+    function fillTestcases() {
         console.log("Filling testcase...");
         const inFiles = [],
             outFiles = [];
@@ -530,23 +559,24 @@ $(() => {
             return false;
         }
         if (inFiles.length != outFiles.length) {
-            s = `{{_('The number of input files (${inFiles.length}) do not match the number of output files (${outFiles.length})!')}}`;
-            s = s + `Input: ${inFiles}\n=====================\n`;
-            s = s + `Output: ${outFiles}\n`;
+            const s =
+                `{{_('The number of input files (${inFiles.length}) do not match the number of output files (${outFiles.length})!')}}` +
+                `Input: ${inFiles}\n=====================\n` +
+                `Output: ${outFiles}\n`;
             alert(s);
             return false;
         }
-        n_test = Math.min(inFiles.length, testcaseLimit);
+        const nTest = Math.min(inFiles.length, testcaseLimit);
         // add boxes
-        while ($total.val() < n_test) {
-            $("a#add-case-row").click();
+        while (+($total.val() as string) < nTest) {
+            $("a#add-case-row").trigger("click");
         }
         // natsort
         const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: "base" });
         inFiles.sort(collator.compare);
         outFiles.sort(collator.compare);
         // fill cases
-        for (let i = 0; i < n_test; i++) {
+        for (let i = 0; i < nTest; i++) {
             $("#id_cases-" + i + "-input_file")
                 .append(new Option(inFiles[i], inFiles[i], true, true))
                 .trigger("change");
@@ -567,7 +597,7 @@ $(() => {
         return false;
     }
 
-    let oldIndex;
+    let oldIndex: number;
     $table.sortable({
         containerSelector: "table",
         itemPath: "> tbody:first",
@@ -575,50 +605,59 @@ $(() => {
         handle: "i.fa-ellipsis-v",
         placeholder: '<tr class="placeholder">',
         onDragStart($item, container, _super) {
-            oldIndex = $item.index();
-            _super($item, container);
+            if (!$item) return;
+            oldIndex = $item?.index();
+            _super?.($item, container);
         },
         onDrop($item, container, _super) {
+            if (!$item) return;
             const newIndex = $item.index();
-            reordering_row(oldIndex, newIndex, $item);
-            _super($item, container);
+            reorderingRow(oldIndex, newIndex, $item);
+            _super?.($item, container);
         },
     });
 
-    $("input#delete-all").on("change", () => {
-        if (this.checked) {
-            $("input[name$='DELETE']").attr("checked", true);
+    $("input#delete-all").on("change", (e) => {
+        if ($(e.currentTarget).attr("checked")) {
+            $("input[name$='DELETE']").attr("checked", "");
         } else {
-            $("input[name$='DELETE']").attr("checked", false);
+            $("input[name$='DELETE']").removeAttr("checked");
         }
     });
     $("#problem-data-zipfile-clear_id").on("change", (e) => {
-        if (this.checked) {
+        if ($(e.currentTarget).attr("checked")) {
             $("input#delete-all").attr("checked", "");
         } else {
             $("input#delete-all").removeAttr("checked");
         }
         $("input#delete-all").trigger("change");
     });
-    if (parseInt($total.val()) == 0 && validFiles.length) {
-        fill_testcases();
+    if (parseInt($total.val() as string) == 0 && validFiles.length) {
+        fillTestcases();
     }
 
     $("#id_problem-data-zipfile").on("change", (event) => {
-        let fileInput = event.target.files[0];
+        const fileInput = (event.target as HTMLInputElement).files?.[0];
+
+        if (!fileInput) return;
+
         const reader = new FileReader();
+
         reader.onload = (ev) => {
-            JSZip.loadAsync(ev.target.result)
-                .then((zip) => {
-                    validFiles = Object.keys(zip.files).sort();
-                    fill_testcases();
-                })
-                .catch((err) => {
-                    console.log(err);
-                    console.error("Failed to open as ZIP file");
-                    alert("{{ _('Test file must be a ZIP file') }}");
-                    event.target.value = "";
-                });
+            const targetResult = ev.target?.result;
+            if (targetResult !== undefined && targetResult !== null) {
+                JSZip.loadAsync(targetResult)
+                    .then((zip) => {
+                        validFiles = Object.keys(zip.files).sort();
+                        fillTestcases();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        console.error("Failed to open as ZIP file");
+                        alert("{{ _('Test file must be a ZIP file') }}");
+                        (event.target as HTMLInputElement).value = "";
+                    });
+            }
         };
         reader.readAsArrayBuffer(fileInput);
     });
