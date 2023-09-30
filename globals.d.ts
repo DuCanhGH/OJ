@@ -1,3 +1,5 @@
+import type Moment from "moment";
+
 import type { WSEventDispatcher } from "$resources/event.js";
 
 declare global {
@@ -12,6 +14,7 @@ declare global {
     declare namespace MathJax {
         export const typesetPromise: (args: HTMLElement[]) => Promise<void>;
     }
+    declare var moment: Moment;
 }
 
 export {};

@@ -10,7 +10,7 @@ module.exports = {
         ecmaVersion: "latest",
         sourceType: "module",
         warnOnUnsupportedTypeScriptVersion: false,
-        extraFileExtensions: [".html"]
+        extraFileExtensions: [".html"],
     },
     env: {
         browser: true,
@@ -27,9 +27,10 @@ module.exports = {
         "@typescript-eslint/no-explicit-any": "off",
         "no-undef": "off",
         "no-var": "off",
+        "no-inner-declarations": "off",
     },
     globals: {
         $: "readonly",
-        moment: "readonly"
+        moment: "readonly",
     },
 };

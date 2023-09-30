@@ -43,62 +43,24 @@
 {% endblock %}
 
 {% block users_js_media %}
-    {% if not contest.ended %}
-        <script type="text/javascript" data-tab="{{ tab }}">
-            $(() => {
-                window.install_tooltips = () => {
-                    $('td.user-name').find('> span:first-child').each(() => {
-                        const link = $(this);
-                        link.mouseenter((e) => {
-                            const start_time = link.siblings('.start-time').text().trim();
-                            link.addClass('tooltipped tooltipped-e').attr('aria-label', start_time);
-                        }).mouseleave((e) => {
-                            link.removeClass('tooltipped tooltipped-e').removeAttr('aria-label');
-                        });
-                    });
-                };
-
-                install_tooltips();
-
-                // Auto reload every 10 seconds
-                let ranking_outdated = false;
-                function update_ranking() {
-                    if ($('body').hasClass('window-hidden')) {
-                        return ranking_outdated = true;
-                    }
-                    const queryParam = window.location.search
-                    $.ajax({
-                        url: queryParam ? queryParam + '&raw' : '?raw',
-                    }).done((data) => {
-                        $('#ranking-table').html(data);
-                        if (localStorage.getItem('show-personal-info') == 'true') {
-                            $('.personal-info').show();
-                            $('#show-personal-info-checkbox').prop('checked', true);
-                        }
-                        if (document.currentScript.dataset.tab === 'ranking') {
-                            window.applyRankingFilter();
-                        }
-                        window.enableAdminOperations();
-                    }).always(() => {
-                        ranking_outdated = false;
-                        setTimeout(update_ranking, 10000);
-                    });
-                }
-                $(window).on('dmoj:window-visible', () => {
-                    if (ranking_outdated) {
-                        update_ranking();
-                    }
-                });
-                setTimeout(update_ranking, 10000);
-            });
-        </script>
-    {% endif %}
     <script 
         src="{{ static('bundled/contest/ranking/main.js') }}" 
         data-tab="{{ tab }}" 
         data-show-virtual="{{ 'true' if show_virtual else 'false' }}"
         data-contest-key="{{ contest.key }}"
+        data-url="{{ url('contest_participation', contest.key, '__username__') }}"
+        data-search-contest-url="{{ url('contest_user_search_select2_ajax', contest.key) }}"
+        data-select2-theme="{{ DMOJ_SELECT2_THEME }}"
+        data-i18n-search-org-placeholder="{{ _('Search organizations') }}"
+        data-i18n-confirm-disqualify-participation="{{ _('Are you sure you want to disqualify this participation?') }}"
+        data-i18n-confirm-undisqualify-participation="{{ _('Are you sure you want to un-disqualify this participation?') }}"
     ></script>
+    {% if not contest.ended %}
+        <script 
+            src="{{ static('bundled/contest/ranking/ongoing.js') }}"
+            data-tab="{{ tab }}"
+        ></script>
+    {% endif %}
     {% include "contest/media-js.html" %}
 {% endblock %}
 
@@ -133,7 +95,7 @@
             <input id="show-virtual-participations-checkbox" type="checkbox" style="vertical-align: bottom">
             <label for="show-virtual-participations-checkbox" style="vertical-align: bottom">{{ _('Show virtual participations') }}</label>
             {% if not is_ICPC_format %}
-            <a href="#" onclick="download_table_as_csv()" style="float: right;">{{ _('Download as CSV') }}</a>
+            <a href="#" onclick="window.downloadTableAsCsv()" style="float: right;">{{ _('Download as CSV') }}</a>
             {% endif %}
         {% endif %}
     </div>

@@ -13,7 +13,7 @@ const repoRoot = path.join(__dirname, "..");
 const tsconfigRaw = await readFile(path.join(repoRoot, "tsconfig.json"), "utf-8");
 
 await esbuild.build({
-    entryPoints: await fastGlob("js/**/*.js", {
+    entryPoints: await fastGlob("js/**/!(*.d).[t|j]s", {
         cwd: repoRoot,
     }),
     outdir: "resources/bundled",
