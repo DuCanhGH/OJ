@@ -1,5 +1,7 @@
 import { countDown } from "../common-utils.js";
 
+const contestId = document.currentScript?.dataset.contestId ?? "";
+
 $(() => {
     countDown($("#contest-time-remaining"));
 
@@ -63,9 +65,9 @@ $(() => {
 
     if (shouldPush) {
         $(() => {
-            window.event_dispatcher.auto_reconnect = true;
-            window.event_dispatcher.on(
-                "contest_{{ request.participation.contest.id_secret }}",
+            window.eventDispatcher.auto_reconnect = true;
+            window.eventDispatcher.on(
+                `contest_${contestId}`,
                 (/** @type {any} */data) => {
                     alert(data.title + "\n\n" + data.message);
                 },

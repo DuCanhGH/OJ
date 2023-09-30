@@ -77,8 +77,8 @@
             window.load_dynamic_update = () => {
                 const $assignees = $(filter_assignee_ids);
 
-                event_dispatcher.auto_reconnect = true;
-                event_dispatcher.on('tickets', (message) => {
+                eventDispatcher.auto_reconnect = true;
+                eventDispatcher.on('tickets', (message) => {
                         console.log(message);
                         if (filter_own_id != null && message.user != filter_own_id &&
                             !~message.assignees.indexOf(filter_own_id))

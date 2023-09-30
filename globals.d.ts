@@ -2,7 +2,7 @@ import type { WSEventDispatcher } from "$resources/event.js";
 
 declare global {
     interface Window {
-        event_dispatcher: WSEventDispatcher;
+        eventDispatcher: WSEventDispatcher;
         parsedCookie: Record<string, string>;
         DjangoPagedown: any;
         editors: any;

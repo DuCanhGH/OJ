@@ -139,8 +139,8 @@
             }
 
             window.load_dynamic_update = () => {
-                event_dispatcher.auto_reconnect = true;
-                event_dispatcher.on('ticket-{{ ticket.id }}', (message) => {
+                eventDispatcher.auto_reconnect = true;
+                eventDispatcher.on('ticket-{{ ticket.id }}', (message) => {
                         console.log(message);
                         switch (message.type) {
                             case 'ticket-status':

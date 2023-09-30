@@ -33,7 +33,7 @@
                         $("html, body").animate({scrollTop: $(document).height()}, 0);
                 }
 
-                event_dispatcher.on('sub_{{ submission.id_secret }}', (message) => {
+                eventDispatcher.on('sub_{{ submission.id_secret }}', (message) => {
                         switch (message.type) {
                             case 'internal-error':
                             case 'grading-end':

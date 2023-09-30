@@ -1,5 +1,10 @@
 const currentLanguageCode = document.currentScript?.dataset.currentLanguageCode;
 
+moment.locale(currentLanguageCode);
+$(() => {
+    $("img.unveil").unveil(200);
+});
+
 /**
  * @param {string} lang
  */
