@@ -140,7 +140,7 @@
         {% include "mathjax-load.html" %}
     {% endif %}
 
-    <script type="text/javascript" src="/resources/user_profile.js"></script>
+    <script type="text/javascript" src="{{ static('bundled/user_profile.js') }}"></script>
     <script type="text/javascript">
         $(() => {
             window.init_submission_table($, JSON.parse("{{ submission_data }}"), JSON.parse("{{ submission_metadata }}"), "{{ LANGUAGE_CODE }}");

@@ -1,7 +1,7 @@
 <script src="{{ static('bundled/mathjax-config.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
 <script>
-    MathJax.typesetPromise().then(() => {
+    MathJax.typesetPromise().then(function () {
         $(".tex-image").hide();
         $(".tex-text").show();
     });

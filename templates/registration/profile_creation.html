@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block media %}
-    <link rel="stylesheet" href="/resources/prebundled/timezone-map/timezone-map.css">
+    <link rel="stylesheet" href="{{ static('prebundled/timezone-map/timezone-map.css') }}">
     {{ form.media.css }}
     <style>
         .map-wrap {

@@ -9,19 +9,8 @@
 
 {% block content_js_media %}
     {{ stats|json_script:"stats" }}
-    <script type="text/javascript">
-        window.stats = JSON.parse(document.getElementById("stats").textContent);
-    </script>
     {% compress js %}
-        {% include "stats/media-js.html" %}
-        <script type="text/javascript">
-            $(() => {
-                draw_stacked_bar_chart(window.stats.problem_status_count, $('#problem-status-count'));
-                draw_bar_chart(window.stats.problem_ac_rate, $('#problem-ac-rate'));
-                draw_pie_chart(window.stats.language_count, $('#language-count'));
-                draw_bar_chart(window.stats.language_ac_rate, $('#language-ac-rate'));
-            });
-        </script>
+        <script src="{{ static('bundled/contest/stats/info.js') }}"></script>
     {% endcompress %}
     {% include "contest/media-js.html" %}
 {% endblock %}

@@ -1,3 +1,3 @@
 import moment from "moment";
 
-global.moment = moment;
+window.moment = moment;

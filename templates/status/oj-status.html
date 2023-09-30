@@ -102,7 +102,7 @@
 {% block media %}
     {% include "status/media-css.html" %}
     {% block content_media %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="/resources/vnoj/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="{{ static('vnoj/daterangepicker/daterangepicker.css') }}">
 {% endblock %}
 
 {% block title_ruler %}{% endblock %}
