@@ -5,73 +5,7 @@
     <title>Task Progress - {{ SITE_LONG_NAME }}</title>
     <link rel="stylesheet" href="{{ static('task_status.css') }}">
     <script src="{{ static('prebundled/jquery-3.4.1.min.js') }}"></script>
-    <script type="module">
-        $(() => {
-            const $jumbotron = $('.jumbotron');
-            const task_id = $jumbotron.attr('data-task-id');
-            const status = JSON.parse($jumbotron.attr('data-task-status'));
-            const redirect = $jumbotron.attr('data-redirect');
-            const $stage = $jumbotron.find('.stage');
-            const $progress = $jumbotron.find('.progress');
-            const $known = $jumbotron.find('.progress-known');
-            const $known_bar = $known.find('.progress-bar');
-            const $known_text = $known.find('.progress-text');
-            const $fail = $jumbotron.find('.progress-failed');
-            const $fail_text = $fail.find('.progress-bar');
-
-            function show_status(status) {
-                $progress.hide();
-                switch (status.code) {
-                    case 'SUCCESS':
-                        $progress.filter('.progress-complete').show();
-                        break;
-                    case 'FAILURE':
-                        if (status.error) $fail_text.text(status.error);
-                        $fail.show();
-                        break;
-                    case 'PROGRESS':
-                        $known_bar.attr({
-                            'aria-valuenow': status.done,
-                            'aria-valuemax': status.total,
-                        }).width(100 * status.done / status.total + '%');
-                        $known_text.text(status.done + ' / ' + status.total);
-                        $known.show();
-                        break;
-                    case 'WORKING':
-                        $progress.filter('.progress-unknown').show();
-                        break;
-                }
-                $stage.text(status.stage || '');
-            }
-
-            function need_ajax(status) {
-                return status.code !== 'SUCCESS' && status.code !== 'FAILURE';
-            }
-
-            function do_ajax(backoff) {
-                $.get("{{ url('task_status_ajax') }}", {
-                    id: task_id
-                }).done((data) => {
-                    show_status(data);
-                    if (data.code === 'SUCCESS') {
-                        window.location.href = redirect;
-                    } else if (need_ajax(data)) {
-                        setTimeout(do_ajax, 500);
-                    }
-                }).fail((xhr, status) => {
-                    console.log(status);
-                    setTimeout(() => {
-                        do_ajax(backoff * 2);
-                    }, backoff);
-                });
-            }
-
-            show_status(status);
-            if (need_ajax(status)) {
-                do_ajax();
-            }
-        });
-    </script>
+    <script src="{{ static('bundled/task-status.js') }}" data-task-status-ajax="{{ url('task_status_ajax') }}"></script>
 </head>
 <body>
 <div class="container">

@@ -2,271 +2,40 @@
 {% block js_media %}
     {{ results_json|json_script:"results-json" }}
     {{ results_colors_json|json_script:"results-colors-json" }}
-    <script type="text/javascript" data-dynamic-update="{{ dynamic_update }}" data-show-problem="{{ show_problem }}">
-        const dynamicUpdate = document.currentScript.dataset.dynamicUpdate === "True";
-        const dynamicContestId = Number("{{ dynamic_contest_id|default:0 }}");
-        const dynamicProblemId = Number("{{ dynamic_problem_id|default:0 }}");
-        const dynamicUserId = Number("{{ dynamic_user_id|default:0 }}");
-        const showProblem = document.currentScript.data.showProblem === "True";
-        const EVENT_LAST_MSG = Number("{{ EVENT_LAST_MSG|default:0 }}");
-        if (dynamicUpdate && EVENT_LAST_MSG) {
-            if (dynamicContestId) {
-                window.dynamic_contest_id = dynamicContestId;
-            } else {
-                window.dynamic_contest_id = null;
-            }
-            if (dynamicUserId) {
-                window.dynamic_user_id = dynamicUserId;
-            } else {
-                window.dynamic_user_id = null;
-            }
-            if (dynamicProblemId) {
-                window.dynamic_problem_id = dynamicProblemId;
-            } else {
-                window.dynamic_problem_id = null;
-            }
-            if (showProblem) {
-                window.show_problem = 1;
-            } else {
-                window.show_problem = 0;
-            }
-        }
-        window.results_json = JSON.parse(document.getElementById("results-json").textContent);
-        window.results_colors_json = JSON.parse(document.getElementById("results-colors-json").textContent);
-    </script>
 
     {% compress js %}
         {% if request.user.is_authenticated and perms.judge.rejudge_submission %}
-            <script type="text/javascript">
-                window.rejudge_submission = (id, e) => {
-                    if ((typeof e !== 'undefined' && e.ctrlKey) ||
-                        confirm("{{ _('Are you sure you want to rejudge?') }}")) {
-                        $.ajax({
-                            url: "{{ url('submission_rejudge') }}",
-                            type: "POST",
-                            data: {
-                                id: id
-                            }
-                        });
-                    }
-                };
-            </script>
+            <script 
+                src="{{ static('bundled/submission/list/inject-rejudge.js') }}"
+                data-submission-rejudge-url="{{ url('submission_rejudge') }}"
+            ></script>
         {% endif %}
 
-        <script type="module">
-            import "$prebundled/chart.js/Chart.js";
-            
-            $(() => {
-                const info_float = $('.info-float');
-                const container = $('#content-right');
-                if (!featureTest('position', 'sticky')) {
-                    fix_div(info_float, 55);
-                    $(window).resize(() => {
-                        info_float.width(container.width());
-                    });
-                    info_float.width(container.width());
-                }
-
-                function escapeRegExp(string) {
-                    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-                }
-
-                function idAndTextMatcher(params, data) {
-                    if ($.trim(params.term) === '')
-                        return data;
-                    var regex = new RegExp(escapeRegExp(params.term), 'i');
-                    return data.text.search(regex) >= 0 || data.id.search(regex) >= 0 ? data : null;
-                }
-
-                $('#status').select2({
-                    theme: '{{ DMOJ_SELECT2_THEME }}',
-                    multiple: 1,
-                    placeholder: "{{ _('Filter by status...') }}",
-                    matcher: idAndTextMatcher,
-                    width: '100%',
-                }).css({'visibility': 'visible'});
-
-                $('#language').select2({
-                    theme: '{{ DMOJ_SELECT2_THEME }}',
-                    multiple: 1,
-                    placeholder: "{{ _('Filter by language...') }}",
-                    matcher: idAndTextMatcher,
-                    width: '100%',
-                }).css({'visibility': 'visible'});
-
-                $('#organization').select2({
-                    theme: '{{ DMOJ_SELECT2_THEME }}',
-                    multiple: 0,
-                    matcher: idAndTextMatcher,
-                    width: '100%',
-                }).css({'visibility': 'visible'});
-            });
-
-            // Draw the statistics graph.
-            let chart = null;
-            function stats_graph(raw_data) {
-                const ctx = $('#status-graph').find('canvas')[0].getContext('2d');
-                const font = $('body').css('font-family');
-                if (chart !== null) {
-                    chart.destroy();
-                }
-                chart = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        datasets: [{
-                            data: raw_data.categories.map((entry) => {
-                                return entry.count;
-                            }),
-                            backgroundColor: raw_data.categories.map((entry) => {
-                                return window.results_colors_json[entry.code];
-                            }),
-                        }],
-                        labels: raw_data.categories.map((entry) => {
-                            return entry.name;
-                        }),
-                    },
-                    options: {
-                        animation: false,
-                        scaleFontFamily: font,
-                        tooltips: {
-                            titleFontFamily: font,
-                            bodyFontFamily: font,
-                        },
-                        legend: {
-                            display: false,
-                        },
-                    },
-                });
-
-                $('#total-submission-count').text(raw_data.total);
-            }
-
-            $(() => {
-                stats_graph(window.results_json);
-            });
-
-            function load_dynamic_update() {
-                const _collect = (e) => {
-                    return e.value;
-                };
-                const language_filter = $.map($('select#language option[selected]'), _collect);
-                const status_filter = $.map($('select#status option[selected]'), _collect);
-                const organization_filter = $.map($('select#organization option[selected]'), _collect);
-
-                const table = $('#submissions-table');
-                const statistics = $("#statistics-table");
-                let doing_ajax = false;
-                let first = parseInt(table.find('>div:first-child').attr('id'));
-
-                const update_submission = (message, force) => {
-                    if (language_filter.length && 'language' in message &&
-                        language_filter.indexOf(message.language) == -1)
-                        return;
-                    if (status_filter.length && 'status' in message &&
-                        status_filter.indexOf(message.status) == -1)
-                        return;
-                    if (organization_filter.length && 'organizations' in message &&
-                        message.organizations.indexOf(parseInt(organization_filter[0])) == -1)
-                        return;
-                    const id = message.id;
-                    let row = table.find('div#' + id);
-                    if (row.length < 1) {
-                        if (id < first)
-                            return;
-                        first = id;
-                        row = $('<div>', {id: id, 'class': 'submission-row'}).hide().prependTo(table);
-                        if (table.find('>div').length >= Number("{{ paginator.per_page }}"))
-                            table.find('>div:last-child').slideUp('slow', () => {
-                                $(this).remove();
-                            });
-                    }
-                    if (force || !doing_ajax) {
-                        if (!force) doing_ajax = true;
-                        $.ajax({
-                            url: "{{ url('submission_single_query') }}",
-                            data: {id: id, show_problem: show_problem}
-                        }).done((data) => {
-                            const was_shown = row.is(':visible');
-                            row.html(data);
-                            register_time(row.find('.time-with-rel'));
-                            if (!was_shown) {
-                                row.slideDown('slow');
-                            }
-                            if (!force)
-                                setTimeout(() => {
-                                    doing_ajax = false;
-                                }, 1000);
-                        }).fail(() => {
-                            console.log('Failed to update submission: ' + id);
-                            if (!force) doing_ajax = false;
-                        });
-                    }
-                };
-
-                let stats_outdated = false;
-                let last_stat_update = Date.now();
-                const stats_update_interval = Number("{{ stats_update_interval|default:0 }}") * 1000;
-
-                function update_stats() {
-                    if (Date.now() - last_stat_update < stats_update_interval)
-                        return;
-                    $.ajax({
-                        url: '?results'
-                    }).done((data) => {
-                        last_stat_update = Date.now();
-                        stats_graph(data);
-                    }).fail(() => {
-                        console.log('Failed to update statistics table!' + id);
-                    }).always(() => {
-                        stats_outdated = false;
-                    });
-                }
-
-                $(window).on('dmoj:window-visible', () => {
-                    if (stats_outdated)
-                        update_stats();
-                });
-
-                var $body = $(document.body);
-                eventDispatcher.on('submissions', (message) => {
-                        if (dynamic_user_id && message.user != dynamic_user_id ||
-                            dynamic_problem_id && message.problem != dynamic_problem_id ||
-                            dynamic_contest_id && message.contest != dynamic_contest_id)
-                            return;
-                        if (message.type == 'update-submission') {
-                            if (message.state == 'test-case' && $body.hasClass('window-hidden'))
-                                return;
-                            update_submission(message);
-                        } else if (message.type == 'done-submission') {
-                            update_submission(message, true);
-
-                            if (!statistics.length) return;
-                            if ($('body').hasClass('window-hidden'))
-                                return stats_outdated = true;
-                            update_stats();
-                        }
-                    }
-                );
-                eventDispatcher.onwsclose((event) => {
-                    if (event.code == 1001) {
-                        console.log('Navigated away');
-                        return;
-                    }
-                    console.log('You probably should refresh?');
-                    $('.ws-closed').show().find('a').click(() => {
-                        window.location.reload();
-                    });
-                });
-            }
-        </script>
+        <script 
+            src="{{ static('bundled/submission/list/main.js') }}"
+            data-dynamic-update="{{ 'true' if dynamic_update else 'false' }}" 
+            data-paginator-per-page="{{ paginator.per_page }}"
+            data-submission-single-query-url="{{ url('submission_single_query') }}"
+            data-show-problem="{{ 'true' if show_problem else 'false' }}"
+            data-select2-theme="{{ DMOJ_SELECT2_THEME }}"
+            data-stats-update-time="{{ stats_update_interval|default(0) * 1000 }}"
+            {% if EVENT_LAST_MSG %}
+                data-event-last-message="{{ EVENT_LAST_MSG }}"
+            {% endif %}
+            {% if dynamic_contest_id %}
+                data-dynamic-contest-id="{{ dynamic_contest_id }}"
+            {% endif %}
+            {% if dynamic_problem_id %}
+                data-dynamic-problem-id="{{ dynamic_problem_id }}"
+            {% endif %}
+            {% if dynamic_user_id %}
+                data-dynamic-user-id="{{ dynamic_user_id }}"
+            {% endif %}
+        ></script>
     {% endcompress %}
 
     {% if dynamic_update and EVENT_LAST_MSG %}
-        <script type="text/javascript">
-            $(() => {
-                load_dynamic_update();
-            });
-        </script>
+        <script src="{{ static('bundled/submission/list/enable-dynamic.js') }}"></script>
     {% endif %}
 {% endblock %}
 

@@ -64,7 +64,7 @@
             {% endif %}
             {% if perms.judge.rejudge_submission and can_edit %} ·
                 {% if not submission.is_locked %}
-                    <a href="#" onclick="rejudge_submission({{ submission.id }}, event);return false">
+                    <a href="#" onclick="window.rejudgeSubmission({{ submission.id }}, event);return false">
                         <i class="fa fa-refresh fa-fw"></i><span class="label">{{ _('rejudge') }}</span>
                     </a>
                 {% else %}
