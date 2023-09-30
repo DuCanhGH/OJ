@@ -1,63 +1,10 @@
 {% extends "common-content.html" %}
 
 {% block js_media %}
-    <script type="text/javascript">
-        $(function () {
-            $('a.sub-case-status').featherlight($('.partial-output-window'), {
-                afterOpen: function () {
-                    var $parent = this.$currentTarget.parent();
-                    var partial = $parent.attr('data-partial-output');
-                    this.$instance.find('.partial-output-window').find('code').text(partial).end().show();
-                }
-            });
-
-            $('input.sub-check').on('change', function (e) {
-                var table = $(this).closest('table');
-                var column = $(this).parent().index();
-                var sel = 'tr td:nth-child(' + (column + 1) + ') input.sub-check';
-                var count = table.find(sel + ':checked').length;
-                if (count == 1) {
-                    table.find(sel + ':not(:checked)').attr('disabled', true);
-                } else {
-                    table.find(sel).removeAttr('disabled');
-                }
-            });
-
-            $('#diff').click(function (e) {
-                e.preventDefault();
-
-                var first = $('#case-table tr td:nth-child(1) input.sub-check:checked')[0];
-                var second = $('#case-table tr td:nth-child(2) input.sub-check:checked')[0];
-                if (!first || !second) {
-                    alert('Please select two submissions.');
-                    return;
-                }
-
-                var first_id = $(first).parent().parent().attr('sub-id');
-                var second_id = $(second).parent().parent().attr('sub-id');
-                if (first_id === second_id) {
-                    alert('Please select two different submissions.');
-                    return;
-                }
-
-                window.location.href = "{{ url('diff_submissions') }}?first_id=" + first_id + '&second_id=' + second_id;
-            });
-
-            var highlight_id = (new URL(window.location.href)).searchParams.get('highlight');
-            if (highlight_id) {
-                var row = $('tr[sub-id=' + highlight_id + ']');
-                if (row.length > 0) {
-                    row.addClass('highlighted');
-                    var checkbox = row.find('td:nth-child(2) input.sub-check');
-                    checkbox.attr('checked', true);
-                    checkbox.trigger('change');
-                }
-            }
-        });
-    </script>
-    <script type="text/javascript" src="{{ static('libs/featherlight/featherlight.min.js') }}"></script>
-    <script type="text/javascript">
-    </script>
+    <script 
+        src="{{ static('bundled/problem/submission-diff.js') }}"
+        data-submissions-diff-url="{{ url('diff_submissions') }}"
+    ></script>
 {% endblock %}
 
 {% block media %}

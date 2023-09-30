@@ -5,61 +5,11 @@
     {% include "leave-warning.html" %}
 
     <script
-        type="module"
-        data-lang-limit-formset="{{ lang_limit_formset }}"
-    >
-        import "$vnoj/jquery.formset.js";
-
-        const langLimitFormset = document.currentScript.dataset.langLimitFormset === "True";
-
-        $(() => {
-            if (langLimitFormset) {
-                $('#form_set tr').formset({
-                    prefix: '{{ lang_limit_formset.prefix }}'
-                });
-
-                $('#lang_limit_title').click(() => {
-                    $('#lang_limit_title i').toggleClass('fa-caret-down fa-caret-up');
-                    $('#lang_limit_table').toggleClass('hidden');
-                });
-                $('#lang_limit_title').click();
-            }
-
-            function noResults() {
-                return "{{ _('Press Enter to select multiple users...') }}";
-            };
-
-            $(document).one('click', '#id_testers + .select2', (e) => {
-                $('#id_testers').data().select2.options.get('translations').dict['noResults'] = noResults;
-            });
-
-            $(document).on('keyup', '#id_testers + .select2 .select2-search__field', (e) => {
-                if (e.keyCode === 13) {
-                    const $id_testers = $('#id_testers');
-                    const testers = $(this).val().split(/[\s,]+/);
-                    if (testers.length <= 1) {
-                        // Skip to let select2 handle this
-                        return;
-                    }
-
-                    $.ajax({
-                        type: 'GET',
-                        url: $id_testers.data().select2.dataAdapter.ajaxOptions.url,
-                        data: {
-                            multiple_terms: testers,
-                        },
-                        success(response) {
-                            for (const tester of response.results) {
-                                $id_testers.select2('trigger', 'select', {
-                                    data: tester,
-                                });
-                            }
-                        },
-                    });
-                }
-            });
-        })
-    </script>
+        src="{{ static('bundled/problem/editor.js') }}"
+        {% if lang_limit_formset %}
+        data-lang-limit-formset-prefix="{{ lang_limit_formset.prefix }}"
+        {% endif %}
+    ></script>
 {% endblock %}
 
 {% block media %}

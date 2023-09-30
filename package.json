@@ -12,10 +12,14 @@
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
     "@commander-js/extra-typings": "11.0.0",
+    "@types/js-cookie": "3.0.4",
+    "ace-code": "1.28.0",
     "chart.js": "4.4.0",
     "commander": "11.0.0",
     "flatpickr": "4.6.13",
+    "js-cookie": "3.0.5",
     "moment": "2.29.4",
+    "nouislider": "15.7.1",
     "ws": "8.14.0"
   },
   "devDependencies": {

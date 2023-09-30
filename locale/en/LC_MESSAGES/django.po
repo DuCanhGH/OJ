@@ -5759,7 +5759,7 @@ msgstr ""
 #: templates/problem/manage_submission.html:104
 #, python-brace-format
 msgid ""
-"You are about to rejudge {count} submissions. Are you sure you want to do "
+"You are about to rejudge %(count)s submissions. Are you sure you want to do "
 "this?"
 msgstr ""
 
@@ -6043,7 +6043,7 @@ msgstr ""
 #: templates/problem/submit.html:161
 #, python-brace-format
 msgid ""
-"Only accept \"{file_ext}\". Maximum file size is {file_size_limit}MB."
+"Only accept \"%(fileExt)s\". Maximum file size is %(fileSizeLimit)s MB."
 msgstr ""
 
 #: templates/problem/submit.html:227

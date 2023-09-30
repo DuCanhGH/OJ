@@ -27,6 +27,9 @@ declare global {
         export const typesetPromise: (args: HTMLElement[]) => Promise<void>;
     }
     declare var moment: Moment;
+    declare var django: {
+        jQuery: JQueryStatic;
+    };
 }
 
 export {};

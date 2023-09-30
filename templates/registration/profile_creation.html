@@ -3,6 +3,10 @@
     <link rel="stylesheet" href="{{ static('prebundled/timezone-map/timezone-map.css') }}">
     {{ form.media.css }}
     <style>
+        .map-inset {
+            background: url('{{ TIMEZONE_MAP }}') 50% 50%
+        }
+
         .map-wrap {
             display: none
         }
@@ -15,16 +19,7 @@
 
 {% block js_media %}
     {{ form.media.js }}
-    <script type="text/javascript">
-        $(() => {
-            try {
-                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                if (typeof tz === 'string' && $('#id_timezone option[value="' + tz + '"]').length) {
-                    $('#id_timezone').val(tz).change();
-                }
-            } catch (e) {}
-        });
-    </script>
+    <script src="{{ static('bundled/registration/profile-creation.js') }}"></script>
 {% endblock %}
 
 {% block body %}

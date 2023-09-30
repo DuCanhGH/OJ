@@ -61,7 +61,7 @@ $(() => {
     });
 
     // Virtual = 0 is live participation, virtual = -1 is spectating
-    const shouldPush = document.currentScript?.dataset.shouldPush === "True";
+    const shouldPush = document.currentScript?.dataset.shouldPush === "true";
 
     if (shouldPush) {
         $(() => {

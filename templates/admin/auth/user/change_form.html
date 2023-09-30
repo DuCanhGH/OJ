@@ -2,11 +2,7 @@
 {% load i18n %}
 
 {% block extrahead %}{{ block.super }}
-    <script>
-        django.jQuery(($) => {
-            $('.profilelink').appendTo('div#bottombar').show();
-        });
-    </script>
+    <script src="{{ static('bundled/admin/auth/user/change-form.js') }}"></script>
 {% endblock extrahead %}
 
 {% block after_field_sets %}{{ block.super }}

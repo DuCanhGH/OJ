@@ -2,20 +2,7 @@
 {% load i18n %}
 
 {% block extrahead %}{{ block.super }}
-    <script>
-        django.jQuery(($) => {
-            $('.rerate-link').appendTo('div#bottombar').show();
-            $('.rejudge-link').click(() => {
-                return confirm("{{ _('Are you sure you want to rejudge ALL the submissions?') }}");
-            });
-            $('.rescore-link').click(() => {
-                return confirm("{{ _('Are you sure you want to rescore ALL the submissions?') }}");
-            });
-            $('.resend-link').click(() => {
-                return confirm("{{ _('Are you sure you want to resend this announcement?') }}");
-            });
-        });
-    </script>
+    <script src="{{ static('bundled/admin/judge/contest/change-form.js') }}"></script>
 {% endblock extrahead %}
 
 {% block after_field_sets %}{{ block.super }}

@@ -6014,9 +6014,9 @@ msgstr "ID kết thúc phải sau ID khởi đầu."
 #: templates/problem/manage_submission.html:104
 #, python-brace-format
 msgid ""
-"You are about to rejudge {count} submissions. Are you sure you want to do "
+"You are about to rejudge %(count)s submissions. Are you sure you want to do "
 "this?"
-msgstr "Bạn có chắc muốn chấm lại {count} bài nộp?"
+msgstr "Bạn có chắc muốn chấm lại %(count)s bài nộp?"
 
 #: templates/problem/manage_submission.html:110
 msgid ""
@@ -6320,10 +6320,9 @@ msgstr "Nhấn để chọn file hoặc kéo thả file vào đây"
 #: templates/problem/submit.html:161
 #, python-brace-format
 msgid ""
-"Only accept \"{file_ext}\". Maximum file size is ${file_size_limit}MB."
+"Only accept \"%(fileExt)s\". Maximum file size is %(fileSizeLimit)s MB."
 msgstr ""
-"Chỉ chấp nhận file có đuôi \"{file_ext}\". Độ lớn tối đa của file là "
-"{file_size_limit}MB."
+"Chỉ chấp nhận file có đuôi \"%(fileExt)s\". Độ lớn tối đa của file là %(fileSizeLimit)s MB."
 
 #: templates/problem/submit.html:227
 msgid "File name"

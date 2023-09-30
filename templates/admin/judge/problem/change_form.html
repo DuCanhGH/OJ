@@ -2,11 +2,7 @@
 {% load i18n %}
 
 {% block extrahead %}{{ block.super }}
-    <script>
-        django.jQuery(($) => {
-            $('.submissions-link').appendTo('div#bottombar').show();
-        });
-    </script>
+    <script src="{{ static('bundled/admin/judge/problem/change-form.js') }}"></script>
 {% endblock extrahead %}
 
 {% block after_field_sets %}{{ block.super }}
