@@ -1,4 +1,4 @@
-import type { OptGroupData, OptionData } from "$js/declarations/select2.js";
+import type { OptGroupData, OptionData } from "$js/$declarations/select2.js";
 import { Chart, Tooltip, Legend, PieController, ArcElement } from "chart.js";
 
 Chart.register(Tooltip, Legend, PieController, ArcElement);
