@@ -1,3 +1,6 @@
 {% compress js %}
-    <script src="{{ static('bundled/timezone/media-js.js') }}"></script>
+    <script 
+        src="{{ static('bundled/timezone/media-js.js') }}" 
+        data-timezone-picker-json="{{ static('prebundled/timezone-map/timezone-picker.json') }}"
+    ></script>
 {% endcompress %}
