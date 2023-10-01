@@ -47,21 +47,7 @@
 {% endblock %}
 
 {% block content_js_media %}
-    <script>
-        $(function () {
-            if (window.navigator.userAgent.indexOf('Edge') >= 0) {
-                var $qr = $('.totp-qr-code');
-                var $canvas = $('<canvas width="400" height="400">').appendTo($qr);
-                var ctx = $canvas[0].getContext('2d');
-                $qr.find('img').on('load', function () {
-                    ctx.msImageSmoothingEnabled = false;
-                    ctx.imageSmoothingEnabled = false;
-                    ctx.drawImage(this, 0, 0, 400, 400);
-                    $(this).hide();
-                });
-            }
-        });
-    </script>
+    <script src="{{ static('bundled/registration/totp-enable.js') }}"></script>
 {% endblock %}
 
 {% block body %}

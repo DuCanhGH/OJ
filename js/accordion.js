@@ -1,4 +1,4 @@
-$(document).on("click", ".accordion .card-toggle", function (e) {
+$(document).on("click", ".accordion .card-toggle", (e) => {
     e.preventDefault();
 
     const $this = $(e.currentTarget);

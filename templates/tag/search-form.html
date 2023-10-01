@@ -24,26 +24,9 @@
             </div>
         </form>
     </div>
-    <script>
-        $(() => {
-            const $form = $('form#filter-form');
-
-            $('#judges').select2({
-                theme: '{{ DMOJ_SELECT2_THEME }}',
-                multiple: 1,
-                placeholder: "{{ _('Filter by online judge...') }}",
-            }).css({'visibility': 'visible'});
-
-            $('#go').click(() => {
-                $form.submit();
-            });
-
-            $('#random').click((e) => {
-                var action = $form.attr('action');
-                $form.attr('action', "{{ url('tagproblem_random') }}").attr('target', '_blank').submit();
-                $form.attr('action', action).attr('target', '');
-                e.preventDefault();
-            });
-        });
-    </script>
+    <script 
+        src="{{ static('bundled/tag/search-form.js') }}" 
+        data-select2-theme="{{ DMOJ_SELECT2_THEME }}"
+        data-tag-problem-random-url="{{ url('tagproblem_random') }}"
+    ></script>
 </div>

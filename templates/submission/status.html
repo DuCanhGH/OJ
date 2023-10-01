@@ -1,66 +1,15 @@
 {% extends "submission/info-base.html" %}
 {% block js_media %}
     {% if not submission.is_graded and EVENT_LAST_MSG %}
-        <script type="text/javascript">
-            $(() => {
-                let blocked = false, request = false;
-                const list = $('#test-cases');
-
-                function update() {
-                    if (blocked) {
-                        request = true;
-                        return;
-                    }
-                    request = false;
-                    blocked = true;
-                    $.ajax({
-                        url: "{{ url('submission_testcases_query') }}",
-                        data: {id: '{{ submission.id }}'}
-                    }).done((data) => {
-                        list.empty().html(data).find('.toggle').each(() => {
-                            register_toggle($(this));
-                        });
-                        setTimeout(() => {
-                            blocked = false;
-                            if (request)
-                                update();
-                        }, 500);
-                    }).fail((data) => {
-                        console.log('Failed to update testcases!');
-                    });
-
-                    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100)
-                        $("html, body").animate({scrollTop: $(document).height()}, 0);
-                }
-
-                eventDispatcher.on('sub_{{ submission.id_secret }}', (message) => {
-                        switch (message.type) {
-                            case 'internal-error':
-                            case 'grading-end':
-                            case 'compile-error':
-                                $('#abort-button').remove();
-                                $('#grading-label').remove();
-                            case 'test-case':
-                            case 'grading-begin':
-                            case 'processing':
-                                update();
-                        }
-                    }
-                )
-            });
-        </script>
+        <script 
+            src="{{ static('bundled/submission/status/main.js') }}" 
+            data-submission-id="{{ submission.id }}"
+            data-submission-secret-id="{{ submission.id_secret }}"
+            data-submission-testcases-query="{{ url('submission_testcases_query') }}"
+        ></script>
     {% endif %}
     {% if not submission.is_graded %}
-        <script type="text/javascript">
-            $(() => {
-                $(document).keydown((e) => {
-                    // Ctrl-Enter or Command-Enter
-                    if ((e.metaKey || e.ctrlKey) && e.which == 13) {
-                        $('#abort-button form').submit();
-                    }
-                });
-            });
-        </script>
+        <script src="{{ static('bundled/submission/status/abort.js') }}"></script>
     {% endif %}
 {% endblock %}
 
@@ -77,19 +26,11 @@
     {% endif %}
     {% set can_edit = submission.problem.is_editable_by(request.user) %}
     {% if perms.judge.rejudge_submission and can_edit and not submission.is_locked %}
-        {% compress js %}
-            <script type="text/javascript">
-                window.confirm_and_rejudge = (form) => {
-                    if (confirm("{{ _('Are you sure you want to rejudge?') }}")) {
-                        form.submit();
-                    }
-                };
-            </script>
-        {% endcompress %}
+        <script src="{{ static('bundled/submission/status/rejudge.js') }}"></script>
         <div>
             <form action="{{ url('submission_rejudge') }}" method="post">
                 {% csrf_token %}
-                <a href="#" onclick="confirm_and_rejudge(parentNode)">{{ _('Rejudge') }}</a>
+                <a href="#" onclick="window.confirmAndRejudge(parentNode)">{{ _('Rejudge') }}</a>
                 <input type="hidden" name="id" value="{{ submission.id }}">
                 <input type="hidden" name="path" value="{{ url('submission_status', submission.id) }}">
             </form>

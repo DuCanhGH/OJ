@@ -1,15 +1,7 @@
 {% extends "base.html" %}
 
 {% block js_media %}
-    <script type="text/javascript">
-        $(function () {
-            $('#id_reason').keydown(function (e) {
-                if (e.ctrlKey && (e.keyCode === 13 || e.keyCode === 10)) {
-                    $(this).closest('form').submit();
-                }
-            });
-        });
-    </script>
+    <script src="{{ static('bundled/organization/requests/request.js') }}"></script>
 {% endblock %}
 
 {% block body %}

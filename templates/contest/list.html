@@ -10,7 +10,7 @@
         data-in-contest="{{ 'true' if request.in_contest else 'false' }}"
         data-contest-name="{{ request.participation.contest.name }}"
         {% if hide_private_contests is not none %}
-        data-hide-private-contests="{{ 'true' if hide_private_contests else 'false' }}"
+            data-hide-private-contests="{{ 'true' if hide_private_contests else 'false' }}"
         {% endif %}
     ></script>
 {% endblock %}

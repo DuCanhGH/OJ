@@ -112,20 +112,7 @@
 {% block js_media %}
     {% include "timezone/media-js.html" %}
     {{ form.media.js }}
-    <script type="text/javascript">
-        $(function () {
-            $('.pass-req-link').click(function () {
-                $('.pass-req').toggle('fast');
-                return false;
-            });
-            try {
-                var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                if (typeof tz === 'string' && $('#id_timezone option[value="' + tz + '"]').length) {
-                    $('#id_timezone').val(tz).change();
-                }
-            } catch (e) {}
-        });
-    </script>
+    <script src="{{ static('bundled/registration/registration-form.js') }}"></script>
     {% if form.captcha %}
         {{ recaptcha_init(LANGUAGE_CODE) }}
     {% endif %}

@@ -22,32 +22,13 @@
 {% endblock %}
 
 {% block js_media %}
-    <script type="text/javascript" src="{{ static('accordion.js') }}"></script>
-
-    {% if selected_tag %}
-        <script>
-            $(function () {
-                var el = $('.accordion .card-body a[tag_id={{ selected_tag }}]')[0];
-                if (el) {
-                    el = $(el);
-                    el.parent().addClass('row-selected');
-                    el.parent().parent().addClass('show');
-                    el.parent().parent().slideDown(0);
-                }
-            });
-        </script>
-    {% else %}
-        <script>
-            $(function () {
-                var el = $('.accordion .card-toggle')[0];
-                if (el) {
-                    el = $(el);
-                    el.next().addClass('show');
-                    el.next().slideDown(0);
-                }
-            });
-        </script>
-    {% endif %}
+    <script src="{{ static('bundled/accordion.js') }}"></script>
+    <script 
+        src="{{ static('bundled/tag/list.js') }}"
+        {% if selected_tag %}
+            data-selected-tag="{{ selected_tag }}"
+        {% endif %}
+    ></script>
 {% endblock %}
 
 {% block title_ruler %}{% endblock %}

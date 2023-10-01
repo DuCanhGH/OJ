@@ -26,38 +26,7 @@
 
 {% block js_media %}
     {% compress js %}
-        <script type="module">
-            import "$prebundled/clipboard/clipboard.js";
-            import "$prebundled/clipboard/tooltip.js";
-
-            $(() => {
-                $(document).find('pre code').each(() => {
-                    var copyButton;
-                    $(this).closest('.source-wrap').before($('<div>', {'class': 'copy-clipboard'})
-                        .append(copyButton = $('<span>', {
-                            'class': 'btn-clipboard',
-                            'data-clipboard-text': $(this).text(),
-                            'title': 'Click to copy'
-                        }).text('Copy')));
-
-                    $(copyButton.get(0)).mouseleave(() => {
-                        $(this).attr('class', 'btn-clipboard');
-                        $(this).removeAttr('aria-label');
-                    });
-
-                    var curClipboard = new Clipboard(copyButton.get(0));
-
-                    curClipboard.on('success', (e) => {
-                        e.clearSelection();
-                        showTooltip(e.trigger, 'Copied!');
-                    });
-
-                    curClipboard.on('error', (e) => {
-                        showTooltip(e.trigger, fallbackMessage(e.action));
-                    });
-                });
-            });
-        </script>
+        <script src="{{ static('bundled/submission/source.js') }}"></script>
     {% endcompress %}
     {% block content_js_media %}{% endblock %}
 {% endblock %}
