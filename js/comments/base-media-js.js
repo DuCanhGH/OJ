@@ -172,11 +172,11 @@ $(document).on("ready", () => {
         e.preventDefault();
 
         if (!hideCommentUrl) {
-            alert("Hiding comments is not supported as the URL to the API is not provided.");
+            alert("Hiding comments is not supported.");
             return;
         }
 
-        if (!(e.ctrlKey || e.metaKey || confirm("Are you sure you want to hide this comment?")))
+        if (!(e.ctrlKey || e.metaKey || confirm(gettext("Are you sure you want to hide this comment?"))))
             return;
 
         const id = $(e.currentTarget).attr("data-id");
