@@ -220,20 +220,23 @@
                 </ul>
 
                 <span id="user-links">
-                    <a
-                        href="{{ url('new_problem_ticket', problem.code) if request.resolver_match.view_name == 'problem_detail' and problem else '/tickets/new?issue_url={{ request.build_absolute_uri()|urlencode }}' }}"
-                        style="margin-right: 5px"
-                    >
+                    <a href=
+                        {% if request.resolver_match.view_name == "problem_detail" and problem %}
+                            "{{ url('new_problem_ticket', problem.code) }}"
+                        {% else %}
+                            "/tickets/new?issue_url={{ request.build_absolute_uri()|urlencode }}"
+                        {% endif %}
+                        style="margin-right: 5px;">
                         <span title="{{ _('Report issue') }}">
-                            <i class="fa fa-exclamation-triangle" style="color: yellow"></i>
+                            <i class="fa fa-exclamation-triangle" style="color: yellow;"></i>
                         </span>
                     </a>
-                    <button id="flag_vi" style="margin-right: 5px; margin-top: 4px" aria-label="EN">
+                    <a href="#" id="flag_vi" onclick="window.submitLanguage('vi')" style="margin-right: 5px; margin-top: 4px" aria-label="EN">
                         <img src="{{ static('icons/vi_flag.svg') }}" alt="" height="24" />
-                    </button>
-                    <button id="flag_en" style="margin-right: 5px; margin-top: 4px" aria-label="VI">
+                    </a>
+                    <a href="#" id="flag_en" onclick="window.submitLanguage('en')" style="margin-right: 5px; margin-top: 4px" aria-label="VI">
                         <img src="{{ static('icons/gb_flag.svg') }}" alt="" height="24" />
-                    </button>
+                    </a>
                     {% if request.user.is_authenticated %}
                         <ul>
                             <li>

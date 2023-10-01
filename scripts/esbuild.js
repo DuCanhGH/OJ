@@ -23,6 +23,7 @@ await esbuild.build({
     minify: true,
     tsconfigRaw,
     target: ["chrome58", "firefox57", "node12", "safari11"],
+    external: ["jquery"],
 });
 
 console.log(`Compiled JS files successfully!`);

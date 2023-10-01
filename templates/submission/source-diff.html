@@ -4,8 +4,8 @@
     {% compress js %}
         <script 
             src="{{ static('bundled/submission/source-diff.js') }}"
-            data-first-source="{{ first_sub.source.source|escapejs }}"
-            data-second-source="{{ second_sub.source.source|escapejs }}"
+            data-first-source="{{ first_sub.source.source }}"
+            data-second-source="{{ second_sub.source.source }}"
         ></script>
     {% endcompress %}
 {% endblock %}

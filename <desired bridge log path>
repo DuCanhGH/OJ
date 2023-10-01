@@ -1,0 +1,40 @@
+INFO 2023-10-01 07:20:20,053 judge_list Free judges: 0
+INFO 2023-10-01 07:20:20,053 judge_list Queued submission: 14
+INFO 2023-10-01 07:20:45,514 judge_handler Judge connected from: ('127.0.0.1', 37838)
+INFO 2023-10-01 07:20:45,516 judge_handler Judge authenticated: ('127.0.0.1', 37838) (sus)
+INFO 2023-10-01 07:20:45,519 judge_list Dispatched queued submission 14: sus
+INFO 2023-10-01 07:20:45,530 judge_handler Submission acknowledged: 14
+INFO 2023-10-01 07:20:45,569 judge_handler sus: Updating problem list
+INFO 2023-10-01 07:20:45,571 judge_handler sus: Updated 1 problems
+INFO 2023-10-01 07:20:45,571 judge_handler sus: Updating problem list
+INFO 2023-10-01 07:20:45,572 judge_handler sus: Updated 1 problems
+INFO 2023-10-01 07:20:45,624 judge_handler sus: Submission generated compiler messages: 14
+INFO 2023-10-01 07:20:45,626 judge_handler sus: Grading has begun on: 14
+INFO 2023-10-01 07:20:45,673 judge_handler sus: 3 test case(s) completed on: 14
+INFO 2023-10-01 07:20:45,679 judge_handler sus: Grading has ended on: 14
+INFO 2023-10-01 07:20:45,679 judge_list Judge available after grading 14: sus
+INFO 2023-10-01 07:21:11,638 judge_list Free judges: 1
+INFO 2023-10-01 07:21:11,638 judge_list Dispatched submission 14 to: sus
+INFO 2023-10-01 07:21:11,642 judge_handler Submission acknowledged: 14
+INFO 2023-10-01 07:21:11,648 judge_handler sus: Updating problem list
+INFO 2023-10-01 07:21:11,649 judge_handler sus: Updated 1 problems
+INFO 2023-10-01 07:21:11,650 judge_handler sus: Updating problem list
+INFO 2023-10-01 07:21:11,651 judge_handler sus: Updated 1 problems
+INFO 2023-10-01 07:21:11,739 judge_handler sus: Submission generated compiler messages: 14
+INFO 2023-10-01 07:21:11,741 judge_handler sus: Grading has begun on: 14
+INFO 2023-10-01 07:21:11,779 judge_handler sus: 2 test case(s) completed on: 14
+INFO 2023-10-01 07:21:11,788 judge_handler sus: 1 test case(s) completed on: 14
+INFO 2023-10-01 07:21:11,794 judge_handler sus: Grading has ended on: 14
+INFO 2023-10-01 07:21:11,794 judge_list Judge available after grading 14: sus
+INFO 2023-10-01 07:21:26,235 judge_list Free judges: 1
+INFO 2023-10-01 07:21:26,235 judge_list Dispatched submission 14 to: sus
+INFO 2023-10-01 07:21:26,238 judge_handler Submission acknowledged: 14
+INFO 2023-10-01 07:21:26,243 judge_handler sus: Updating problem list
+INFO 2023-10-01 07:21:26,245 judge_handler sus: Updated 1 problems
+INFO 2023-10-01 07:21:26,245 judge_handler sus: Updating problem list
+INFO 2023-10-01 07:21:26,246 judge_handler sus: Updated 1 problems
+INFO 2023-10-01 07:21:26,333 judge_handler sus: Submission generated compiler messages: 14
+INFO 2023-10-01 07:21:26,335 judge_handler sus: Grading has begun on: 14
+INFO 2023-10-01 07:21:26,382 judge_handler sus: 3 test case(s) completed on: 14
+INFO 2023-10-01 07:21:26,388 judge_handler sus: Grading has ended on: 14
+INFO 2023-10-01 07:21:26,388 judge_list Judge available after grading 14: sus

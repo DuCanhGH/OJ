@@ -2,21 +2,19 @@
 {% block media %}{% endblock %}
 
 {% block js_media %}
-    <script type="text/javascript">
-        window.filter_user_ids = JSON.parse("{{ filter_status.user_id }}");
-        window.filter_own_id = JSON.parse("{{ filter_status.own_id }}");
-        window.filter_assignee_ids = JSON.parse("{{ filter_status.assignee_id }}");
-    </script>
-    <script type="text/javascript">
-        
-    </script>
+    <script 
+        src="{{ static('bundled/ticket/list/main.js')}}"
+        data-filter-user-ids="{{ filter_status.user_id }}"
+        data-filter-own-id="{{ filter_status.own_id }}"
+        data-filter-assignee-ids="{{ filter_status.assignee_id }}"
+        data-new-ticket-url="{{ url('ticket_ajax') }}"
+        data-select2-theme="{{ DMOJ_SELECT2_THEME }}"
+        data-ticket-user-select2-url="{{ url('ticket_user_select2_ajax') }}"
+        daat-ticket-assignee-select2-url="{{ url('ticket_assignee_select2_ajax') }}"
+    ></script>
 
     {% if EVENT_LAST_MSG %}
-        <script type="text/javascript">
-            $(() => {
-                load_dynamic_update();
-            });
-        </script>
+        <script src="{{ static('bundled/ticket/list/dynamic.js') }}"></script>
     {% endif %}
 {% endblock %}
 

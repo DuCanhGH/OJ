@@ -8,7 +8,9 @@
         src="{{ static('bundled/contest/list.js') }}"
         data-official-contest-mode="{{ 'true' if request.official_contest_mode else 'false' }}" 
         data-in-contest="{{ 'true' if request.in_contest else 'false' }}"
-        data-contest-name="{{ request.participation.contest.name }}"
+        {% if request.participation is not none %}
+            data-contest-name="{{ request.participation.contest.name }}"
+        {% endif %}
         {% if hide_private_contests is not none %}
             data-hide-private-contests="{{ 'true' if hide_private_contests else 'false' }}"
         {% endif %}

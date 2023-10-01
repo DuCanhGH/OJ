@@ -1,4 +1,3 @@
-const contest = document.currentScript?.dataset.contestName ?? "(unknown contest)";
 const officialContestMode = document.currentScript?.dataset.officialContestMode === "true";
 const inContest = document.currentScript?.dataset.inContest === "true";
 
@@ -22,6 +21,8 @@ $(() => {
     }
 
     if (inContest) {
+        const contest = document.currentScript?.dataset.contestName ?? "(unknown contest)";
+
         $(".contest-join").on("click", () => {
             return confirm(
                 `${gettext("Are you sure you want to join?")}\n${interpolate(

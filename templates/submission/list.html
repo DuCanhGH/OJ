@@ -1,7 +1,7 @@
 {% extends "common-content.html" %}
 {% block js_media %}
-    {{ results_json|json_script:"results-json" }}
-    {{ results_colors_json|json_script:"results-colors-json" }}
+    {{ results_json|json_script("results-json") }}
+    {{ results_colors_json|json_script("results-colors-json") }}
 
     {% compress js %}
         {% if request.user.is_authenticated and perms.judge.rejudge_submission %}

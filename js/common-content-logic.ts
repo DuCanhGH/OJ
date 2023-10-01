@@ -1,6 +1,15 @@
 import "$prebundled/clipboard/clipboard.js";
 import "$prebundled/clipboard/tooltip.js";
 
+declare global {
+    interface Window {
+        /**
+         * This method is only available when you include `common-content-logic.js`.
+         */
+        addCodeCopyButtons: (<T = HTMLElement>($content: JQuery<T>) => void) | undefined;
+    }
+}
+
 $(() => {
     window.addCodeCopyButtons = ($container) => {
         $container.find("pre code").each((_, el) => {
@@ -13,8 +22,8 @@ $(() => {
                             class: "btn-clipboard",
                             "data-clipboard-text": $(el).text(),
                             title: gettext("Click to copy"),
-                        }).text(gettext("Copy"))),
-                    ),
+                        }).text(gettext("Copy"))) as unknown as JQuery<JQuery.Node>,
+                    ) as unknown as JQuery<JQuery.Node>,
                 );
 
             const firstCopyButton = copyButton.get(0);

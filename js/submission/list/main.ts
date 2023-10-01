@@ -1,5 +1,7 @@
 import type { OptGroupData, OptionData } from "$js/declarations/select2.js";
-import { Chart } from "chart.js";
+import { Chart, Tooltip, Legend, PieController, ArcElement } from "chart.js";
+
+Chart.register(Tooltip, Legend, PieController, ArcElement);
 
 const dynamicUpdate = document.currentScript?.dataset.dynamicUpdate === "true";
 const paginatorPerPage = document.currentScript?.dataset.paginatorPerPage;
@@ -222,7 +224,7 @@ window.loadDynamicUpdate = () => {
         })
             .done((data) => {
                 lastStatsUpdate = Date.now();
-                statsGraph(data);
+                statsGraph(JSON.parse(data));
             })
             .fail(() => {
                 console.log("Failed to update statistics table!");
