@@ -68,7 +68,7 @@ $(() => {
                         $("<input>")
                             .attr("type", "hidden")
                             .attr("name", "csrfmiddlewaretoken")
-                            .attr("value", csrfToken) as unknown as JQuery<JQuery.Node>,
+                            .attr("value", csrfToken),
                     )
                     .attr("method", "POST")
                     .appendTo($("body"))

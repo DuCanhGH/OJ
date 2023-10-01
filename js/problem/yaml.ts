@@ -14,8 +14,8 @@ $(() => {
                             class: "btn-clipboard",
                             "data-clipboard-text": $(el).text(),
                             title: "Click to copy",
-                        }).text("Copy")) as unknown as JQuery<JQuery.Node>,
-                    ) as unknown as JQuery<JQuery.Node>,
+                        }).text("Copy")),
+                    ),
                 );
 
             const firstCopyButton = copyButton[0];

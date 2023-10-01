@@ -1,9 +1,4 @@
-window.parsedCookie = document.cookie.split(";").reduce((acc, cur) => {
-    const [key, value] = cur.trim().split("=");
-    acc[decodeURIComponent(key)] = decodeURIComponent(value);
-
-    return acc;
-}, /** @type {Record<string, string>} */({}));
+import cookie from "js-cookie";
 
 window.fix_div = (div, height) => {
     var div_offset = div.offset().top - $("html").offset().top;
@@ -259,7 +254,10 @@ $(() => {
     $.ajaxSetup({
         beforeSend(xhr, settings) {
             if (settings.type && !/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type) && !settings.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", window.parsedCookie["csrftoken"]);
+                const csrfToken = cookie.get("csrftoken");
+                if (csrfToken !== undefined) {
+                    xhr.setRequestHeader("X-CSRFToken", csrfToken);
+                }
             }
         },
     });

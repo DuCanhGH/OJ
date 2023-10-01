@@ -1,5 +1,7 @@
 import cookie from "js-cookie";
 
+import type { Ticket } from "../types.js";
+
 const filterUserIds = JSON.parse(document.currentScript?.dataset.filterUserIds ?? "[]");
 const filterOwnId = JSON.parse(document.currentScript?.dataset.filterOwnId ?? "null");
 const filterAssigneeIds = JSON.parse(document.currentScript?.dataset.filterAssigneeIds ?? "[]");
@@ -7,12 +9,6 @@ const newTicketUrl = document.currentScript?.dataset.newTicketUrl;
 const select2Theme = document.currentScript?.dataset.select2Theme;
 const ticketUserSelect2Url = document.currentScript?.dataset.ticketUserSelect2Url;
 const ticketAssigneeSelect2Url = document.currentScript?.dataset.ticketAssigneeSelect2Url;
-
-interface Ticket {
-    id: string;
-    open: boolean;
-    title: string;
-}
 
 $(() => {
     $("input#open, input#own").on("click", () => {
@@ -24,7 +20,7 @@ $(() => {
                     $("<input>")
                         .attr("type", "hidden")
                         .attr("name", "csrfmiddlewaretoken")
-                        .attr("value", csrfToken) as unknown as JQuery<JQuery.Node>,
+                        .attr("value", csrfToken),
                 )
                 .attr("method", "POST")
                 .appendTo($("body"))
@@ -137,12 +133,10 @@ $(() => {
                     src: data.gravatar_url,
                     width: 24,
                     height: 24,
-                }) as unknown as JQuery<JQuery.Node>,
+                }),
             )
             .append(
-                $("<span>", { class: data.display_rank + " user-search-name" }).text(
-                    data.text,
-                ) as unknown as JQuery<JQuery.Node>,
+                $("<span>", { class: data.display_rank + " user-search-name" }).text(data.text),
             );
     }
 

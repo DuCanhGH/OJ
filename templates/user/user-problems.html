@@ -1,28 +1,7 @@
 {% extends "user/user-base.html" %}
 
 {% block user_js_media %}
-    <script type="text/javascript">
-        window.show_pp_base = 1;
-        window.currently_requesting_pp = false;
-        window.load_more_pp = () => {
-            if (window.currently_requesting_pp) return;
-            window.currently_requesting_pp = true;
-
-            $.get("{{ url('user_pp_ajax', user.user.username) }}", {
-                start: window.show_pp_base * 10,
-                end: (window.show_pp_base + 1) * 10
-            }).done((data) => {
-                const results = $(data['results']);
-                $('.pp-table').append(results);
-                register_time(results.find('.time-with-rel'));
-                window.show_pp_base++;
-                if (!data['has_more']) {
-                    $("#pp-load-link-wrapper").hide();
-                }
-                window.currently_requesting_pp = false;
-            });
-        };
-    </script>
+    <script src="{{ static('bundled/user/user-problem.js') }}" data-user-pp-url="{{ url('user_pp_ajax', user.user.username) }}"></script>
 {% endblock %}
 
 {% block title_ruler %}{% endblock %}
@@ -40,7 +19,7 @@
         </div>
         {% if pp_has_more %}
             <div id="pp-load-link-wrapper">
-                <a id="pp-load-more-link" href="javascript:load_more_pp()">{{ _('Load more...') }}</a>
+                <a id="pp-load-more-link" href="javascript:window.loadMorePp()">{{ _('Load more...') }}</a>
             </div>
         {% endif %}
     {% else %}

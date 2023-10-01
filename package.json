@@ -28,7 +28,6 @@
     "@types/js-cookie": "3.0.4",
     "@types/mathjax": "0.0.37",
     "@types/semver": "7.5.2",
-    "@types/tablesorter": "2.31.3",
     "@types/ws": "8.5.5",
     "@typescript-eslint/eslint-plugin": "6.7.2",
     "@typescript-eslint/parser": "6.7.2",

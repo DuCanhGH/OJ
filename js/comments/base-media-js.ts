@@ -4,6 +4,44 @@ const upvoteCommentUrl = document.currentScript?.dataset.upvoteCommentUrl;
 const downvoteCommentUrl = document.currentScript?.dataset.downvoteCommentUrl;
 const hideCommentUrl = document.currentScript?.dataset.hideCommentUrl;
 
+declare global {
+    interface Window {
+        /**
+         * This method is only available when you include `comments/base-media-js.js`.
+         *
+         * Reply a comment.
+         * @param parent
+         */
+        replyComment: ((parent: string) => void) | undefined;
+        /**
+         * This method is only available when you include `comments/base-media-js.js`.
+         * @param parent
+         */
+        showRevision: ((commentId: string, offset: number) => void) | undefined;
+        /**
+         * This method is only available when you include `comments/base-media-js.js`.
+         *
+         * Show the content of a comment.
+         * @param commentId
+         */
+        commentShowContent: ((commentId: string) => void) | undefined;
+        /**
+         * This method is only available when you include `comments/base-media-js.js`.
+         *
+         * Upvote a comment.
+         * @param id
+         */
+        commentUpvote: ((id: string) => void) | undefined;
+        /**
+         * This method is only available when you include `comments/base-media-js.js`.
+         *
+         * Downvote a comment.
+         * @param id
+         */
+        commentDownvote: ((id: string) => void) | undefined;
+    }
+}
+
 $(document).on("ready", () => {
     window.replyComment = (parent) => {
         const $commentReply = $("#comment-" + parent + "-reply");
@@ -49,10 +87,7 @@ $(document).on("ready", () => {
         $(e.currentTarget).closest(".reply-comment").fadeOut();
     });
 
-    /**
-     * @param {JQuery<HTMLElement>} $comment
-     */
-    function updateMath($comment) {
+    function updateMath($comment: JQuery<HTMLElement>) {
         if ("MathJax" in window) {
             const $body = $comment.find(".comment-body");
             MathJax.typesetPromise([$body[0]]).then(() => {
@@ -109,15 +144,7 @@ $(document).on("ready", () => {
         });
     };
 
-    /**
-     *
-     * @param {string} url
-     * @param {string} id
-     * @param {number} delta
-     * @param {(() => void) | undefined} onSuccess
-     * @returns
-     */
-    function ajaxVote(url, id, delta, onSuccess) {
+    function ajaxVote(url: string, id: string, delta: number, onSuccess: (() => void) | undefined) {
         return $.ajax({
             url,
             type: "POST",
@@ -135,11 +162,7 @@ $(document).on("ready", () => {
         });
     }
 
-    /**
-     * @param {string} id
-     * @returns
-     */
-    const getVotes = (id) => {
+    const getVotes = (id: string) => {
         const $comment = $("#comment-" + id);
         return {
             upvote: $comment.find(".upvote-link").first(),
@@ -176,7 +199,13 @@ $(document).on("ready", () => {
             return;
         }
 
-        if (!(e.ctrlKey || e.metaKey || confirm(gettext("Are you sure you want to hide this comment?"))))
+        if (
+            !(
+                e.ctrlKey ||
+                e.metaKey ||
+                confirm(gettext("Are you sure you want to hide this comment?"))
+            )
+        )
             return;
 
         const id = $(e.currentTarget).attr("data-id");
