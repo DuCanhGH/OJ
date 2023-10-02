@@ -1,5 +1,5 @@
 interface SubmissionMetadata {
-    min_year: number;
+    min_year: number | null;
 }
 
 const languageCode = document.currentScript?.dataset.languageCode ?? "en-US";
@@ -66,15 +66,15 @@ function initSubmissionTable(
         }
         const days = [];
         for (
-            let day = startDay, day_num = 1;
+            let day = startDay, dayNum = 1;
             day <= endDay;
-            day.setDate(day.getDate() + 1), day_num++
+            day.setDate(day.getDate() + 1), dayNum++
         ) {
             const isodate = day.toISOString().split("T")[0];
             days.push({
                 date: new Date(day),
                 weekday: day.getDay(),
-                day_num: day_num,
+                day_num: dayNum,
                 activity: submissionActivity[isodate] || 0,
             });
         }
