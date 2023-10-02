@@ -1,4 +1,4 @@
-import { decodeJSONBytes, urlSafeBase64Encode } from "$js/user/webauthn-helpers.js";
+import { decodeJSONBytes, urlSafeBase64Encode, isCredentialPublicKey } from "$js/user/webauthn-helpers.js";
 
 const webauthnAssert = document.currentScript?.dataset.webauthnAssert;
 
@@ -7,10 +7,6 @@ $(() => {
         return Array.prototype.map
             .call(new Uint8Array(buffer), (x) => ("00" + x.toString(16)).slice(-2))
             .join("");
-    }
-
-    function isCredentialPublicKey(credential: Credential): credential is PublicKeyCredential {
-        return credential.type === "public-key";
     }
 
     $("#use-webauthn").on("click", (event) => {

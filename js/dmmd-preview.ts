@@ -1,3 +1,5 @@
+import cookie from "js-cookie";
+
 declare global {
     interface Window {
         /**
@@ -24,7 +26,7 @@ $(() => {
         // Submit the form if Ctrl+Enter is pressed in pagedown textarea.
         $textarea.on("keydown", (ev) => {
             // Ctrl+Enter pressed (metaKey used to support command key on mac).
-            if ((ev.metaKey || ev.ctrlKey) && ev.which == 13) {
+            if ((ev.metaKey || ev.ctrlKey) && ev.code === "Enter") {
                 $form.trigger("submit");
             }
         });
@@ -38,7 +40,7 @@ $(() => {
                         previewUrl,
                         {
                             content: text,
-                            csrfmiddlewaretoken: window.parsedCookie["csrftoken"],
+                            csrfmiddlewaretoken: cookie.get("csrftoken"),
                         },
                         (result) => {
                             $content.html(result);
@@ -128,5 +130,3 @@ $(() => {
             }
         });
 });
-
-export {};

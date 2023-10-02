@@ -46,30 +46,7 @@
 
 {% block js_media %}
     {{ form.media.js }}
-    <script type="text/javascript">
-        $(function () {
-            function check($obj, duration) {
-                var group = $obj.parent().find('.form-group');
-                if ($obj.is(':checked')) {
-                    group.fadeIn(duration);
-                } else {
-                    group.fadeOut(duration);
-                }
-            };
-            check($('#id_submission_download'), 0);
-            $('#id_submission_download').change(function() {
-                check($(this), 300);
-            });
-            $('#prepare-download').click(function() {
-                return confirm("{{ _('Are you sure you want to prepare a download?') }}");
-            });
-        });
-        $(document).ready(function () {
-            $('.time-remaining').each(function () {
-                count_down($(this));
-            });
-        });
-    </script>
+    <script src="{{ static('bundled/user/prepare-data.js') }}"></script>
 {% endblock %}
 
 {% block body %}
