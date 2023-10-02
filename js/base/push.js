@@ -65,10 +65,10 @@ $(() => {
 
     if (shouldPush) {
         $(() => {
-            window.eventDispatcher.auto_reconnect = true;
+            window.eventDispatcher.autoReconnect = true;
             window.eventDispatcher.on(
                 `contest_${contestId}`,
-                (/** @type {any} */data) => {
+                (data) => {
                     alert(data.title + "\n\n" + data.message);
                 },
             );

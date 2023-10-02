@@ -162,8 +162,8 @@ $(() => {
     }
 
     window.loadDynamicUpdate = () => {
-        window.eventDispatcher.auto_reconnect = true;
-        window.eventDispatcher.on(`ticket-${ticketId}`, (message: any) => {
+        window.eventDispatcher.autoReconnect = true;
+        window.eventDispatcher.on<Ticket>(`ticket-${ticketId}`, (message) => {
             console.log(message);
             switch (message.type) {
                 case "ticket-status":

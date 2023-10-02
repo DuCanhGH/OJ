@@ -93,8 +93,8 @@ $(() => {
     window.loadDynamicUpdate = () => {
         const $assignees = $(filterAssigneeIds);
 
-        window.eventDispatcher.auto_reconnect = true;
-        window.eventDispatcher.on("tickets", (message: any) => {
+        window.eventDispatcher.autoReconnect = true;
+        window.eventDispatcher.on<Ticket>("tickets", (message) => {
             console.log(message);
             if (
                 filterOwnId != null &&

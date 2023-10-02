@@ -239,7 +239,7 @@ window.loadDynamicUpdate = () => {
 
     const $body = $(document.body);
 
-    window.eventDispatcher.on("submissions", (message: any) => {
+    window.eventDispatcher.on("submissions", (message) => {
         if (
             (window.dynamicUserId && message.user != window.dynamicProblemId) ||
             (window.dynamicProblemId && message.problem != window.dynamicProblemId) ||
@@ -260,7 +260,7 @@ window.loadDynamicUpdate = () => {
         }
     });
 
-    window.eventDispatcher.onwsclose((event: any) => {
+    window.eventDispatcher.onwsclose((event) => {
         if (event.code == 1001) {
             console.log("Navigated away");
             return;

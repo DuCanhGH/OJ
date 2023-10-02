@@ -1,6 +1,6 @@
 import type Moment from "moment";
 
-import type { WSEventDispatcher } from "$resources/event.js";
+import type { WSEventDispatcher } from "$js/event.js";
 
 declare global {
     interface Window {

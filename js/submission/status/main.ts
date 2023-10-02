@@ -2,6 +2,16 @@ const submissionId = document.currentScript?.dataset.submissionId;
 const submissionSecretId = document.currentScript?.dataset.submissionSecretId;
 const submissionTestcasesQueryUrl = document.currentScript?.dataset.submissionTestcasesQueryUrl;
 
+interface SubmissionStatus {
+    type:
+        | "internal-error"
+        | "grading-end"
+        | "compile-error"
+        | "test-case"
+        | "grading-begin"
+        | "processing";
+}
+
 $(() => {
     let blocked = false,
         request = false;
@@ -48,7 +58,7 @@ $(() => {
         }
     }
 
-    window.eventDispatcher.on(`sub_${submissionSecretId}`, (message: any) => {
+    window.eventDispatcher.on<SubmissionStatus>(`sub_${submissionSecretId}`, (message) => {
         switch (message.type) {
             case "internal-error":
             case "grading-end":
