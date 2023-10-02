@@ -28,10 +28,9 @@ $(() => {
         }
     });
 
-    // @ts-expect-error fix common.js
-    register_notify("ticket", {
+    window.registerNotify("ticket", {
         $checkbox: $("#notification"),
-        change(enabled: any) {
+        change(enabled) {
             if (!enabled) {
                 for (const key of Object.keys(localStorage)) {
                     if (key.startsWith("ticket:open:")) {
@@ -59,8 +58,7 @@ $(() => {
                 console.log("Got data for: " + ticket.id);
                 console.log(data);
                 $tbody.prepend($(data.row));
-                // @ts-expect-error fix common.js
-                notify("ticket", data.notification.title, {
+                window.notify("ticket", data.notification.title, {
                     body: data.notification.body,
                 });
             },
@@ -84,12 +82,10 @@ $(() => {
             const $status = $row.find("td").first().find("i");
             if (ticket.open) {
                 $status.removeClass("fa-check-circle-o").addClass("fa-exclamation-circle");
-                // @ts-expect-error fix common.js
-                notify("ticket", gettext("Reopened: ") + ticket.title);
+                window.notify("ticket", gettext("Reopened: ") + ticket.title);
             } else {
                 $status.removeClass("fa-exclamation-circle").addClass("fa-check-circle-o");
-                // @ts-expect-error fix common.js
-                notify("ticket", gettext("Closed: ") + ticket.title);
+                window.notify("ticket", gettext("Closed: ") + ticket.title);
             }
         }
     }

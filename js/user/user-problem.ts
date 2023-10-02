@@ -19,8 +19,7 @@ window.loadMorePp = () => {
     }).done((data) => {
         const results = $(data["results"]);
         $(".pp-table").append(results);
-        // @ts-expect-error fix common.js
-        register_time(results.find(".time-with-rel"));
+        window.registerTime(results.find(".time-with-rel"));
         showPpBase++;
         if (!data["has_more"]) {
             $("#pp-load-link-wrapper").hide();

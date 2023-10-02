@@ -29,9 +29,9 @@ else:
     class MathJaxPagedownWidget(PagedownWidget):
         class Media:
             js = [
-                'mathjax_config.js',
+                'bundled/mathjax-config.js',
                 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js',
-                'pagedown_math.js',
+                'bundled/pagedown-math.js',
             ]
 
 

@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content_js_media %}
-    {{ stats|json_script:"stats" }}
+    {{ stats|json_script("stats") }}
     {% compress js %}
         <script src="{{ static('bundled/contest/stats/info.js') }}"></script>
     {% endcompress %}

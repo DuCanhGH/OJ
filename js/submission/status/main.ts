@@ -22,9 +22,8 @@ $(() => {
                 list.empty()
                     .html(data)
                     .find(".toggle")
-                    .each(() => {
-                        // @ts-expect-error update common.js
-                        register_toggle($(this));
+                    .each((_, el) => {
+                        window.registerToggle($(el));
                     });
                 setTimeout(() => {
                     blocked = false;

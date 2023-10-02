@@ -3,7 +3,7 @@
 {% block js_media %}
     {{data_form.media.js}}
     {% include "leave-warning.html" %}
-    {{ valid_files_json|json_script:"valid-files-json" }}
+    {{ valid_files_json|json_script("valid-files-json") }}
     <script
         src="{{ static('bundled/problem/data.js') }}"
         data-select2-theme="{{ DMOJ_SELECT2_THEME }}"

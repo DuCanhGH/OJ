@@ -121,8 +121,7 @@ $(() => {
         }
     });
 
-    // @ts-expect-error update common.js
-    register_notify("ticket", {
+    window.registerNotify("ticket", {
         change(enabled: any) {
             if (enabled) increasePageRef();
         },
@@ -135,8 +134,7 @@ $(() => {
     function ticketStatus(ticket: Ticket) {
         updateTicketState(ticket.open);
         if (isHighestRef()) {
-            // @ts-expect-error update common.js
-            notify(
+            window.notify(
                 "ticket",
                 (ticket.open ? gettext("Reopened: ") : gettext("Closed: ")) + $title.text(),
             );

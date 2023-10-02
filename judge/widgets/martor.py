@@ -8,10 +8,10 @@ class MartorWidget(OldMartorWidget):
         css = {
             'all': ['martor-description.css'],
         }
-        js = ['martor-mathjax.js']
+        js = ['bundled/martor-mathjax.js']
 
 
 class AdminMartorWidget(OldAdminMartorWidget):
     class Media:
         css = MartorWidget.Media.css
-        js = ['admin/js/jquery.init.js', 'martor-mathjax.js']
+        js = ['admin/js/jquery.init.js', 'bundled/martor-mathjax.js']

@@ -35,10 +35,10 @@ $(() => {
     }
 
     function makeDisplayData(data: JQuery<HTMLElement>) {
-        const site_data = data.attr("data-info");
-        const judge_data = data.attr("data-judge-info");
-        const display_data = site_data || judge_data;
-        return display_data;
+        const siteData = data.attr("data-info");
+        const judgeData = data.attr("data-judge-info");
+        const displayData = siteData || judgeData;
+        return displayData;
     }
 
     // Terrible hack, adapted from https://github.com/select2/select2/issues/4436
@@ -49,7 +49,7 @@ $(() => {
         // @ts-ignore
         function (Result, Utils) {
             // @ts-ignore
-            RefPresenter = function ($element, options, dataAdapter) {
+            const RefPresenter = function ($element, options, dataAdapter) {
                 // @ts-ignore
                 RefPresenter.__super__.constructor.call(this, $element, options, dataAdapter);
             };

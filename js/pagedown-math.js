@@ -1,3 +1,4 @@
+// @ts-nocheck
 function mathjax_pagedown($) {
     if ('MathJax' in window) {
         $.each(window.editors, function (id, editor) {

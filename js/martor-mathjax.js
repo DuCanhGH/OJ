@@ -1,5 +1,5 @@
 jQuery(function ($) {
-    $(document).on('martor:preview', function (e, $content) {
+    $(document).on('martor:preview', function (_, $content) {
         function update_math() {
             MathJax.typesetPromise([$content[0]]).then(function () {
                 $content.find('.tex-image').hide();
@@ -16,6 +16,7 @@ jQuery(function ($) {
                     dataType: 'script',
                     cache: true,
                     success: function () {
+                        // @ts-expect-error I give up with MathJax
                         window.MathJax.startup = {typeset: false};
                         $.ajax({
                             type: 'GET',

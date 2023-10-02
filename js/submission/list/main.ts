@@ -197,8 +197,7 @@ window.loadDynamicUpdate = () => {
                 .done((data) => {
                     const was_shown = row.is(":visible");
                     row.html(data);
-                    // @ts-expect-error update common.js
-                    register_time(row.find(".time-with-rel"));
+                    window.registerTime(row.find(".time-with-rel"));
                     if (!was_shown) {
                         row.slideDown("slow");
                     }

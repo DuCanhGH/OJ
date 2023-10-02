@@ -1,4 +1,7 @@
-import { Chart } from "chart.js";
+import type { LegendItem } from "chart.js";
+import { Chart, PieController, BarController } from "chart.js";
+
+Chart.register(PieController, BarController);
 
 export function drawPieChart(data: any, $chart: JQuery<HTMLElement>) {
     const ctx = $chart.find("canvas")[0].getContext("2d");
@@ -28,7 +31,7 @@ export function drawPieChart(data: any, $chart: JQuery<HTMLElement>) {
 }
 
 export function drawBarChart(data: any, $chart: JQuery<HTMLElement>, showPercentage = true) {
-    const orig_data = JSON.parse(JSON.stringify(data));
+    const origData = JSON.parse(JSON.stringify(data));
     const ctx = $chart.find("canvas")[0].getContext("2d");
 
     if (ctx === null) return null;
@@ -63,7 +66,7 @@ export function drawBarChart(data: any, $chart: JQuery<HTMLElement>, showPercent
 
                     chart.data.datasets[datasetIndex].data[index] = !hidden
                         ? 0
-                        : orig_data.datasets[datasetIndex].data[index];
+                        : origData.datasets[datasetIndex].data[index];
 
                     chart.toggleDataVisibility(index);
                     chart.update();
@@ -75,10 +78,10 @@ export function drawBarChart(data: any, $chart: JQuery<HTMLElement>, showPercent
                 },
                 tooltip: {
                     callbacks: {
-                        label(tooltipItem: any) {
+                        label(tooltipItem) {
                             return showPercentage
-                                ? Math.round(tooltipItem.value * 100) / 100 + "%"
-                                : tooltipItem.value;
+                                ? Math.round(+tooltipItem.formattedValue * 100) / 100 + "%"
+                                : tooltipItem.formattedValue;
                         },
                     },
                 },
@@ -146,7 +149,7 @@ export function drawStackedBarChart(data: any, $chart: JQuery<HTMLElement>) {
                             for (let i = 0; i < tooltipItems.length; ++i) {
                                 total += +tooltipItems[i].label;
                             }
-                            return "Total: " + total;
+                            return `Total: ${total}`;
                         },
                     },
                 },
@@ -171,26 +174,22 @@ export function drawStackedBarChart(data: any, $chart: JQuery<HTMLElement>) {
                                 }
                             });
 
-                            const labels = data.datasets.map((dataset: any, i) => {
-                                return {
+                            const labels = data.datasets.map(
+                                (dataset, i) => ({
                                     text: dataset.label,
                                     fillStyle: !Array.isArray(dataset.backgroundColor)
                                         ? dataset.backgroundColor
                                         : dataset.backgroundColor[0],
                                     hidden: !chart.isDatasetVisible(i),
-                                    lineCap: dataset.borderCapStyle,
-                                    lineDash: dataset.borderDash,
-                                    lineDashOffset: dataset.borderDashOffset,
-                                    lineJoin: dataset.borderJoinStyle,
                                     lineWidth: dataset.borderWidth,
                                     strokeStyle: dataset.borderColor,
-                                    pointStyle: dataset.pointStyle,
                                     datasetIndex: i,
-                                };
-                            }, this);
+                                }),
+                                this,
+                            ) as LegendItem[];
 
                             labels.push({
-                                text: "Total: " + total,
+                                text: `Total: ${total}`,
                                 fillStyle: "transparent",
                                 strokeStyle: "transparent",
                                 datasetIndex: -1,
@@ -232,7 +231,7 @@ export function drawVerticalStackedBarChart(
 
     const chart = new Chart(ctx, {
         type: "bar",
-        data: data,
+        data,
         options: {
             maintainAspectRatio: false,
             scales: {
@@ -258,7 +257,7 @@ export function drawVerticalStackedBarChart(
                             for (let i = 0; i < tooltipItems.length; ++i) {
                                 total += +tooltipItems[i].formattedValue;
                             }
-                            return "Total: " + total;
+                            return `Total: ${total}`;
                         },
                     },
                 },
@@ -283,26 +282,22 @@ export function drawVerticalStackedBarChart(
                                 }
                             });
 
-                            const labels = data.datasets.map((dataset: any, i) => {
-                                return {
-                                    text: dataset.label,
+                            const labels = data.datasets.map(
+                                (dataset, i) => ({
+                                    text: dataset.label ?? "",
                                     fillStyle: !Array.isArray(dataset.backgroundColor)
                                         ? dataset.backgroundColor
                                         : dataset.backgroundColor[0],
                                     hidden: !chart.isDatasetVisible(i),
-                                    lineCap: dataset.borderCapStyle,
-                                    lineDash: dataset.borderDash,
-                                    lineDashOffset: dataset.borderDashOffset,
-                                    lineJoin: dataset.borderJoinStyle,
                                     lineWidth: dataset.borderWidth,
                                     strokeStyle: dataset.borderColor,
-                                    pointStyle: dataset.pointStyle,
                                     datasetIndex: i,
-                                };
-                            }, this);
+                                }),
+                                this,
+                            ) as LegendItem[];
 
                             labels.push({
-                                text: "Total: " + total,
+                                text: `Total: ${total}`,
                                 fillStyle: "transparent",
                                 strokeStyle: "transparent",
                                 datasetIndex: -1,
