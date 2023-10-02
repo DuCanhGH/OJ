@@ -5,6 +5,7 @@ const select2Theme = document.currentScript?.dataset.select2Theme;
 const contestKey = document.currentScript?.dataset.contestKey;
 const url = document.currentScript?.dataset.url;
 const searchContestUrl = document.currentScript?.dataset.searchContestUrl;
+const tab = document.currentScript?.dataset.tab;
 
 declare global {
     interface Window {
@@ -314,7 +315,7 @@ $(() => {
     window.enableAdminOperations();
 });
 
-if (document.currentScript?.dataset.tab === "ranking") {
+if (tab === "ranking") {
     $.fn.ignore = function (sel) {
         return this.clone()
             .find(sel || ">*")

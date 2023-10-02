@@ -1,3 +1,5 @@
+const tab = document.currentScript?.dataset.tab;
+
 $(() => {
     (function installTooltips() {
         $("td.user-name")
@@ -30,7 +32,7 @@ $(() => {
                     $(".personal-info").show();
                     $("#show-personal-info-checkbox").prop("checked", true);
                 }
-                if (document.currentScript?.dataset.tab === "ranking") {
+                if (tab === "ranking") {
                     window.applyRankingFilter();
                 }
                 window.enableAdminOperations();

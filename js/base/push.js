@@ -1,6 +1,8 @@
 import { countDown } from "../common-utils.js";
 
 const contestId = document.currentScript?.dataset.contestId ?? "";
+// Virtual = 0 is live participation, virtual = -1 is spectating
+const shouldPush = document.currentScript?.dataset.shouldPush === "true";
 
 $(() => {
     countDown($("#contest-time-remaining"));
@@ -60,18 +62,12 @@ $(() => {
         selected = null;
     });
 
-    // Virtual = 0 is live participation, virtual = -1 is spectating
-    const shouldPush = document.currentScript?.dataset.shouldPush === "true";
-
     if (shouldPush) {
         $(() => {
             window.eventDispatcher.autoReconnect = true;
-            window.eventDispatcher.on(
-                `contest_${contestId}`,
-                (data) => {
-                    alert(data.title + "\n\n" + data.message);
-                },
-            );
+            window.eventDispatcher.on(`contest_${contestId}`, (data) => {
+                alert(data.title + "\n\n" + data.message);
+            });
         });
     }
 });
